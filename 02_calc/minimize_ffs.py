@@ -205,16 +205,21 @@ def min_ffxml(mol, ofs, ffxml):
 
     # make copy of the input mol
     oe_mol = oechem.OEGraphMol(mol)
-    off_mol = Molecule.from_openeye(oe_mol)
 
-    # load in force field
-    ff = ForceField(ffxml)
-
-    # create components for OpenMM system
-    topology = Topology.from_molecules(molecules=[off_mol])
     try:
+        # create openforcefield molecule ==> prone to triggering Exception
+        off_mol = Molecule.from_openeye(oe_mol)
+
+        # load in force field
+        ff = ForceField(ffxml)
+
+        # create components for OpenMM system
+        topology = Topology.from_molecules(molecules=[off_mol])
+
+        # create openmm system ==> prone to triggering Exception
         #system = ff.create_openmm_system(topology, charge_from_molecules=[off_mol])
         system = ff.create_openmm_system(topology)
+
     except Exception:
         smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
         print( ' >>> openforcefield failed to create OpenMM system: '
@@ -228,7 +233,7 @@ def min_ffxml(mol, ofs, ffxml):
 
     # save geometry, save energy as tag, write mol to file
     oe_mol.SetCoords(oechem.OEFloatArray(newpos))
-    oechem.OESetSDData(oe_mol, "Energy Parsley", str(energy))
+    oechem.OESetSDData(oe_mol, "Energy FFXML", str(energy))
     oechem.OEWriteConstMolecule(ofs, oe_mol)
 
     return
@@ -288,13 +293,12 @@ def main(infile, outfile, ffxml, minimizer):
         oechem.OEPerceiveChiral(mol)
         oechem.OEAssignAromaticFlags(mol, oechem.OEAroModel_MDL)
 
-
         # assign charges to copy of mol
         # note that chg_mol does NOT have conformers
         try:
             chg_mol = charge_mol(mol)
-        except RuntimeError:
 
+        except RuntimeError:
             # perceive stereochem
             #find_unspecified_stereochem(mol)
             oechem.OE3DToInternalStereo(mol)
@@ -303,8 +307,16 @@ def main(infile, outfile, ffxml, minimizer):
             # by OE3DToInternalStereo if it thinks mol is flat
             mol.ResetPerceived()
             oechem.OE3DToBondStereo(mol)
-            chg_mol = charge_mol(mol)
-            print(f'fixed stereo: {mol.GetTitle()}')
+
+            try:
+                chg_mol = charge_mol(mol)
+                print(f'fixed stereo: {mol.GetTitle()}')
+            except RuntimeError:
+                title = mol.GetTitle()
+                smilabel = oechem.OEGetSDData(mol, "SMILES QCArchive")
+                print( ' >>> Charge assignment failed due to unspecified '
+                      f'stereochemistry {title} {smilabel}')
+                continue
 
         for j, conf in enumerate(mol.GetConfs()):
 
@@ -314,7 +326,7 @@ def main(infile, outfile, ffxml, minimizer):
             # assign charges to the conf itself
             chg_conf = charge_conf(chg_mol, conf)
 
-            if minimizer == 'xmlfile':
+            if minimizer == 'ffxml':
                 # minimize with parsley (charges set by ff not used from conf)
                 min_ffxml(chg_conf, ofs, ffxml)
 
@@ -351,7 +363,7 @@ if __name__ == "__main__":
 
     parser.add_argument("-m", "--minimizer",
             help="Force field minimization to undertake. "
-                 "Options include: gaff gaff2 mmff94 mmff94s xmlfile")
+                 "Options include: gaff gaff2 mmff94 mmff94s ffxml")
 
     parser.add_argument("-f", "--ffxml",
             help="Open force field ffxml file",
@@ -359,8 +371,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.minimizer == 'xmlfile' and not os.path.isfile(args.ffxml):
-        raise ValueError('Please specify ffxml file for minimizer of \'xmlfile\'')
+    if args.minimizer not in ['gaff', 'gaff2', 'mmff94', 'mmff94s', 'ffxml']:
+        raise ValueError('Please specify one of the following: '
+                         'gaff gaff2 mmff94 mmff94s ffxml')
+    if args.minimizer == 'ffxml' and not os.path.isfile(args.ffxml):
+        raise ValueError('Please specify ffxml file for minimizer of \'ffxml\'')
 
     main(args.infile, args.outfile, args.ffxml, args.minimizer)
 
