@@ -15,9 +15,12 @@ Extract molecules from [QCArchive](https://qcarchive.molssi.org/), convert to Op
 |`extract_qcarchive_dataset.ipynb` |             |
 
 Also relevant from OpenEye:
-* `molchunk.py` -- VTL modified to
+* `molchunk.py` -- VTL modified
 * `molextract.py`
 * [`mols2pdf.py`](https://docs.eyesopen.com/toolkits/python/_downloads/mols2pdf.py)
 
 ## `02_calc`
 * `minimize_ffs.py`
+
+## `03_analysis`
+* `cat_mols.py` -- VTL modified
