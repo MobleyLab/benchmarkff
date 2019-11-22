@@ -106,7 +106,8 @@ def get_sd_list(mol, taglabel):
 
     Returns
     -------
-    sdlist: N-length list with value from SD tag
+    sdlist : list
+        N-length list with value from SD tag
 
     """
 
@@ -123,6 +124,19 @@ def get_sd_list(mol, taglabel):
 def read_check_input(infile):
     """
     Read input file into an ordered dictionary.
+
+    Parameters
+    ----------
+    infile : string
+        name of input file to match script
+
+    Returns
+    -------
+    in_dict : OrderedDict
+        dictionary from input file, where key is method and value is dictionary
+        first entry should be reference method
+        in sub-dictionary, keys are 'sdfile' and 'sdtag'
+
     """
 
     in_dict = collections.OrderedDict()
@@ -165,12 +179,17 @@ def compare_two_mols(rmol, qmol, rmsd_cutoff):
 
     Parameters
     ----------
-    rmol:       reference OEChem molecule with all its filtered conformers
-    qmol:       query OEChem molecule with all its filtered conformers
+    rmol : OEMol
+        reference OEChem molecule with all its filtered conformers
+    qmol : OEMol
+        query OEChem molecule with all its filtered conformers
+    rmsd_cutoff : float
+        cutoff above which two structures are considered diff conformers
 
     Returns
     -------
-    molIndices: 1D list of qmol conformer indices that correspond to rmol confs
+    molIndices : list
+        1D list of qmol conformer indices that correspond to rmol confs
 
     """
 
@@ -201,124 +220,129 @@ def compare_two_mols(rmol, qmol, rmsd_cutoff):
     return molIndices
 
 
-def plot_mol_minima(molName, minimaE, xticklabels, selected=None, stag=False):
-    '''
+def plot_mol_minima(mol_name, minimaE, legend, selected=None, stag=False):
+    """
+    Generate line plot of conformer energies of all methods (single molecule).
 
-    selected: list of indexes for methods to be plotted. 0-based index.
-              consider also renaming figname to not overwrite existing plots.
-    stag: Boolean, True to stagger plots to better see line trends.
-          Works best with few (<4?) numFiles.
-          Be very wary of using this to not confuse energy distributions.
+    Parameters
+    ----------
+    mol_name : string
+        title of the mol being plotted
+    minimaE : list of lists
+        minimaE[i][j] represents ith method and jth conformer energy
+    legend : list
+        list of strings with all method names in same order as minimaE
+    selected : list
+        list of indices for methods to be plotted; e.g., [0], [0, 4]
+    stag : Boolean
+        True to stagger plots to see line trends (in case they all overlap);
+        works best with few (<4?) different methods;
+        be wary of using this option when comparing energy distributions
 
-    # minimaE for ONE molecule
-    '''
+    """
 
+    # get details of reference method
     ref_nconfs = len(minimaE[0])
-    refFile = xticklabels[0]
-    numFiles = len(minimaE)
+    ref_file = legend[0]
+    num_files = len(minimaE)
 
-    ### Flatten this 2D list into a 1D to find min and max for plot
+    # flatten the 2D list into 1D to find min and max for plot
     flatten = [item for sublist in minimaE for item in sublist]
     floor = min(flatten)
     ceiling = max(flatten)
-#    if (ceiling - floor) > 4.0:
-#        ystep = (ceiling - floor) / 9  # have 10 increments of y-axis
-#        ystep = round(ystep * 2) / 2  # round the step to nearest 0.5
-#    else:
-#        ystep = (ceiling - floor)
 
-    ### Stagger each of the component files of minimaE for ease of viewing.
+    # stagger each of the methods for ease of viewing
     if stag == True:
         tempMinimaE = []
-        for i, fileE in enumerate(minimaE):
-            tempMinimaE.append([x + i / 2. for x in fileE])
+        for i, file_ene in enumerate(minimaE):
+            tempMinimaE.append([x + i / 2. for x in file_ene])
         minimaE = tempMinimaE
-        ceiling = ceiling + numFiles
+        ceiling = ceiling + num_files
 
-    ### Figure labels.
-    plttitle = "Relative Energies of %s Minima" % (molName)
-    plttitle += "\nby Reference: %s" % (refFile)
+    # set figure-related labels
+    plttitle = "Relative Energies of %s Minima" % (mol_name)
+    plttitle += "\nby Reference: %s" % (ref_file)
     ylabel = "Relative energy (kcal/mol)"
-    figname = "minimaE_%s.png" % (molName)
+    figname = "minimaE_%s.png" % (mol_name)
 
-    ### Set x-axis values and labels. Can either be letter or number.
-
-    # LETTER LABELS
-    letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # label x-axis by letter
+    # set xtick labels by either letters or numbers
+    letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     rpt = int((len(minimaE[0]) / 26) + 1)
     xlabs = [''.join(i)
              for i in itertools.product(letters, repeat=rpt)][:ref_nconfs]
-    # OR, NUMBER LABELS
+    # xticks by numbers instead
     #xlabs = range(len(minimaE[0]))
 
-    ### Set this up for grid.
+    # create figure
     fig = plt.figure(figsize=(20, 10))
     ax = fig.gca()
     ax.set_xticks(np.arange(-1, ref_nconfs + 1, 2))
 
-    ### Label figure. Label xticks before plot for better spacing.
+    # label figure; label xticks before plotting for better spacing.
     plt.title(plttitle, fontsize=16)
     plt.ylabel(ylabel, fontsize=20)
     plt.xlabel("conformer minimum", fontsize=20)
     plt.xticks(list(range(ref_nconfs)), xlabs, fontsize=18)
     plt.yticks(fontsize=18)
 
-    ### Plot the data.
-    colors = mpl.cm.rainbow(np.linspace(0, 1, numFiles))
+    # define line colors and markers
+    colors = mpl.cm.rainbow(np.linspace(0, 1, num_files))
     markers = [
         "x", "^", "8", "d", "o", "s", "*", "p", "v", "<", "D", "+", ">", "."
     ] * 10
-    #for i in reversed(range(numFiles)):
-    for i, FileE in enumerate(minimaE):
+
+    # plot the data
+    for i, file_ene in enumerate(minimaE):
+
+        # skip the non-selected ones if defined
         if selected is not None and i not in selected:
             continue
-        xi = list(range(ref_nconfs))
-        #yi = [item[i] for item in minimaE]
-        yi = FileE
-        plt.plot(xi,yi,color=colors[i],label=xticklabels[i],\
-            marker=markers[i],markersize=9)
 
-    ### Add legend and set plot limits.
+        # define x's from integer range with step 1
+        xi = list(range(ref_nconfs))
+
+        # generate plot
+        plt.plot(xi, file_ene, color=colors[i], label=legend[i],
+            marker=markers[i], markersize=9)
+
+    # add legend, set plot limits, add grid
     plt.legend(bbox_to_anchor=(0.96, 1), loc=2, prop={'size': 18})
     plt.xlim(-1, ref_nconfs + 1)
-    # y axis limits: min, max, step
     ax.set_yticks(
         np.arange(int(round(floor)) - 2,
                   int(round(ceiling)) + 2))
-                  #int(round(ceiling)) + 2, ystep))
     plt.grid()
 
+    # save and close figure
     plt.savefig(figname, bbox_inches='tight')
-    #    plt.show()
-
-    # save memory, close figure
+    #plt.show()
     fig.clear()
     plt.close(fig)
 
 
 def match_minima(in_dict, rmsd_cutoff):
     """
-    For list of SDF files, match the conformer minima to those of the reference
-       SDF file. Ex. Conf G of reference file matches with conf R of file3.
+    For different methods, match the conformer minima to those of the reference
+        method. Ex. Conf G of reference method matches with conf R of method 2.
 
     Parameters
     ----------
-    TODO
-
-    sdf_list: str list - list of the SDF file names to be analyzed.
-          This list should include reference SDF file (sdf_ref) as first element.
-    ff_list: str list - list of levels of theory corresponding to the files
-          in sdf_list. E.g., ['MP2/def2-TZVP','B3LYP-D3MBJ/6-311++G**']
+    in_dict : OrderedDict
+        dictionary from input file, where key is method and value is dictionary
+        first entry should be reference method
+        in sub-dictionary, keys are 'sdfile' and 'sdtag'
+    rmsd_cutoff : float
+        cutoff above which two structures are considered diff conformers
 
     Returns
     -------
-    mol_dict: nested dictionary of format:
-        mol_dict['molName']['energies']
+    mol_dict : dict of dicts
+        mol_dict['mol_name']['energies']
         = [[file1: conf1 conf2] [file2: conf1 conf2]]
 
     """
 
-    # nested dictionary with 1st layer of mol names, 2nd layer of energies
+    # nested dictionary: 1st layer of mol names, 2nd layer of method energies
     mol_dict = {}
 
     # get first filename representing the reference geometries
@@ -402,14 +426,17 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
 
     Parameters
     ----------
-    rel_energies: 3D list of energies, where rel_energies[i][j][k] represents the
-      ith molecule, jth file, kth conformer rel energy
-    lowest_conf_indices: a 1D list of index of the reference conformer per each mol
+    rel_energies : 3D list
+        energies, where rel_energies[i][j][k] represents ith mol, jth file,
+        kth conformer rel energy
+    lowest_conf_indices : 1D list
+        indices of the lowest energy conformer per each mol
 
     Returns
     -------
-    rms_array: a 2D list of RMS errors for each file with reference to
-      first input file, rms_array[i][j] represents ith mol, jth file
+    rms_array : 2D list
+        RMS errors for each file with reference to first input file
+        rms_array[i][j] represents ith mol, jth file's RMSE
 
     """
     rms_array = []
@@ -443,75 +470,83 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
     return rms_array
 
 
-def calc_rel_ene(minimaE):
+def calc_rel_ene(matched_enes):
     """
-    Calculate the relative energy. For each file, take conformer energy
-       relative to minimum X. The conformer minimum is chosen from
-       the first conformer for which all files have an energy value.
-       Note that relative energies are taken with a file's conformers,
-       not subtracting one file from another (see calc_rms_error).
+    Calculate conformer relative energies of matching conformers.
+        For each file, subtract minimum conformer energy from all conformers.
+        The minimum-energy conformer minimum is chosen from first
+        finding the method with the least number of missing energies,
+        then of that method, choosing the lowest energy conformer.
+    For mols with a single conformer it doesn't make sense to calculate
+        relative energies. These mols are removed from matched_enes.
 
     Parameters
     ----------
-    minimaE: 3D list of energies, where minimaE[i][j][k] represents the
-      ith molecule, jth file, kth minima of that ith molecule
+    matched_enes : 3D list
+        energies, matched_enes[i][j][k] represents energy of
+        ith mol, jth file, kth conformer
 
     Returns
     -------
-    rel_energies: 3D list of energies as above except with relative energies
-      (lowest energy conformer subtracted from all energies) For mols
-      with a single conformer it doesn't make sense to calculate rel
-      energies. These mols are deleted from minimaE.
-    lowest_conf_indices: a 1D list of index of the reference conformer per each mol
+    rel_energies : 3D list
+        energies in same format as above except with relative energies
+    lowest_conf_indices : 1D list
+        indices of the lowest energy conformer by reference mols
 
     """
 
     lowest_conf_indices = []
 
     # loop over molecules
-    for i, mol_array in enumerate(minimaE):
+    for i, mol_array in enumerate(matched_enes):
 
-        # number of conformers in reference file
+        # get number of conformers in reference file
         ref_nconfs = len(mol_array[0])
 
-        # for this molecule, count number of (conf) nans in each file (1d list)
-        nanCnt = []
+        # for this mol, count number of conf nans for each method (1d list)
+        nan_cnt = []
         for j in range(ref_nconfs):
-            nanCnt.append(sum(np.isnan([file_enes[j] for file_enes in mol_array])))
-        #print("mol {} nanCnt: {}".format(i, nanCnt))
+            nan_cnt.append(sum(np.isnan([file_enes[j] for file_enes in mol_array])))
+        #print("mol {} nan_cnt: {}".format(i, nan_cnt))
 
-        # for this molecule, find which file has the least nans
-        # equivalent to finding which query file has the most matches
-        # where0 is the index of the file with least number of nans
-        where0 = np.empty(0)
+        # find which method has fewest nans; equiv to finding which query
+        # method has most number of conformer matches
+
+        # no_nan_conf_inds: list of conf indices with no nans across all files
+        no_nan_conf_inds = np.empty(0)
         cnt = 0
-        # check if there are 0 nans. if so, assign index to where0, leave loop
-        # loop is left as soon as 'where0' is assigned or if
-        # there is nothing left in nanCnt to check
-        while where0.size == 0 and cnt < ref_nconfs:
-            where0 = np.where(np.asarray(nanCnt) == cnt)[0]
+
+        # check which confs have 0 method nans. if none of them, check which
+        # have 1 nan across all files, etc. repeat until you find the smallest
+        # nan value for which you get conformer indices with that number nans.
+        # leave loop when 'no_nan_conf_inds' is assigned or if nothing left in nan_cnt
+        while no_nan_conf_inds.size == 0 and cnt < ref_nconfs:
+            no_nan_conf_inds = np.where(np.asarray(nan_cnt) == cnt)[0]
             cnt += 1
 
-        # where0 got assigned. for this query file, get lowest energy conformer
-        if where0.size > 0:
-            # energies from query file with least nans for this mol
-            leastNanEs = np.take(mol_array[0], where0)
-            # index of the lowest energy conformer
-            winningconfIdx = where0[np.argmin(leastNanEs)]
-            lowest_conf_indices.append(winningconfIdx)
+        # for an existing no_nan_conf_inds, get lowest energy conf of reference method
+        if no_nan_conf_inds.size > 0:
 
-        # where0 did not get assigned so all files had max (ref_nconfs) nans?
-        # in this case just use index of file with lowest number of nans
-        # TODO: wouldn't it be better here to use lowest ref conf ene?
+            # get energies from reference [0] file
+            leastNanEs = np.take(mol_array[0], no_nan_conf_inds)
+
+            # find index of the lowest energy conformer
+            lowest_conf_idx = no_nan_conf_inds[np.argmin(leastNanEs)]
+            lowest_conf_indices.append(lowest_conf_idx)
+
+        # if no_nan_conf_inds not assigned, this means all methods had all nans
+        # in this case just get index of conformer with lowest number of nans
         else:
-            lowest_conf_indices.append(nanCnt.index(min(nanCnt)))
+            lowest_conf_indices.append(nan_cnt.index(min(nan_cnt)))
 
     # after going thru all mols, calc relative energies by subtracting lowest
     rel_energies = []
-    for z, molE in zip(lowest_conf_indices, minimaE):
+    for z, molE in zip(lowest_conf_indices, matched_enes):
+
         # temp list for this mol's relative energies
         temp = []
 
+        # subtract energy of lowest_conf_index; store in list
         for fileE in molE:
             temp.append(
                 [(fileE[i] - fileE[z]) for i in range(len(fileE))])
@@ -520,43 +555,59 @@ def calc_rel_ene(minimaE):
     return rel_energies, lowest_conf_indices
 
 
-def write_rel_ene(molName, rmse, relEnes, zero, ff_list, prefix='relene'):
+def write_rel_ene(mol_name, rmse, relEnes, low_ind, ff_list, prefix='relene'):
     """
+    Write the relative energies and RMSEs in an output text file.
+
+    Parameters
+    ----------
+    mol_name : string
+        title of the mol being written out
     rmse : list
-        list of RMSEs for all the query files with this mol
+        1D list of RMSEs for all the compared methods against ref method
+    relEnes : 2D list
+        relEnes[i][j] represents energy of ith method and jth conformer
+    low_ind : int
+        integer of the index of the lowest energy conformer
+    ff_list : list
+        list of methods including reference as the first
+    prefix : string
+        prefix of output dat file
 
     """
 
-    compF = open(prefix + '_' + molName + '.dat', 'w')
-    compF.write("# Molecule %s\n" % molName)
-    compF.write("# Energies (kcal/mol) for each matched conformer relative to "
-                + "conformer " + str(zero) + " across each column.\n")
-    compF.write("# Rows represent conformers of this molecule; columns " +
-                "represent some calculations from a particular file.\n")
-    compF.write("# Columns are ordered by conformer index, then the " +
-                "following levels of theory:")
+    ofile = open(f"{prefix}_{mol_name}.dat", 'w')
+    ofile.write(f"# Molecule %s\n" % mol_name)
+    ofile.write("# Energies (kcal/mol) for conformers matched to first method.")
+    ofile.write(f"\n# Energies are relative to conformer {low_ind}.\n")
+    ofile.write("# Rows represent conformers; columns represent methods.\n")
 
     # write methods, RMSEs, integer column header
     rmsheader = "\n# "
     colheader = "\n\n# "
-    for i, t in enumerate(ff_list):
-        compF.write("\n# %d %s" % ((i + 1), t))
-        rmsheader += '\t%.4f' % rmse[i]
-        colheader += '\t' + str(i + 1)
+    for i, method in enumerate(ff_list):
+        ofile.write(f"\n# {i+1} {method}")
+        rmsheader += f"\t{rmse[i]:.4f}"
+        colheader += f"\t\t{i+1}"
 
-    compF.write("\n\n# RMS errors by level of theory, with respect to the " +
-                "first level of theory listed:")
-    compF.write(rmsheader)
-    compF.write(colheader)
+    ofile.write("\n\n# RMS errors by method, with respect to the " +
+                "first method listed:")
+    ofile.write(rmsheader)
+    ofile.write(colheader)
 
     # write each ff's relative energies
     for i in range(len(relEnes[0])):
-        compF.write('\n' + str(i) + '\t')
+
+        # label conformer row
+        ofile.write(f"\n{i}\t")
+
+        # write energies for this conformer of all methods
         thisline = [x[i] for x in relEnes]
         thisline = ['%.4f' % elem for elem in thisline]
         thisline = '\t'.join(map(str, thisline))
-        compF.write(thisline)
-    compF.close()
+        ofile.write(thisline)
+
+    ofile.close()
 
 
 def extract_matches(mol_dict):
@@ -568,11 +619,16 @@ def extract_matches(mol_dict):
 
     Parameter
     ---------
-    mol_dict
+    mol_dict : dict of dicts
+        mol_dict['mol_name']['energies']
+        = [[file1: conf1 conf2] [file2: conf1 conf2]]
 
     Returns
     -------
-    same as the parameter with new key/value pairs for matched data
+    mol_dict : dict of dicts
+        mol_dict['mol_name']['energies']
+        mol_dict['mol_name']['energies_matched']
+
     """
 
     # iterate over each molecule
@@ -633,6 +689,23 @@ def extract_matches(mol_dict):
 
 
 def main(in_dict, readpickle, plot, rmsd_cutoff):
+    """
+    Execute the minima matching.
+
+    Parameter
+    ---------
+    in_dict : OrderedDict
+        dictionary from input file, where key is method and value is dictionary
+        first entry should be reference method
+        in sub-dictionary, keys are 'sdfile' and 'sdtag'
+    readpickle : Boolean
+        read in data from match.pickle
+    plot : Boolean
+        generate line plots of conformer energies
+    rmsd_cutoff : float
+        cutoff above which two structures are considered diff conformers
+
+    """
 
     # run matching, unless reading in from pickle file
     if readpickle:
@@ -649,12 +722,12 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
     mol_dict = extract_matches(mol_dict)
 
     # collect the matched energies into a list of lists
-    minimaE = []
+    matched_enes = []
     for m in mol_dict:
-        minimaE.append(mol_dict[m]['energies_matched'])
+        matched_enes.append(mol_dict[m]['energies_matched'])
 
     # with matched energies, calculate relative values and RMS error
-    rel_energies, lowest_conf_indices = calc_rel_ene(minimaE)
+    rel_energies, lowest_conf_indices = calc_rel_ene(matched_enes)
     rms_array = calc_rms_error(rel_energies, lowest_conf_indices)
 
     # write out data file of relative energies
@@ -662,19 +735,18 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
     ff_list = list(in_dict.keys())
 
     for i, mn in enumerate(mol_names):
-        #
-        try:
-            write_rel_ene(mn, rms_array[i], rel_energies[i], lowest_conf_indices[i], ff_list)
-        #
-        except IndexError:
-            lowest_conf_indices.append(np.nan)
-            write_rel_ene(mn, [np.nan]*len(ff_list), elists[i], lowest_conf_indices[i], ff_list)
+        write_rel_ene(mn, rms_array[i], rel_energies[i], lowest_conf_indices[i], ff_list)
 
     if plot:
         for i, m in enumerate(mol_dict):
-#            if m != 'AlkEthOH_c1178': continue
+
+            # only plot for single molecule
+             #if m != 'AlkEthOH_c1178': continue
+
             plot_mol_minima(m, rel_energies[i], ff_list)
-#            plot_mol_minima(m, rel_energies[i], ff_list, selected=[0]) # zero based index
+
+            # only plot selected methods
+            #plot_mol_minima(m, rel_energies[i], ff_list, selected=[0])
 
 
 ### ------------------- Parser -------------------
