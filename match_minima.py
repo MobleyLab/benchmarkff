@@ -8,7 +8,7 @@ Compute relative energies of corresponding conformers to a reference conformer.
 Generate plots for relative conformer energies (one plot per mol).
 
 By:      Victoria T. Lim
-Version: Nov 18 2019
+Version: Dec 2 2019
 
 """
 
@@ -36,7 +36,7 @@ def read_mols(infile, mol_slice=None):
     ----------
     infile : string
         name of input file with molecules
-    mol_slice : list
+    mol_slice : list[int]
         list of indices from which to slice mols generator for read_mols
         [start, stop, step]
 
@@ -156,17 +156,16 @@ def read_check_input(infile):
             in_dict[dataline[0]] = {'sdfile': dataline[1], 'sdtag': dataline[2]}
 
     # check that each file exists before starting
-    while True:
-        list1 = []
-        for v in in_dict.values():
-            list1.append(os.path.isfile(v['sdfile']))
+    list1 = []
+    for vals in in_dict.values():
+        list1.append(os.path.isfile(vals['sdfile']))
 
-        # if all elements are True then all files exist
-        if all(list1):
-            return in_dict
-        else:
-            print(list1)
-            raise ValueError("One or more listed files not found")
+    # if all elements are True then all files exist
+    if all(list1):
+        return in_dict
+    else:
+        print(list1)
+        raise ValueError("One or more listed files not found")
 
 
 def compare_two_mols(rmol, qmol, rmsd_cutoff):
@@ -337,8 +336,9 @@ def match_minima(in_dict, rmsd_cutoff):
     Returns
     -------
     mol_dict : dict of dicts
-        mol_dict['mol_name']['energies']
-        = [[file1: conf1 conf2] [file2: conf1 conf2]]
+        mol_dict['mol_name']['energies'] =
+            [[file1_conf1_E file1_conf2_E] [file2_conf1_E file2_conf2_E]]
+        An analogous structure is followed for mol_dict['mol_name']['indices'].
 
     """
 
@@ -354,10 +354,10 @@ def match_minima(in_dict, rmsd_cutoff):
         sdf_tag = ff_dict['sdtag']
 
         # load molecules from open reference and query files
-        print("\n\nOpening reference file %s" % sdf_ref)
+        print(f"\n\nOpening reference file {sdf_ref}")
         mols_ref = read_mols(sdf_ref)
 
-        print("Opening query file %s for [ %s ] energies" % (sdf_query, ff_label))
+        print(f"Opening query file {sdf_query} for [ {ff_label} ] energies")
         mols_query = read_mols(sdf_query)
 
         # loop over each molecule in reference and query files
@@ -378,20 +378,18 @@ def match_minima(in_dict, rmsd_cutoff):
             # create entry for this mol in mol_dict if not already present
             # energies [i][j] will be 2d list of ith file and jth conformer
             if mol_name not in mol_dict:
-                mol_dict[mol_name] = {}
-                mol_dict[mol_name] = {'energies': [], 'indices': [], 'ref_nconfs': []}
+                mol_dict[mol_name] = {'energies': [], 'indices': []}
 
             # no same molecules were found bt ref and query files
             # for N reference minima of each mol, P matching indices for each ref minimia
             if not run_match:
-                print(f"No {mol_name} molecule found in {sdf_query}")
+                print(f"No \"{mol_name}\" molecule found in {sdf_query}")
 
                 # fill in -2 error values for conformer indices
                 mol_dict[mol_name]['indices'].append([-2] * ref_nconfs)
 
                 # fill in nan values for conformer energies and ref_nconfs
                 mol_dict[mol_name]['energies'].append([np.nan] * ref_nconfs)
-                mol_dict[mol_name]['ref_nconfs'].append(ref_nconfs)
 
                 # reset mols_query generator
                 mols_query = read_mols(sdf_query)
@@ -399,9 +397,14 @@ def match_minima(in_dict, rmsd_cutoff):
                 # continue with the next rmol
                 continue
 
+            # get data from specified sd tag for all conformers
+            data_confs = get_sd_list(qmol, sdf_tag)
+
+            # format sd tag data to float types
+            float_data_confs = list(map(float, data_confs))
+
             # store sd data from tags into dictionary
-            mol_dict[mol_name]['energies'].append(list(map(float,
-                                get_sd_list(qmol, sdf_tag))))
+            mol_dict[mol_name]['energies'].append(float_data_confs)
 
             # actually don't run match if query file is same as reference file
             # keep this section after sd tag extraction of energies
@@ -612,16 +615,27 @@ def write_rel_ene(mol_name, rmse, relEnes, low_ind, ff_list, prefix='relene'):
 
 def extract_matches(mol_dict):
     """
-    This function checks if minima is matched, using indices lists inside dict.
-    If match is found, store the corresponding energy under a new key with
+    This function checks if minima are matched, using conformer indices.
+    For example, mol_dict[example_mol]['indices'] = [ 0 2 1 ] means that,
+    compared to the reference conformers, the queried file has confs 1 and 2
+    switched. The switch will be made to compare corresponding energies
+    for matching conformers.
+
+    If the query file doesn't have a match to one of the reference conformers,
+    then 'None' will be in the list of indices. Other indices of NON-match
+    are -1 (query file the same as reference file so everything matches)
+    and -2 (query file missing the whole molecule of the reference file).
+
+    If a match is found, store the corresponding energy under a new key with
     value of "energies_matched". If there is no match, the energy listed in the
     dict is not used; rather, nan is added as placeholder.
 
     Parameter
     ---------
     mol_dict : dict of dicts
-        mol_dict['mol_name']['energies']
-        = [[file1: conf1 conf2] [file2: conf1 conf2]]
+        mol_dict['mol_name']['energies'] =
+            [[file1_conf1_E file1_conf2_E] [file2_conf1_E file2_conf2_E]]
+        An analogous structure is followed for mol_dict['mol_name']['indices'].
 
     Returns
     -------
@@ -654,22 +668,22 @@ def extract_matches(mol_dict):
                 # as set in the compare_two_mols function
                 if conf_index is None:
                     print(
-                        "No matching conformer within RMSD cutoff for {}th "
-                        "conf of {} mol in {}th file.".format(j, m, i))
+                        f"No matching conformer within RMSD cutoff for {j}th "
+                        f"conf of {m} mol in {i}th file.")
                     fileData.append(np.nan)
 
                 # the query molecule was missing
                 elif conf_index == -2:
                     # only print this warning message once per mol
                     if j == 0:
-                        print("!!!! The entire {} mol is not found in "
-                              "{}th file. !!!!".format(m, i))
+                        print(f"!!!! The entire {m} mol is not found in "
+                              f"{i}th file. !!!!")
                     fileData.append(np.nan)
 
                 # energies are missing somehow?
                 elif len(energy_array[i]) == 0:
-                    print("!!!! Mol {} was found and confs were matched by "
-                          "RMSD but there are no energies of {}th method. !!!!".format(m, i))
+                    print(f"!!!! Mol {m} was found and confs were matched by "
+                          f"RMSD but there are no energies of {i}th method. !!!!")
                     fileData.append(np.nan)
 
                 # conformers not matched bc query file = reference file
@@ -690,7 +704,9 @@ def extract_matches(mol_dict):
 
 def main(in_dict, readpickle, plot, rmsd_cutoff):
     """
-    Execute the minima matching.
+    Match conformers from sets of different optimizations.
+    Compute relative energies of corresponding confs to a reference conformer.
+    Generate plots for relative conformer energies (one plot per mol).
 
     Parameter
     ---------
