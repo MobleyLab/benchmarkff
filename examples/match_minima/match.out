@@ -1,0 +1,332 @@
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8.sdf for [ B3LYP-D3BJ/DZVP ] energies
+
+Skipping comparison against self.
+
+Skipping comparison against self.
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8_gaff.sdf for [ GAFF ] energies
+>>>> Matching full_3526 conformers to minima: 1 <<<<
+>>>> Matching full_3526 conformers to minima: 2 <<<<
+>>>> Matching full_3526 conformers to minima: 3 <<<<
+>>>> Matching full_3526 conformers to minima: 4 <<<<
+>>>> Matching full_3526 conformers to minima: 5 <<<<
+>>>> Matching full_3526 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 1 <<<<
+>>>> Matching full_3527 conformers to minima: 2 <<<<
+>>>> Matching full_3527 conformers to minima: 3 <<<<
+>>>> Matching full_3527 conformers to minima: 4 <<<<
+>>>> Matching full_3527 conformers to minima: 5 <<<<
+>>>> Matching full_3527 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 7 <<<<
+>>>> Matching full_3527 conformers to minima: 8 <<<<
+>>>> Matching full_3527 conformers to minima: 9 <<<<
+>>>> Matching full_3527 conformers to minima: 10 <<<<
+>>>> Matching full_3527 conformers to minima: 11 <<<<
+>>>> Matching full_3527 conformers to minima: 12 <<<<
+>>>> Matching full_3527 conformers to minima: 13 <<<<
+>>>> Matching full_3527 conformers to minima: 14 <<<<
+>>>> Matching full_3527 conformers to minima: 15 <<<<
+>>>> Matching full_3527 conformers to minima: 16 <<<<
+>>>> Matching full_3527 conformers to minima: 17 <<<<
+>>>> Matching full_3527 conformers to minima: 18 <<<<
+>>>> Matching full_3527 conformers to minima: 19 <<<<
+>>>> Matching full_3527 conformers to minima: 20 <<<<
+>>>> Matching full_3527 conformers to minima: 21 <<<<
+>>>> Matching full_3527 conformers to minima: 22 <<<<
+>>>> Matching full_3527 conformers to minima: 23 <<<<
+>>>> Matching full_3527 conformers to minima: 24 <<<<
+>>>> Matching full_3527 conformers to minima: 25 <<<<
+>>>> Matching full_3527 conformers to minima: 26 <<<<
+>>>> Matching full_3527 conformers to minima: 27 <<<<
+>>>> Matching full_3527 conformers to minima: 28 <<<<
+>>>> Matching full_3527 conformers to minima: 29 <<<<
+>>>> Matching full_3527 conformers to minima: 30 <<<<
+>>>> Matching full_3527 conformers to minima: 31 <<<<
+>>>> Matching full_3527 conformers to minima: 32 <<<<
+>>>> Matching full_3527 conformers to minima: 33 <<<<
+>>>> Matching full_3527 conformers to minima: 34 <<<<
+>>>> Matching full_3527 conformers to minima: 35 <<<<
+>>>> Matching full_3527 conformers to minima: 36 <<<<
+>>>> Matching full_3527 conformers to minima: 37 <<<<
+>>>> Matching full_3527 conformers to minima: 38 <<<<
+>>>> Matching full_3527 conformers to minima: 39 <<<<
+>>>> Matching full_3527 conformers to minima: 40 <<<<
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8_gaff2.sdf for [ GAFF2 ] energies
+>>>> Matching full_3526 conformers to minima: 1 <<<<
+>>>> Matching full_3526 conformers to minima: 2 <<<<
+>>>> Matching full_3526 conformers to minima: 3 <<<<
+>>>> Matching full_3526 conformers to minima: 4 <<<<
+>>>> Matching full_3526 conformers to minima: 5 <<<<
+>>>> Matching full_3526 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 1 <<<<
+>>>> Matching full_3527 conformers to minima: 2 <<<<
+>>>> Matching full_3527 conformers to minima: 3 <<<<
+>>>> Matching full_3527 conformers to minima: 4 <<<<
+>>>> Matching full_3527 conformers to minima: 5 <<<<
+>>>> Matching full_3527 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 7 <<<<
+>>>> Matching full_3527 conformers to minima: 8 <<<<
+>>>> Matching full_3527 conformers to minima: 9 <<<<
+>>>> Matching full_3527 conformers to minima: 10 <<<<
+>>>> Matching full_3527 conformers to minima: 11 <<<<
+>>>> Matching full_3527 conformers to minima: 12 <<<<
+>>>> Matching full_3527 conformers to minima: 13 <<<<
+>>>> Matching full_3527 conformers to minima: 14 <<<<
+>>>> Matching full_3527 conformers to minima: 15 <<<<
+no match bc rmsd is  1.0088653016819975
+>>>> Matching full_3527 conformers to minima: 16 <<<<
+>>>> Matching full_3527 conformers to minima: 17 <<<<
+>>>> Matching full_3527 conformers to minima: 18 <<<<
+>>>> Matching full_3527 conformers to minima: 19 <<<<
+no match bc rmsd is  1.0192790670055176
+>>>> Matching full_3527 conformers to minima: 20 <<<<
+>>>> Matching full_3527 conformers to minima: 21 <<<<
+>>>> Matching full_3527 conformers to minima: 22 <<<<
+>>>> Matching full_3527 conformers to minima: 23 <<<<
+>>>> Matching full_3527 conformers to minima: 24 <<<<
+>>>> Matching full_3527 conformers to minima: 25 <<<<
+>>>> Matching full_3527 conformers to minima: 26 <<<<
+no match bc rmsd is  1.0924918696872066
+>>>> Matching full_3527 conformers to minima: 27 <<<<
+>>>> Matching full_3527 conformers to minima: 28 <<<<
+>>>> Matching full_3527 conformers to minima: 29 <<<<
+>>>> Matching full_3527 conformers to minima: 30 <<<<
+>>>> Matching full_3527 conformers to minima: 31 <<<<
+>>>> Matching full_3527 conformers to minima: 32 <<<<
+>>>> Matching full_3527 conformers to minima: 33 <<<<
+>>>> Matching full_3527 conformers to minima: 34 <<<<
+>>>> Matching full_3527 conformers to minima: 35 <<<<
+>>>> Matching full_3527 conformers to minima: 36 <<<<
+>>>> Matching full_3527 conformers to minima: 37 <<<<
+>>>> Matching full_3527 conformers to minima: 38 <<<<
+>>>> Matching full_3527 conformers to minima: 39 <<<<
+>>>> Matching full_3527 conformers to minima: 40 <<<<
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8_mmff94.sdf for [ MMFF94 ] energies
+>>>> Matching full_3526 conformers to minima: 1 <<<<
+>>>> Matching full_3526 conformers to minima: 2 <<<<
+>>>> Matching full_3526 conformers to minima: 3 <<<<
+>>>> Matching full_3526 conformers to minima: 4 <<<<
+>>>> Matching full_3526 conformers to minima: 5 <<<<
+>>>> Matching full_3526 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 1 <<<<
+>>>> Matching full_3527 conformers to minima: 2 <<<<
+>>>> Matching full_3527 conformers to minima: 3 <<<<
+>>>> Matching full_3527 conformers to minima: 4 <<<<
+>>>> Matching full_3527 conformers to minima: 5 <<<<
+>>>> Matching full_3527 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 7 <<<<
+>>>> Matching full_3527 conformers to minima: 8 <<<<
+>>>> Matching full_3527 conformers to minima: 9 <<<<
+>>>> Matching full_3527 conformers to minima: 10 <<<<
+>>>> Matching full_3527 conformers to minima: 11 <<<<
+no match bc rmsd is  1.1960976881641907
+>>>> Matching full_3527 conformers to minima: 12 <<<<
+>>>> Matching full_3527 conformers to minima: 13 <<<<
+>>>> Matching full_3527 conformers to minima: 14 <<<<
+>>>> Matching full_3527 conformers to minima: 15 <<<<
+>>>> Matching full_3527 conformers to minima: 16 <<<<
+>>>> Matching full_3527 conformers to minima: 17 <<<<
+>>>> Matching full_3527 conformers to minima: 18 <<<<
+>>>> Matching full_3527 conformers to minima: 19 <<<<
+>>>> Matching full_3527 conformers to minima: 20 <<<<
+>>>> Matching full_3527 conformers to minima: 21 <<<<
+>>>> Matching full_3527 conformers to minima: 22 <<<<
+>>>> Matching full_3527 conformers to minima: 23 <<<<
+>>>> Matching full_3527 conformers to minima: 24 <<<<
+>>>> Matching full_3527 conformers to minima: 25 <<<<
+>>>> Matching full_3527 conformers to minima: 26 <<<<
+>>>> Matching full_3527 conformers to minima: 27 <<<<
+>>>> Matching full_3527 conformers to minima: 28 <<<<
+>>>> Matching full_3527 conformers to minima: 29 <<<<
+>>>> Matching full_3527 conformers to minima: 30 <<<<
+>>>> Matching full_3527 conformers to minima: 31 <<<<
+no match bc rmsd is  1.0123915012690587
+>>>> Matching full_3527 conformers to minima: 32 <<<<
+>>>> Matching full_3527 conformers to minima: 33 <<<<
+>>>> Matching full_3527 conformers to minima: 34 <<<<
+>>>> Matching full_3527 conformers to minima: 35 <<<<
+>>>> Matching full_3527 conformers to minima: 36 <<<<
+>>>> Matching full_3527 conformers to minima: 37 <<<<
+>>>> Matching full_3527 conformers to minima: 38 <<<<
+no match bc rmsd is  1.0777843400733376
+>>>> Matching full_3527 conformers to minima: 39 <<<<
+>>>> Matching full_3527 conformers to minima: 40 <<<<
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8_mmff94s.sdf for [ MMFF94S ] energies
+>>>> Matching full_3526 conformers to minima: 1 <<<<
+>>>> Matching full_3526 conformers to minima: 2 <<<<
+>>>> Matching full_3526 conformers to minima: 3 <<<<
+>>>> Matching full_3526 conformers to minima: 4 <<<<
+>>>> Matching full_3526 conformers to minima: 5 <<<<
+>>>> Matching full_3526 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 1 <<<<
+>>>> Matching full_3527 conformers to minima: 2 <<<<
+>>>> Matching full_3527 conformers to minima: 3 <<<<
+>>>> Matching full_3527 conformers to minima: 4 <<<<
+>>>> Matching full_3527 conformers to minima: 5 <<<<
+>>>> Matching full_3527 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 7 <<<<
+>>>> Matching full_3527 conformers to minima: 8 <<<<
+>>>> Matching full_3527 conformers to minima: 9 <<<<
+>>>> Matching full_3527 conformers to minima: 10 <<<<
+>>>> Matching full_3527 conformers to minima: 11 <<<<
+no match bc rmsd is  1.1960976881641907
+>>>> Matching full_3527 conformers to minima: 12 <<<<
+>>>> Matching full_3527 conformers to minima: 13 <<<<
+>>>> Matching full_3527 conformers to minima: 14 <<<<
+>>>> Matching full_3527 conformers to minima: 15 <<<<
+>>>> Matching full_3527 conformers to minima: 16 <<<<
+>>>> Matching full_3527 conformers to minima: 17 <<<<
+>>>> Matching full_3527 conformers to minima: 18 <<<<
+>>>> Matching full_3527 conformers to minima: 19 <<<<
+>>>> Matching full_3527 conformers to minima: 20 <<<<
+>>>> Matching full_3527 conformers to minima: 21 <<<<
+>>>> Matching full_3527 conformers to minima: 22 <<<<
+>>>> Matching full_3527 conformers to minima: 23 <<<<
+>>>> Matching full_3527 conformers to minima: 24 <<<<
+>>>> Matching full_3527 conformers to minima: 25 <<<<
+>>>> Matching full_3527 conformers to minima: 26 <<<<
+>>>> Matching full_3527 conformers to minima: 27 <<<<
+>>>> Matching full_3527 conformers to minima: 28 <<<<
+>>>> Matching full_3527 conformers to minima: 29 <<<<
+>>>> Matching full_3527 conformers to minima: 30 <<<<
+>>>> Matching full_3527 conformers to minima: 31 <<<<
+no match bc rmsd is  1.0123915012690587
+>>>> Matching full_3527 conformers to minima: 32 <<<<
+>>>> Matching full_3527 conformers to minima: 33 <<<<
+>>>> Matching full_3527 conformers to minima: 34 <<<<
+>>>> Matching full_3527 conformers to minima: 35 <<<<
+>>>> Matching full_3527 conformers to minima: 36 <<<<
+>>>> Matching full_3527 conformers to minima: 37 <<<<
+>>>> Matching full_3527 conformers to minima: 38 <<<<
+no match bc rmsd is  1.0777843400733376
+>>>> Matching full_3527 conformers to minima: 39 <<<<
+>>>> Matching full_3527 conformers to minima: 40 <<<<
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8_parsley.sdf for [ Parsley ] energies
+>>>> Matching full_3526 conformers to minima: 1 <<<<
+>>>> Matching full_3526 conformers to minima: 2 <<<<
+>>>> Matching full_3526 conformers to minima: 3 <<<<
+>>>> Matching full_3526 conformers to minima: 4 <<<<
+>>>> Matching full_3526 conformers to minima: 5 <<<<
+>>>> Matching full_3526 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 1 <<<<
+>>>> Matching full_3527 conformers to minima: 2 <<<<
+>>>> Matching full_3527 conformers to minima: 3 <<<<
+>>>> Matching full_3527 conformers to minima: 4 <<<<
+>>>> Matching full_3527 conformers to minima: 5 <<<<
+>>>> Matching full_3527 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 7 <<<<
+>>>> Matching full_3527 conformers to minima: 8 <<<<
+>>>> Matching full_3527 conformers to minima: 9 <<<<
+>>>> Matching full_3527 conformers to minima: 10 <<<<
+>>>> Matching full_3527 conformers to minima: 11 <<<<
+>>>> Matching full_3527 conformers to minima: 12 <<<<
+>>>> Matching full_3527 conformers to minima: 13 <<<<
+>>>> Matching full_3527 conformers to minima: 14 <<<<
+>>>> Matching full_3527 conformers to minima: 15 <<<<
+>>>> Matching full_3527 conformers to minima: 16 <<<<
+no match bc rmsd is  1.1206516562654487
+>>>> Matching full_3527 conformers to minima: 17 <<<<
+>>>> Matching full_3527 conformers to minima: 18 <<<<
+>>>> Matching full_3527 conformers to minima: 19 <<<<
+>>>> Matching full_3527 conformers to minima: 20 <<<<
+>>>> Matching full_3527 conformers to minima: 21 <<<<
+>>>> Matching full_3527 conformers to minima: 22 <<<<
+>>>> Matching full_3527 conformers to minima: 23 <<<<
+>>>> Matching full_3527 conformers to minima: 24 <<<<
+>>>> Matching full_3527 conformers to minima: 25 <<<<
+>>>> Matching full_3527 conformers to minima: 26 <<<<
+>>>> Matching full_3527 conformers to minima: 27 <<<<
+>>>> Matching full_3527 conformers to minima: 28 <<<<
+>>>> Matching full_3527 conformers to minima: 29 <<<<
+>>>> Matching full_3527 conformers to minima: 30 <<<<
+>>>> Matching full_3527 conformers to minima: 31 <<<<
+>>>> Matching full_3527 conformers to minima: 32 <<<<
+>>>> Matching full_3527 conformers to minima: 33 <<<<
+>>>> Matching full_3527 conformers to minima: 34 <<<<
+>>>> Matching full_3527 conformers to minima: 35 <<<<
+>>>> Matching full_3527 conformers to minima: 36 <<<<
+>>>> Matching full_3527 conformers to minima: 37 <<<<
+>>>> Matching full_3527 conformers to minima: 38 <<<<
+>>>> Matching full_3527 conformers to minima: 39 <<<<
+>>>> Matching full_3527 conformers to minima: 40 <<<<
+
+
+Opening reference file trim_8.sdf
+Opening query file trim_8_smirnoff.sdf for [ Smirnoff99Frosst ] energies
+>>>> Matching full_3526 conformers to minima: 1 <<<<
+>>>> Matching full_3526 conformers to minima: 2 <<<<
+>>>> Matching full_3526 conformers to minima: 3 <<<<
+>>>> Matching full_3526 conformers to minima: 4 <<<<
+>>>> Matching full_3526 conformers to minima: 5 <<<<
+>>>> Matching full_3526 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 1 <<<<
+>>>> Matching full_3527 conformers to minima: 2 <<<<
+>>>> Matching full_3527 conformers to minima: 3 <<<<
+>>>> Matching full_3527 conformers to minima: 4 <<<<
+>>>> Matching full_3527 conformers to minima: 5 <<<<
+>>>> Matching full_3527 conformers to minima: 6 <<<<
+>>>> Matching full_3527 conformers to minima: 7 <<<<
+>>>> Matching full_3527 conformers to minima: 8 <<<<
+>>>> Matching full_3527 conformers to minima: 9 <<<<
+>>>> Matching full_3527 conformers to minima: 10 <<<<
+>>>> Matching full_3527 conformers to minima: 11 <<<<
+>>>> Matching full_3527 conformers to minima: 12 <<<<
+>>>> Matching full_3527 conformers to minima: 13 <<<<
+>>>> Matching full_3527 conformers to minima: 14 <<<<
+>>>> Matching full_3527 conformers to minima: 15 <<<<
+>>>> Matching full_3527 conformers to minima: 16 <<<<
+>>>> Matching full_3527 conformers to minima: 17 <<<<
+>>>> Matching full_3527 conformers to minima: 18 <<<<
+no match bc rmsd is  1.1073628281501149
+>>>> Matching full_3527 conformers to minima: 19 <<<<
+>>>> Matching full_3527 conformers to minima: 20 <<<<
+>>>> Matching full_3527 conformers to minima: 21 <<<<
+>>>> Matching full_3527 conformers to minima: 22 <<<<
+>>>> Matching full_3527 conformers to minima: 23 <<<<
+>>>> Matching full_3527 conformers to minima: 24 <<<<
+>>>> Matching full_3527 conformers to minima: 25 <<<<
+>>>> Matching full_3527 conformers to minima: 26 <<<<
+>>>> Matching full_3527 conformers to minima: 27 <<<<
+>>>> Matching full_3527 conformers to minima: 28 <<<<
+>>>> Matching full_3527 conformers to minima: 29 <<<<
+>>>> Matching full_3527 conformers to minima: 30 <<<<
+>>>> Matching full_3527 conformers to minima: 31 <<<<
+>>>> Matching full_3527 conformers to minima: 32 <<<<
+>>>> Matching full_3527 conformers to minima: 33 <<<<
+>>>> Matching full_3527 conformers to minima: 34 <<<<
+>>>> Matching full_3527 conformers to minima: 35 <<<<
+>>>> Matching full_3527 conformers to minima: 36 <<<<
+>>>> Matching full_3527 conformers to minima: 37 <<<<
+no match bc rmsd is  1.0834976931932943
+>>>> Matching full_3527 conformers to minima: 38 <<<<
+>>>> Matching full_3527 conformers to minima: 39 <<<<
+>>>> Matching full_3527 conformers to minima: 40 <<<<
+No matching conformer within RMSD cutoff for 14th conf of full_3527 mol in 2th file.
+No matching conformer within RMSD cutoff for 18th conf of full_3527 mol in 2th file.
+No matching conformer within RMSD cutoff for 25th conf of full_3527 mol in 2th file.
+No matching conformer within RMSD cutoff for 10th conf of full_3527 mol in 3th file.
+No matching conformer within RMSD cutoff for 30th conf of full_3527 mol in 3th file.
+No matching conformer within RMSD cutoff for 37th conf of full_3527 mol in 3th file.
+No matching conformer within RMSD cutoff for 10th conf of full_3527 mol in 4th file.
+No matching conformer within RMSD cutoff for 30th conf of full_3527 mol in 4th file.
+No matching conformer within RMSD cutoff for 37th conf of full_3527 mol in 4th file.
+No matching conformer within RMSD cutoff for 15th conf of full_3527 mol in 5th file.
+No matching conformer within RMSD cutoff for 17th conf of full_3527 mol in 6th file.
+No matching conformer within RMSD cutoff for 36th conf of full_3527 mol in 6th file.

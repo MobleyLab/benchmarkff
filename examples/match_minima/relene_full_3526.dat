@@ -1,0 +1,23 @@
+# Molecule full_3526
+# Energies (kcal/mol) for conformers matched to first method.
+# Energies are relative to conformer 3.
+# Rows represent conformers; columns represent methods.
+
+# 1 B3LYP-D3BJ/DZVP
+# 2 GAFF
+# 3 GAFF2
+# 4 MMFF94
+# 5 MMFF94S
+# 6 Parsley
+# 7 Smirnoff99Frosst
+
+# RMS errors by method, with respect to the first method listed:
+# 	0.0000	2.8181	6.9883	5.0466	5.0466	6.7480	2.4236
+
+# 		1		2		3		4		5		6		7
+0	0.9191	1.6397	1.7607	2.1382	2.1382	1.5538	1.5135
+1	6.3199	4.0469	5.2690	6.0119	6.0119	3.9748	3.7380
+2	10.3183	13.8809	-0.9483	2.0587	2.0587	-0.2417	12.9419
+3	0.0000	0.0000	0.0000	0.0000	0.0000	0.0000	0.0000
+4	6.3201	4.0471	5.2691	6.0119	6.0119	3.9749	3.7381
+5	11.0291	15.0495	0.3369	3.4500	3.4500	0.7937	13.9954

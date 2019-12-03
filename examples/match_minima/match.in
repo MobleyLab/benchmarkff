@@ -1,0 +1,9 @@
+# label, filename, SD tag
+# reference geometries should be in FIRST file
+B3LYP-D3BJ/DZVP,     trim_8.sdf,          Energy QCArchive
+GAFF,                trim_8_gaff.sdf,     Energy GAFF
+GAFF2,               trim_8_gaff2.sdf,    Energy GAFF2
+MMFF94,              trim_8_mmff94.sdf,   Energy MMFF94
+MMFF94S,             trim_8_mmff94s.sdf,  Energy MMFF94S
+Parsley,             trim_8_parsley.sdf,  Energy FFXML
+Smirnoff99Frosst,    trim_8_smirnoff.sdf, Energy FFXML
