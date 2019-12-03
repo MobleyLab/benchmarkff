@@ -67,7 +67,6 @@ def main(infile):
             chg_mol = charge_mol(mol)
 
         except RuntimeError:
-            find_unspecified_stereochem(mol)
 
             # perceive stereochem
             #find_unspecified_stereochem(mol)
