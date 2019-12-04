@@ -224,6 +224,25 @@ def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs):
     Generate bar plot of RMSEs of conformer energies for this molecule of
     all methods compared to reference method.
 
+    Number of conformers used to calculate the RMSE is also plotted
+    as a solid line. The number of possible conformers available
+    by the reference method is plotted as a dashed line.
+
+    Parameters
+    ----------
+    mol_name : string
+        title of the mol being plotted
+    rmses : list
+        rmses[i] is the RMSE of this mol of reference compared to ith method
+    xticklabels : list
+        list of methods of the same length as rmses list; should not include
+        reference method label
+    eff_nconfs : list
+        effective number of conformers with non-nan values;
+        same format and length as rmses
+    ref_nconfs : int
+        number of conformers in the reference method
+
     """
 
     # set figure-related labels
