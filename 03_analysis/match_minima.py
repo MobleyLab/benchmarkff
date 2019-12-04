@@ -171,10 +171,10 @@ def read_check_input(infile):
 def compare_two_mols(rmol, qmol, rmsd_cutoff):
     """
     For two identical molecules, with varying conformers,
-        make an M by N comparison to match the M minima of
-        rmol to the N minima of qmol. Match is declared
-        for lowest RMSD between the two conformers and
-        if the RMSD is below rmsd_cutoff.
+    make an M by N comparison to match the M minima of
+    rmol to the N minima of qmol. Match is declared
+    for lowest RMSD between the two conformers and
+    if the RMSD is below rmsd_cutoff.
 
     Parameters
     ----------
@@ -219,6 +219,53 @@ def compare_two_mols(rmol, qmol, rmsd_cutoff):
     return molIndices
 
 
+def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs):
+    """
+    Generate bar plot of RMSEs of conformer energies for this molecule of
+    all methods compared to reference method.
+
+    """
+
+    # set figure-related labels
+    plttitle = f"RMSEs of relative energies for\nmolecule {mol_name}"
+    ylabel = "RMSE (kcal/mol)"
+    figname = f"barRMSE_{mol_name}.png"
+
+    # define x locations by integer number of methods
+    x_locs = list(range(len(xticklabels)))
+
+    # label figure; label xticks before plot for better spacing
+    plt.title(plttitle, fontsize=20)
+    plt.ylabel(ylabel, fontsize=18)
+    plt.xticks(x_locs, xticklabels, fontsize=14, rotation=-30, ha='left')
+    plt.yticks(fontsize=14)
+
+    # define custom colors here if desired
+    #colors = ['tab:blue']*len(xticklabels)
+    colors = ['tab:blue']*2 + ['tab:orange']*2 + ['tab:green']*2
+
+    # plot rmses as bars
+    plt.bar(x_locs, rmses, color=colors, align='center', label='RMSE')
+
+    # plot number of conformers as lines
+    ax2 = plt.twinx()
+    ax2.plot(x_locs, eff_nconfs, color='k', alpha=0.5,
+             label='actual num confs')
+    ax2.axhline(ref_nconfs, color='k', alpha=0.5, ls='--',
+                label='reference num confs')
+
+    # format line graph properties, then add plot legend
+    ax2.set_ylabel('Number of conformers', fontsize=18)
+    ax2.tick_params(axis='y', labelsize=14)
+    ax2.yaxis.set_ticks(np.arange(min(eff_nconfs)-1, max(eff_nconfs)+2, 1))
+    plt.legend()
+
+    # save and close figure
+    plt.savefig(figname, bbox_inches='tight')
+    #plt.show()
+    plt.clf()
+
+
 def plot_mol_minima(mol_name, minimaE, legend, selected=None, stag=False):
     """
     Generate line plot of conformer energies of all methods (single molecule).
@@ -259,10 +306,10 @@ def plot_mol_minima(mol_name, minimaE, legend, selected=None, stag=False):
         ceiling = ceiling + num_files
 
     # set figure-related labels
-    plttitle = "Relative Energies of %s Minima" % (mol_name)
-    plttitle += "\nby Reference: %s" % (ref_file)
+    plttitle = f"Relative Energies of {mol_name} Minima"
+    plttitle += f"\nby Reference: {ref_file}"
     ylabel = "Relative energy (kcal/mol)"
-    figname = "minimaE_%s.png" % (mol_name)
+    figname = f"minimaE_{mol_name}.png"
 
     # set xtick labels by either letters or numbers
     letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -322,7 +369,7 @@ def plot_mol_minima(mol_name, minimaE, legend, selected=None, stag=False):
 def match_minima(in_dict, rmsd_cutoff):
     """
     For different methods, match the conformer minima to those of the reference
-        method. Ex. Conf G of reference method matches with conf R of method 2.
+    method. Ex. Conf G of reference method matches with conf R of method 2.
 
     Parameters
     ----------
@@ -376,11 +423,11 @@ def match_minima(in_dict, rmsd_cutoff):
                     break
 
             # create entry for this mol in mol_dict if not already present
-            # energies [i][j] will be 2d list of ith file and jth conformer
+            # energies [i][j] will be 2d list of ith method and jth conformer
             if mol_name not in mol_dict:
                 mol_dict[mol_name] = {'energies': [], 'indices': []}
 
-            # no same molecules were found bt ref and query files
+            # no same molecules were found bt ref and query methods
             # for N reference minima of each mol, P matching indices for each ref minimia
             if not run_match:
                 print(f"No \"{mol_name}\" molecule found in {sdf_query}")
@@ -406,7 +453,7 @@ def match_minima(in_dict, rmsd_cutoff):
             # store sd data from tags into dictionary
             mol_dict[mol_name]['energies'].append(float_data_confs)
 
-            # actually don't run match if query file is same as reference file
+            # don't run match if query method is same as reference method
             # keep this section after sd tag extraction of energies
             if sdf_query == sdf_ref:
                 print("\nSkipping comparison against self.")
@@ -424,13 +471,13 @@ def match_minima(in_dict, rmsd_cutoff):
 def calc_rms_error(rel_energies, lowest_conf_indices):
     """
     From relative energies with respect to some conformer from calc_rel_ene,
-       calculate the root mean square error with respect to the relative
-       conformer energies of the first (reference) file.
+    calculate the root mean square error with respect to the relative
+    conformer energies of the first (reference) method.
 
     Parameters
     ----------
     rel_energies : 3D list
-        energies, where rel_energies[i][j][k] represents ith mol, jth file,
+        energies, where rel_energies[i][j][k] represents ith mol, jth method,
         kth conformer rel energy
     lowest_conf_indices : 1D list
         indices of the lowest energy conformer per each mol
@@ -438,8 +485,8 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
     Returns
     -------
     rms_array : 2D list
-        RMS errors for each file with reference to first input file
-        rms_array[i][j] represents ith mol, jth file's RMSE
+        RMS errors for each method with reference to first input method
+        rms_array[i][j] represents ith mol, jth method's RMSE
 
     """
     rms_array = []
@@ -448,7 +495,7 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
     for i, mol_array in enumerate(rel_energies):
         mol_rmses = []
 
-        # iterate over each file (FF)
+        # iterate over each file (method)
         for j, filelist in enumerate(mol_array):
 
             # subtract query file minus reference file
@@ -476,41 +523,51 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
 def calc_rel_ene(matched_enes):
     """
     Calculate conformer relative energies of matching conformers.
-        For each file, subtract minimum conformer energy from all conformers.
-        The minimum-energy conformer minimum is chosen from first
-        finding the method with the least number of missing energies,
-        then of that method, choosing the lowest energy conformer.
+    For each method, subtract minimum conformer energy from all conformers.
+    The minimum-energy conformer minimum is chosen from first
+    finding the method with the least number of missing energies,
+    then of that method, choosing the lowest energy conformer.
+
     For mols with a single conformer it doesn't make sense to calculate
-        relative energies. These mols are removed from matched_enes.
+    relative energies. These mols are removed from matched_enes.
 
     Parameters
     ----------
     matched_enes : 3D list
         energies, matched_enes[i][j][k] represents energy of
-        ith mol, jth file, kth conformer
+        ith mol, jth method, kth conformer
 
     Returns
     -------
     rel_energies : 3D list
-        energies in same format as above except with relative energies
+        energies in same format as matched_enes except with relative energies
     lowest_conf_indices : 1D list
         indices of the lowest energy conformer by reference mols
+    eff_nconfs : 2D list
+        effective number of conformers with non-nan values
+        eff_nconfs[i][j] is for ith mol, jth method
 
     """
 
     lowest_conf_indices = []
+    eff_nconfs = []
 
     # loop over molecules
     for i, mol_array in enumerate(matched_enes):
 
-        # get number of conformers in reference file
+        # get number of conformers in reference method
         ref_nconfs = len(mol_array[0])
 
-        # for this mol, count number of conf nans for each method (1d list)
+        # for this mol, count number of nans for each conf of all methods
+        # 1d list of length ref_nconfs, where max value is num_methods
         nan_cnt = []
         for j in range(ref_nconfs):
             nan_cnt.append(sum(np.isnan([file_enes[j] for file_enes in mol_array])))
         #print("mol {} nan_cnt: {}".format(i, nan_cnt))
+
+        # store the effective number of conformers per method
+        eff_cnt = sum(~np.isnan(np.array(mol_array).T))
+        eff_nconfs.append(eff_cnt)
 
         # find which method has fewest nans; equiv to finding which query
         # method has most number of conformer matches
@@ -555,10 +612,10 @@ def calc_rel_ene(matched_enes):
                 [(fileE[i] - fileE[z]) for i in range(len(fileE))])
         rel_energies.append(temp)
 
-    return rel_energies, lowest_conf_indices
+    return rel_energies, lowest_conf_indices, eff_nconfs
 
 
-def write_rel_ene(mol_name, rmse, relEnes, low_ind, ff_list, prefix='relene'):
+def write_rel_ene(mol_name, rmse, rel_enes, low_ind, ff_list, prefix='relene'):
     """
     Write the relative energies and RMSEs in an output text file.
 
@@ -568,8 +625,8 @@ def write_rel_ene(mol_name, rmse, relEnes, low_ind, ff_list, prefix='relene'):
         title of the mol being written out
     rmse : list
         1D list of RMSEs for all the compared methods against ref method
-    relEnes : 2D list
-        relEnes[i][j] represents energy of ith method and jth conformer
+    rel_enes : 2D list
+        rel_enes[i][j] represents energy of ith method and jth conformer
     low_ind : int
         integer of the index of the lowest energy conformer
     ff_list : list
@@ -580,7 +637,7 @@ def write_rel_ene(mol_name, rmse, relEnes, low_ind, ff_list, prefix='relene'):
     """
 
     ofile = open(f"{prefix}_{mol_name}.dat", 'w')
-    ofile.write(f"# Molecule %s\n" % mol_name)
+    ofile.write(f"# Molecule {mol_name}\n")
     ofile.write("# Energies (kcal/mol) for conformers matched to first method.")
     ofile.write(f"\n# Energies are relative to conformer {low_ind}.\n")
     ofile.write("# Rows represent conformers; columns represent methods.\n")
@@ -599,14 +656,14 @@ def write_rel_ene(mol_name, rmse, relEnes, low_ind, ff_list, prefix='relene'):
     ofile.write(colheader)
 
     # write each ff's relative energies
-    for i in range(len(relEnes[0])):
+    for i in range(len(rel_enes[0])):
 
         # label conformer row
         ofile.write(f"\n{i}\t")
 
         # write energies for this conformer of all methods
-        thisline = [x[i] for x in relEnes]
-        thisline = ['%.4f' % elem for elem in thisline]
+        thisline = [x[i] for x in rel_enes]
+        thisline = [f"{elem:.4f}" for elem in thisline]
         thisline = '\t'.join(map(str, thisline))
         ofile.write(thisline)
 
@@ -617,14 +674,14 @@ def extract_matches(mol_dict):
     """
     This function checks if minima are matched, using conformer indices.
     For example, mol_dict[example_mol]['indices'] = [ 0 2 1 ] means that,
-    compared to the reference conformers, the queried file has confs 1 and 2
+    compared to the reference conformers, the queried method has confs 1 and 2
     switched. The switch will be made to compare corresponding energies
     for matching conformers.
 
-    If the query file doesn't have a match to one of the reference conformers,
+    If the query method doesn't have a match to one of the reference conformers,
     then 'None' will be in the list of indices. Other indices of NON-match
-    are -1 (query file the same as reference file so everything matches)
-    and -2 (query file missing the whole molecule of the reference file).
+    are -1 (query method the same as reference method so everything matches)
+    and -2 (query method missing the whole molecule of the reference method).
 
     If a match is found, store the corresponding energy under a new key with
     value of "energies_matched". If there is no match, the energy listed in the
@@ -648,12 +705,12 @@ def extract_matches(mol_dict):
     # iterate over each molecule
     for m in mol_dict:
 
-        # 2D list, [i][j] i=filename (FF), j=index
+        # 2D list, [i][j] i=filename (method), j=index
         # index represents queried mol's conformation location that matches
         # the ref mol's conformer
         queried_indices = mol_dict[m]['indices']
 
-        # 2D list, [i][j] i=filename (FF), j=energy
+        # 2D list, [i][j] i=filename (method), j=energy
         energy_array = mol_dict[m]['energies']
 
         # based on the indices, extract the matching energies
@@ -667,9 +724,8 @@ def extract_matches(mol_dict):
                 # conformers were matched but all RMSDs were beyond cutoff
                 # as set in the compare_two_mols function
                 if conf_index is None:
-                    print(
-                        f"No matching conformer within RMSD cutoff for {j}th "
-                        f"conf of {m} mol in {i}th file.")
+                    print(f"No matching conformer within RMSD cutoff for {j}th"
+                          f" conf of {m} mol in {i}th file.")
                     fileData.append(np.nan)
 
                 # the query molecule was missing
@@ -743,7 +799,7 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
         matched_enes.append(mol_dict[m]['energies_matched'])
 
     # with matched energies, calculate relative values and RMS error
-    rel_energies, lowest_conf_indices = calc_rel_ene(matched_enes)
+    rel_energies, lowest_conf_indices, eff_nconfs = calc_rel_ene(matched_enes)
     rms_array = calc_rms_error(rel_energies, lowest_conf_indices)
 
     # write out data file of relative energies
@@ -754,15 +810,21 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
         write_rel_ene(mn, rms_array[i], rel_energies[i], lowest_conf_indices[i], ff_list)
 
     if plot:
-        for i, m in enumerate(mol_dict):
+        for i, mol_name in enumerate(mol_dict):
 
-            # only plot for single molecule
-             #if m != 'AlkEthOH_c1178': continue
+            # only plot for single molecule by name
+            #if mol_name != 'AlkEthOH_c1178': continue
 
-            plot_mol_minima(m, rel_energies[i], ff_list)
+            plot_mol_minima(mol_name, rel_energies[i], ff_list)
 
-            # only plot selected methods
-            #plot_mol_minima(m, rel_energies[i], ff_list, selected=[0])
+            # only plot selected methods by index
+            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
+
+            # plot RMSE bars -- don't plot reference which is 0 rmse to self
+            ref_nconfs = eff_nconfs[i][0]
+            plot_mol_rmses(mol_name, rms_array[i][1:], ff_list[1:],
+                           eff_nconfs[i][1:], ref_nconfs)
+
 
 
 ### ------------------- Parser -------------------
