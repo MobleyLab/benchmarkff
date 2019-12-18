@@ -6,10 +6,10 @@ compare_ffs.py
 For 2+ SDF files that are parallel in terms of molecules and their conformers,
 assess them (e.g., having FF geometries) with respective to a reference SDF
 file (e.g., having QM geometries). Metrics include: RMSD of conformers, TFD
-(another geometric evaluation), and relative energy comparisons.
+(another geometric evaluation), and relative energy differences.
 
 By:      Victoria T. Lim
-Version: Dec 13 2019
+Version: Dec 17 2019
 
 """
 
@@ -65,21 +65,17 @@ def calc_tfd(ref_mol, query_mol):
     if (Chem.MolToSmiles(que_rdmol) != Chem.MolToSmiles(ref_rdmol)):
         return -1
 
-    # else calculate the TFD
+    # calculate the TFD
     else:
         tfd = Chem.TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
-#        try:
-#            tfd = TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
-#        # TODO where does this come from and what does it mean?
-#        except IndexError:
-#            tfd = 0
 
     return tfd
 
 
 def compare_ffs(in_dict, conf_id_tag, outprefix):
     """
-    TODO
+    For 2+ SDF files that are parallel in terms of molecules and their conformers,
+    assess them by RMSD, TFD, and relative energy differences.
 
     Parameters
     ----------
@@ -87,6 +83,12 @@ def compare_ffs(in_dict, conf_id_tag, outprefix):
         dictionary from input file, where key is method and value is dictionary
         first entry should be reference method
         in sub-dictionary, keys are 'sdfile' and 'sdtag'
+    conf_id_tag : string
+        label of the SD tag that should be the same for matching conformers
+        in different files
+    outprefix : string
+        prefix appended to sdf file name to write out new SDF file
+        with RMSD and TFD info added as SD tags
 
     Returns
     -------
@@ -218,13 +220,40 @@ def compare_ffs(in_dict, conf_id_tag, outprefix):
 
 
 def flatten(list_of_lists):
-    "Flatten one level of nesting"
+    """
+    Flatten one level of nesting.
+
+    Parameter
+    ---------
+    list_of_lists
+
+    Returns
+    -------
+    1D numpy array
+
+    """
     return np.concatenate(list_of_lists).ravel()
 
-def draw_scatter(xdata, ydata, method_labels, xlabel="", ylabel=""):
+
+def draw_scatter(xdata, ydata, method_labels, xlabel, ylabel, outfile):
     """
+    Draw scatter plot, such as of (ddE vs RMSD) or (ddE vs TFD).
+
+    Parameters
+    ----------
+    xdata : list of lists
+        xdata[i][j] represents ith method and jth molecular structure
     ydata : list of lists
         should have same shape and correspond to xdata
+    method_labels : list
+        list of all the method names including reference method first
+    xlabel : string
+        name of the x-axis label
+    ylabel : string
+        name of the y-axis label
+    outfile : string
+        name of the output file
+
     """
     print(f"Number of data points in scatter plot: {len(flatten(xdata))}")
     markers = ["o", "^", "d", "x", "s", "p"]
@@ -233,28 +262,42 @@ def draw_scatter(xdata, ydata, method_labels, xlabel="", ylabel=""):
     for i in range(num_methods):
         plt.scatter(xdata[i], ydata[i], marker=markers[i], label=method_labels[i+1])
 
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+    plt.xlabel(xlabel, fontsize=14)
+    plt.ylabel(ylabel, fontsize=14)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
 
-    # TODO: mv legend outside of plot
-    plt.legend()
-    plt.show()
+    plt.legend(loc=(1.04,0.5), fontsize=12)
+    plt.savefig(outfile, bbox_inches='tight')
+    plt.clf()
+    #plt.show()
 
-def draw_ridgeplot(mydata, datalabel, method_labels):
+
+def draw_ridgeplot(mydata, datalabel, method_labels, outfile):
     """
+    Draw ridge plot of data (to which kernel density estimate is applied)
+    segregated by each method (representing a different color/level).
+
     Modified from the following code:
     https://seaborn.pydata.org/examples/kde_ridgeplot.html
 
     Parameters
     ----------
     mydata : list of lists
+        mydata[i][j] represents ith method and jth molecular structure
     datalabel : string
+        name of the x-axis label
+        also used for pandas dataframe column name
+    method_labels : list
+        list of all the method names including reference method first
+    outfile : string
+        name of the output file
 
     """
     # Define and use a simple function to label the plot in axes coordinates
     def label(x, color, label):
         ax = plt.gca()
-        ax.text(0, .2, label, fontweight="bold", color=color,
+        ax.text(0, .2, label, fontweight="bold", color=color, fontsize=14,
                 ha="left", va="center", transform=ax.transAxes)
 
     num_methods = len(mydata)
@@ -297,14 +340,21 @@ def draw_ridgeplot(mydata, datalabel, method_labels):
     g.set(yticks=[])
     g.despine(bottom=True, left=True)
 
+    # adjust font sizes
+    plt.xlabel(datalabel, fontsize=16)
+    plt.xticks(fontsize=16)
+
     # save with transparency for overlapping plots
-    # TODO generalize
-    plt.savefig('test.png', transparent=True)
-    plt.show()
+    plt.savefig(outfile, bbox_inches='tight', transparent=True)
+    plt.clf()
+    #plt.show()
 
 
 def main(in_dict, conf_id_tag, plot):
     """
+    For 2+ SDF files that are parallel in terms of molecules and their
+    conformers, assess them with respective to a reference SDF file (e.g., QM).
+    Metrics include RMSD of conformers, TFD, and relative energy differences.
 
     Parameter
     ---------
@@ -312,6 +362,9 @@ def main(in_dict, conf_id_tag, plot):
         dictionary from input file, where key is method and value is dictionary
         first entry should be reference method
         in sub-dictionary, keys are 'sdfile' and 'sdtag'
+    conf_id_tag : string
+        label of the SD tag that should be the same for matching conformers
+        in different files
     plot : Boolean
         generate line plots of conformer energies
 
@@ -333,10 +386,30 @@ def main(in_dict, conf_id_tag, plot):
         tfds.append(flatten(c))
 
     if plot:
-        draw_scatter(rmsds, energies, method_labels, "RMSD ($\mathrm{\AA}$)", "ddE (kcal/mol)")
-        draw_scatter(tfds, energies, method_labels, "TFD", "ddE (kcal/mol)")
-        draw_ridgeplot(energies, 'ddE (kcal/mol)', method_labels)
-        draw_ridgeplot(rmsds, 'RMSD ($\mathrm{\AA}$)', method_labels)
+        draw_scatter(
+            rmsds,
+            energies,
+            method_labels,
+            "RMSD ($\mathrm{\AA}$)",
+            "ddE (kcal/mol)",
+            "scatter_rmsd.png")
+        draw_scatter(
+            tfds,
+            energies,
+            method_labels,
+            "TFD",
+            "ddE (kcal/mol)",
+            "scatter_tfd.png")
+        draw_ridgeplot(
+            energies,
+            "ddE (kcal/mol)",
+            method_labels,
+            "ridge_dde.png")
+        draw_ridgeplot(
+            rmsds,
+            "RMSD ($\mathrm{\AA}$)",
+            method_labels,
+            "ridge_rmsd.png")
 
 
 ### ------------------- Parser -------------------
