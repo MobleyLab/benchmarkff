@@ -24,27 +24,24 @@ conda install -c openeye -c conda-forge -c omnia rdkit openeye-toolkits qcfracta
 
 ## Contents
 
-### `01_setup`
-Extract molecules from [QCArchive](https://qcarchive.molssi.org/), convert to OpenEye mols, and standardize conformers and titles.
+Directories in this repo:
 
-| file                             | description |
-|----------------------------------|-------------|
-|`combine_conformers.ipynb`        |             |
-|`extract_qcarchive_dataset.ipynb` |             |
+* `01_setup`: Extract molecules from [QCArchive](https://qcarchive.molssi.org/), convert to OpenEye mols, and standardize conformers and titles.
+* `02_calc`
+* `03_analysis`
+* `examples`: See this directory for example results and plots.
 
-Also relevant from OpenEye:
+File descriptions:
+
+| directory   | file                             | description |
+|-------------|----------------------------------|-------------|
+|`01_setup`   |`combine_conformers.ipynb`        | ...         |
+|`01_setup`   |`extract_qcarchive_dataset.ipynb` | ...         |
+|`02_calc`    |`minimize_ffs.py`                 | ...         |
+|`03_analysis`|`cat_mols.py`                     |OpenEye script, modified to ... |
+
+Other [OpenEye scripts](https://docs.eyesopen.com/toolkits/python/oechemtk/oechem_examples_summary.html) helpful for setup:
 * `molchunk.py` -- VTL modified
 * `molextract.py`
 * [`mols2pdf.py`](https://docs.eyesopen.com/toolkits/python/_downloads/mols2pdf.py)
 
-### `02_calc`
-* `minimize_ffs.py`
-
-### `03_analysis`
-* `cat_mols.py` -- VTL modified
-
-### `examples`
-See this directory for example results and plots.
-
-### Other
-Some relevant scripts by [OpenEye](https://docs.eyesopen.com/toolkits/python/oechemtk/oechem_examples_summary.html).
