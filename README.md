@@ -17,7 +17,7 @@ This repository houses code pertaining to extracting molecule datasets from [QCA
 
 ## Conda setup
 ```
-conda create -n parsley python=3.6 matplotlib scipy numpy seaborn
+conda create -n parsley python=3.6 matplotlib numpy seaborn
 conda activate parsley
 conda install -c openeye -c conda-forge -c omnia rdkit openeye-toolkits qcfractal qcportal openforcefield cmiles openmm
 ```

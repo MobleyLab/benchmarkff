@@ -13,7 +13,6 @@ Version: Dec 2 2019
 """
 
 import os
-import sys
 import numpy as np
 import pickle
 import itertools
@@ -666,7 +665,6 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
         pickle.dump(mol_dict, open('match.pickle', 'wb'))
 
     # process dictionary to match the energies by RMSD-matched conformers
-    numMols = len(mol_dict)
     mol_dict = extract_matches(mol_dict)
 
     # collect the matched energies into a list of lists
