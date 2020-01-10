@@ -145,7 +145,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
         tfds_method = []
 
         # open an output file to store query molecules with new SD tags
-        out_file = f'{out_prefix}_{sdf_que}'
+        out_file = f'{out_prefix}_{os.path.basename(sdf_que)}'
         ofs = oechem.oemolostream()
         if not ofs.open(out_file):
             oechem.OEThrow.Fatal(f"Unable to open {out_file} for writing")
