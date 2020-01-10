@@ -3,21 +3,23 @@
 """
 reader.py
 
-Functions to parse input files or OEMols from those files.
+Functions to parse input files (for Quanformer / BenchmarkFF) or
+OEMols from multi-molecule SDF files.
 
 By:      Victoria T. Lim
-Version: Dec 11 2019
+Version: Jan 9 2020
 
 """
 
 import os
+import numpy as np
 import copy
 import collections
 
 import openeye.oechem as oechem
 from rdkit import Chem, Geometry
 
-def read_mols(infile, mol_slice=None):
+def read_mols(in_file, mol_slice=None):
     """
     Open a molecule file and return molecules and conformers as OEMols.
     Provide option to slice the mols to return only a chunk from the
@@ -25,7 +27,7 @@ def read_mols(infile, mol_slice=None):
 
     Parameters
     ----------
-    infile : string
+    in_file : string
         name of input file with molecules
     mol_slice : list[int]
         list of indices from which to slice mols generator for read_mols
@@ -38,8 +40,8 @@ def read_mols(infile, mol_slice=None):
     """
     ifs = oechem.oemolistream()
     ifs.SetConfTest(oechem.OEAbsCanonicalConfTest())
-    if not ifs.open(infile):
-        raise FileNotFoundError(f"Unable to open {infile} for reading")
+    if not ifs.open(in_file):
+        raise FileNotFoundError(f"Unable to open {in_file} for reading")
     mols = ifs.GetOEMols()
 
     if mol_slice is not None:
@@ -112,13 +114,14 @@ def get_sd_list(mol, taglabel):
 
     return sd_list
 
-def read_check_input(infile):
+
+def read_check_input(in_file):
     """
     Read input file into an ordered dictionary.
 
     Parameters
     ----------
-    infile : string
+    in_file : string
         name of input file to match script
 
     Returns
@@ -133,18 +136,12 @@ def read_check_input(infile):
     in_dict = collections.OrderedDict()
 
     # read input file
-    with open(infile) as f:
-        for line in f:
+    contents = np.genfromtxt(in_file, delimiter=',', unpack=True,
+        dtype='unicode', autostrip=True)
 
-            # skip commented lines or empty lines
-            if line.startswith('#'):
-                continue
-            dataline = [x.strip() for x in line.split(',')]
-            if dataline == ['']:
-                continue
-
-            # store each file's information in dictionary of dictionaries
-            in_dict[dataline[0]] = {'sdfile': dataline[1], 'sdtag': dataline[2]}
+    # store each file's information in dictionary of dictionaries
+    for i in range(len(contents[0])):
+        in_dict[contents[0][i]] = {'sdfile': contents[1][i], 'sdtag': contents[2][i]}
 
     # check that each file exists before starting
     list1 = []
@@ -216,7 +213,6 @@ def rdmol_from_oemol(oemol):
     # where rda[n] is an atom index for a double bond of form 1-2=3-4
     # and is_cis is a Boolean is True then onds 1-2 and 3-4 are cis to each other
 
-    aro_bond = 0
     for oeb in oemol.GetBonds():
         # get neighboring rd atoms
         rd_a1 = map_atoms[oeb.GetBgnIdx()]
