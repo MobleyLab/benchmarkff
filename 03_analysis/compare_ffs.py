@@ -15,16 +15,12 @@ Version: Dec 17 2019
 
 import os
 import numpy as np
-
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 import openeye.oechem as oechem
 import rdkit.Chem as Chem
 from rdkit.Chem import TorsionFingerprints
-
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import pandas as pd
-import seaborn as sns
-
 import reader
 
 ### ------------------- Functions -------------------
@@ -71,7 +67,7 @@ def calc_tfd(ref_mol, query_mol):
 
     # calculate the TFD
     else:
-        tfd = Chem.TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
+        tfd = TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
 
     return tfd
 
@@ -487,6 +483,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if not os.path.exists(args.infile):
         parser.error(f"Input file {args.infile} does not exist.")
+
+    # suppress the following repeated warning
+    # Warning: Using automorph=true and heavyOnly=false in OERMSD.
+    # Warning: In some cases, this can lead to long runtimes due to a large number of automorph matches.
+    oechem.OEThrow.SetLevel(oechem.OEErrorLevel_Error)
 
     # read main input file and check that files within exist
     in_dict = reader.read_check_input(args.infile)
