@@ -13,159 +13,15 @@ Version: Dec 2 2019
 """
 
 import os
-import sys
 import numpy as np
 import pickle
 import itertools
-import copy
-import collections
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import openeye.oechem as oechem
+import reader
 
 ### ------------------- Functions -------------------
-
-
-def read_mols(infile, mol_slice=None):
-    """
-    Open a molecule file and return molecules and conformers as OEMols.
-    Provide option to slice the mols to return only a chunk from the
-    specified indices.
-
-    Parameters
-    ----------
-    infile : string
-        name of input file with molecules
-    mol_slice : list[int]
-        list of indices from which to slice mols generator for read_mols
-        [start, stop, step]
-
-    Returns
-    -------
-    mols : OEMols
-
-    """
-    ifs = oechem.oemolistream()
-    ifs.SetConfTest(oechem.OEAbsCanonicalConfTest())
-    if not ifs.open(infile):
-        raise FileNotFoundError(f"Unable to open {infile} for reading")
-    mols = ifs.GetOEMols()
-
-    if mol_slice is not None:
-        if len(mol_slice) != 3 or mol_slice[0] >= mol_slice[1] or mol_slice[2] <= 0:
-            raise ValueError("Check input to mol_slice. Should have len 3, "
-                "start value < stop value, step >= 1.")
-
-        # TODO more efficient. can't itertools bc lost mol info (name, SD) after next()
-        # adding copy/deepcopy doesnt work on generator objects
-        # also doesn't work to convert generator to list then slice list
-        #mols = itertools.islice(mols, mol_slice[0], mol_slice[1], mol_slice[2])
-        #mlist = mlist[mol_slice[0]:mol_slice[1]:mol_slice[2]]
-
-        def incrementer(count, mols, step):
-            if step == 1:
-                count += 1
-                return count
-            # use step-1 because for loop already increments once
-            for j in range(step-1):
-                count += 1
-                next(mols)
-            return count
-
-        mlist = []
-        count = 0
-        for i, m in enumerate(mols):
-
-            if count >= mol_slice[1]:
-                return mlist
-            elif count < mol_slice[0]:
-                count += 1
-                continue
-            else:
-                # important to append copy else still linked to orig generator
-                mlist.append(copy.copy(m))
-                try:
-                    count = incrementer(count, mols, mol_slice[2])
-                except StopIteration:
-                    return mlist
-
-        return mlist
-
-    return mols
-
-
-def get_sd_list(mol, taglabel):
-    """
-    Get list of specified SD tag for all confs in mol.
-
-    Parameters
-    ----------
-    mol : OEMol with N conformers
-    taglabel : string
-        tag from which to extract SD data
-
-    Returns
-    -------
-    sdlist : list
-        N-length list with value from SD tag
-
-    """
-
-    sd_list = []
-
-    for j, conf in enumerate(mol.GetConfs()):
-        for x in oechem.OEGetSDDataPairs(conf):
-            if taglabel.lower() in x.GetTag().lower():
-                sd_list.append(x.GetValue())
-                break
-
-    return sd_list
-
-def read_check_input(infile):
-    """
-    Read input file into an ordered dictionary.
-
-    Parameters
-    ----------
-    infile : string
-        name of input file to match script
-
-    Returns
-    -------
-    in_dict : OrderedDict
-        dictionary from input file, where key is method and value is dictionary
-        first entry should be reference method
-        in sub-dictionary, keys are 'sdfile' and 'sdtag'
-
-    """
-
-    in_dict = collections.OrderedDict()
-
-    # read input file
-    with open(infile) as f:
-        for line in f:
-
-            # skip commented lines or empty lines
-            if line.startswith('#'):
-                continue
-            dataline = [x.strip() for x in line.split(',')]
-            if dataline == ['']:
-                continue
-
-            # store each file's information in dictionary of dictionaries
-            in_dict[dataline[0]] = {'sdfile': dataline[1], 'sdtag': dataline[2]}
-
-    # check that each file exists before starting
-    list1 = []
-    for vals in in_dict.values():
-        list1.append(os.path.isfile(vals['sdfile']))
-
-    # if all elements are True then all files exist
-    if all(list1):
-        return in_dict
-    else:
-        print(list1)
-        raise ValueError("One or more listed files not found")
 
 
 def compare_two_mols(rmol, qmol, rmsd_cutoff):
@@ -421,10 +277,10 @@ def match_minima(in_dict, rmsd_cutoff):
 
         # load molecules from open reference and query files
         print(f"\n\nOpening reference file {sdf_ref}")
-        mols_ref = read_mols(sdf_ref)
+        mols_ref = reader.read_mols(sdf_ref)
 
         print(f"Opening query file {sdf_query} for [ {ff_label} ] energies")
-        mols_query = read_mols(sdf_query)
+        mols_query = reader.read_mols(sdf_query)
 
         # loop over each molecule in reference and query files
         for rmol in mols_ref:
@@ -458,13 +314,13 @@ def match_minima(in_dict, rmsd_cutoff):
                 mol_dict[mol_name]['energies'].append([np.nan] * ref_nconfs)
 
                 # reset mols_query generator
-                mols_query = read_mols(sdf_query)
+                mols_query = reader.read_mols(sdf_query)
 
                 # continue with the next rmol
                 continue
 
             # get data from specified sd tag for all conformers
-            data_confs = get_sd_list(qmol, sdf_tag)
+            data_confs = reader.get_sd_list(qmol, sdf_tag)
 
             # format sd tag data to float types
             float_data_confs = list(map(float, data_confs))
@@ -809,7 +665,6 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
         pickle.dump(mol_dict, open('match.pickle', 'wb'))
 
     # process dictionary to match the energies by RMSD-matched conformers
-    numMols = len(mol_dict)
     mol_dict = extract_matches(mol_dict)
 
     # collect the matched energies into a list of lists
@@ -877,7 +732,7 @@ if __name__ == "__main__":
         parser.error(f"Input file {args.infile} does not exist.")
 
     # read main input file and check that files within exist
-    in_dict = read_check_input(args.infile)
+    in_dict = reader.read_check_input(args.infile)
 
     # run match_minima
     main(in_dict, args.readpickle, args.plot, args.cutoff)
