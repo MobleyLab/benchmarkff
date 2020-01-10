@@ -3,7 +3,7 @@
 """
 compare_ffs.py
 
-For 2+ SDF files that are parallel in terms of molecules and their conformers,
+For 2+ SDF files that are analogous in terms of molecules and their conformers,
 assess them (e.g., having FF geometries) with respective to a reference SDF
 file (e.g., having QM geometries). Metrics include: RMSD of conformers, TFD
 (another geometric evaluation), and relative energy differences.
@@ -60,10 +60,14 @@ def calc_tfd(ref_mol, query_mol):
     # convert querymol to one readable by RDKit
     que_rdmol = reader.rdmol_from_oemol(query_mol)
 
-    # if there was a mistake in the conversion process, return -1
-    # TODO handle differently?
-    if (Chem.MolToSmiles(que_rdmol) != Chem.MolToSmiles(ref_rdmol)):
-        return -1
+    # check if there was a mistake in the conversion process
+    rsmiles = Chem.MolToSmiles(ref_rdmol)
+    qsmiles = Chem.MolToSmiles(que_rdmol)
+    if rsmiles != qsmiles:
+        raise ValueError("ERROR: SMILES strings no longer match after "
+                 f"conversion of offending molecules: \'{ref_mol.GetTitle()}\'"
+                 f" and \'{query_mol.GetTitle()}\'\n"
+                 f"Their SMILES strings are:\n{rsmiles}\n{qsmiles}")
 
     # calculate the TFD
     else:
@@ -72,10 +76,10 @@ def calc_tfd(ref_mol, query_mol):
     return tfd
 
 
-def compare_ffs(in_dict, conf_id_tag, outprefix):
+def compare_ffs(in_dict, conf_id_tag, out_prefix):
     """
-    For 2+ SDF files that are parallel in terms of molecules and their conformers,
-    assess them by RMSD, TFD, and relative energy differences.
+    For 2+ SDF files that are analogous in terms of molecules and their
+    conformers, assess them by RMSD, TFD, and relative energy differences.
 
     Parameters
     ----------
@@ -86,7 +90,7 @@ def compare_ffs(in_dict, conf_id_tag, outprefix):
     conf_id_tag : string
         label of the SD tag that should be the same for matching conformers
         in different files
-    outprefix : string
+    out_prefix : string
         prefix appended to sdf file name to write out new SDF file
         with RMSD and TFD info added as SD tags
 
@@ -135,10 +139,10 @@ def compare_ffs(in_dict, conf_id_tag, outprefix):
         tfds_method = []
 
         # open an output file to store query molecules with new SD tags
-        outfile = f'{outprefix}_{sdf_que}'
+        out_file = f'{out_prefix}_{sdf_que}'
         ofs = oechem.oemolostream()
-        if not ofs.open(outfile):
-            oechem.OEThrow.Fatal(f"Unable to open {outfile} for writing")
+        if not ofs.open(out_file):
+            oechem.OEThrow.Fatal(f"Unable to open {out_file} for writing")
 
         # load molecules from open reference and query files
         print(f"\n\nOpening reference file {sdf_ref}")
@@ -235,45 +239,63 @@ def flatten(list_of_lists):
     return np.concatenate(list_of_lists).ravel()
 
 
-def draw_scatter(xdata, ydata, method_labels, xlabel, ylabel, outfile):
+def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what_for='talk'):
     """
     Draw scatter plot, such as of (ddE vs RMSD) or (ddE vs TFD).
 
     Parameters
     ----------
-    xdata : list of lists
-        xdata[i][j] represents ith method and jth molecular structure
-    ydata : list of lists
-        should have same shape and correspond to xdata
+    x_data : list of lists
+        x_data[i][j] represents ith method and jth molecular structure
+    y_data : list of lists
+        should have same shape and correspond to x_data
     method_labels : list
         list of all the method names including reference method first
-    xlabel : string
+    x_label : string
         name of the x-axis label
-    ylabel : string
+    y_label : string
         name of the y-axis label
-    outfile : string
+    out_file : string
         name of the output file
+    what_for : string
+        dictates figure size, text size of axis labels, legend, etc.
+        "paper" or "talk"
 
     """
-    print(f"Number of data points in scatter plot: {len(flatten(xdata))}")
+    print(f"Number of data points in scatter plot: {len(flatten(x_data))}")
     markers = ["o", "^", "d", "x", "s", "p"]
 
-    num_methods = len(xdata)
+    num_methods = len(x_data)
+    plist = []
     for i in range(num_methods):
-        plt.scatter(xdata[i], ydata[i], marker=markers[i], label=method_labels[i+1])
+        p = plt.scatter(x_data[i], y_data[i], marker=markers[i], label=method_labels[i+1])
+        plist.append(p)
 
-    plt.xlabel(xlabel, fontsize=14)
-    plt.ylabel(ylabel, fontsize=14)
-    plt.xticks(fontsize=12)
-    plt.yticks(fontsize=12)
+    if what_for == 'paper':
+        fig = plt.gcf()
+        fig.set_size_inches(4, 3)
+        plt.xlabel(x_label, fontsize=10)
+        plt.ylabel(y_label, fontsize=10)
+        plt.xticks(fontsize=8)
+        plt.yticks(fontsize=8)
+        plt.legend(loc=(1.04,0.5), fontsize=8)
+        # make the marker size smaller
+        for p in plist:
+            p.set_sizes([12.0])
 
-    plt.legend(loc=(1.04,0.5), fontsize=12)
-    plt.savefig(outfile, bbox_inches='tight')
+    elif what_for == 'talk':
+        plt.xlabel(x_label, fontsize=14)
+        plt.ylabel(y_label, fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.legend(loc=(1.04,0.5), fontsize=12)
+
+    plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
     #plt.show()
 
 
-def draw_ridgeplot(mydata, datalabel, method_labels, outfile):
+def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
     segregated by each method (representing a different color/level).
@@ -290,14 +312,22 @@ def draw_ridgeplot(mydata, datalabel, method_labels, outfile):
         also used for pandas dataframe column name
     method_labels : list
         list of all the method names including reference method first
-    outfile : string
+    out_file : string
         name of the output file
+    what_for : string
+        dictates figure size, text size of axis labels, legend, etc.
+        "paper" or "talk"
 
     """
     # Define and use a simple function to label the plot in axes coordinates
     def label(x, color, label):
         ax = plt.gca()
-        ax.text(0, .2, label, fontweight="bold", color=color, fontsize=14,
+
+        # set axis font size
+        if what_for == 'paper': fs = 8
+        elif what_for == 'talk': fs = 14
+
+        ax.text(0, .2, label, fontweight="bold", color=color, fontsize=fs,
                 ha="left", va="center", transform=ax.transAxes)
 
     num_methods = len(mydata)
@@ -312,28 +342,45 @@ def draw_ridgeplot(mydata, datalabel, method_labels, outfile):
     # list of dataframes concatenated to single dataframe
     df = pd.concat(temp, ignore_index = True)
 
+    if what_for == 'paper':
+        ridgedict = {
+            "h":0.5,
+            "lw":0.7,
+            "vl":0.25,
+            "xfontsize":8,
+        }
+    elif what_for == 'talk':
+        ridgedict = {
+            "h":1.0,
+            "lw":1.5,
+            "vl":0.5,
+            "xfontsize":16,
+        }
+
     # Initialize the FacetGrid object
     pal = sns.palplot(sns.color_palette("tab10"))
-    g = sns.FacetGrid(df, row="method", hue="method", aspect=15, height=1.0, palette=pal)
+    g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
+        height=ridgedict["h"], palette=pal)
 
-    # draw filled-in densities
-    g.map(sns.kdeplot, datalabel, clip_on=False, shade=True, alpha=0.5, lw=1.5, bw=.2)
+    # draw filled-in densities, change bw for smoothing parameter
+    g.map(sns.kdeplot, datalabel, clip_on=False, shade=True, alpha=0.5,
+        lw=ridgedict["lw"], bw=.2)
 
     # draw outline around densities; can also single outline color: color="k"
-    g.map(sns.kdeplot, datalabel, clip_on=False, lw=1.5, bw=.2)
+    g.map(sns.kdeplot, datalabel, clip_on=False, lw=ridgedict["lw"], bw=.2)
 
     # draw horizontal line below densities
-    g.map(plt.axhline, y=0, lw=1.5, clip_on=False)
+    g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
 
     # draw a vertical line at x=0 for visual reference
-    g.map(plt.axvline, x=0, lw=0.5, ls='--', color='gray', clip_on=False)
+    g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls='--', color='gray', clip_on=False)
 
     # add labels to each level and to whole x-axis
     g.map(label, datalabel)
 
     # Set the subplots to overlap
     #g.fig.subplots_adjust(hspace=0.05)
-    g.fig.subplots_adjust(hspace=-.45)
+    g.fig.subplots_adjust(hspace=-0.45)
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
@@ -341,18 +388,18 @@ def draw_ridgeplot(mydata, datalabel, method_labels, outfile):
     g.despine(bottom=True, left=True)
 
     # adjust font sizes
-    plt.xlabel(datalabel, fontsize=16)
-    plt.xticks(fontsize=16)
+    plt.xlabel(datalabel, fontsize=ridgedict["xfontsize"])
+    plt.xticks(fontsize=ridgedict["xfontsize"])
 
     # save with transparency for overlapping plots
-    plt.savefig(outfile, bbox_inches='tight', transparent=True)
+    plt.savefig(out_file, bbox_inches='tight', transparent=True)
     plt.clf()
     #plt.show()
 
 
-def main(in_dict, conf_id_tag, plot):
+def main(in_dict, conf_id_tag, plot=False):
     """
-    For 2+ SDF files that are parallel in terms of molecules and their
+    For 2+ SDF files that are analogous in terms of molecules and their
     conformers, assess them with respective to a reference SDF file (e.g., QM).
     Metrics include RMSD of conformers, TFD, and relative energy differences.
 
@@ -392,24 +439,28 @@ def main(in_dict, conf_id_tag, plot):
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
             "ddE (kcal/mol)",
-            "scatter_rmsd.png")
+            "scatter_rmsd.png",
+            "paper")
         draw_scatter(
             tfds,
             energies,
             method_labels,
             "TFD",
             "ddE (kcal/mol)",
-            "scatter_tfd.png")
+            "scatter_tfd.png",
+            "talk")
         draw_ridgeplot(
             energies,
             "ddE (kcal/mol)",
             method_labels,
-            "ridge_dde.png")
+            "ridge_dde.png",
+            "paper")
         draw_ridgeplot(
             rmsds,
             "RMSD ($\mathrm{\AA}$)",
             method_labels,
-            "ridge_rmsd.png")
+            "ridge_rmsd.png",
+            "talk")
 
 
 ### ------------------- Parser -------------------
