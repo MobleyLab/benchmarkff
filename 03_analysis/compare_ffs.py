@@ -9,7 +9,7 @@ file (e.g., having QM geometries). Metrics include: RMSD of conformers, TFD
 (another geometric evaluation), and relative energy differences.
 
 By:      Victoria T. Lim
-Version: Dec 17 2019
+Version: Jan 9 2020
 
 """
 
