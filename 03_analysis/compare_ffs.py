@@ -9,7 +9,11 @@ file (e.g., having QM geometries). Metrics include: RMSD of conformers, TFD
 (another geometric evaluation), and relative energy differences.
 
 By:      Victoria T. Lim
-Version: Jan 9 2020
+Version: Jan 10 2020
+
+Examples:
+python compare_ffs.py -i match.in -t 'SMILES QCArchive' --plot
+python compare_ffs.py -i match.in -t 'SMILES QCArchive' --plot --molslice 25 26 3:5 6::3
 
 """
 
@@ -72,7 +76,7 @@ def calc_tfd(ref_mol, query_mol):
     return tfd
 
 
-def compare_ffs(in_dict, conf_id_tag, out_prefix):
+def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
     """
     For 2+ SDF files that are analogous in terms of molecules and their
     conformers, assess them by RMSD, TFD, and relative energy differences.
@@ -89,6 +93,12 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix):
     out_prefix : string
         prefix appended to sdf file name to write out new SDF file
         with RMSD and TFD info added as SD tags
+    mol_slice : numpy slice object
+        The resulting integers are numerically sorted and duplicates removed.
+        e.g., slices = np.s_[0, 3:5, 6::3] would be parsed to return
+        [0, 3, 4, 6, 9, 12, 15, 18, ...]
+        Can also parse from end: [-3:] gets the last 3 molecules, and
+        [-2:-1] is the same as [-2] to get just next to last molecule.
 
     Returns
     -------
@@ -142,10 +152,10 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix):
 
         # load molecules from open reference and query files
         print(f"\n\nOpening reference file {sdf_ref}")
-        mols_ref = reader.read_mols(sdf_ref)
+        mols_ref = reader.read_mols(sdf_ref, mol_slice)
 
         print(f"Opening query file {sdf_que} for [ {ff_label} ] energies")
-        mols_que = reader.read_mols(sdf_que)
+        mols_que = reader.read_mols(sdf_que, mol_slice)
 
         # loop over each molecule in reference and query files
         for rmol, qmol in zip(mols_ref, mols_que):
@@ -264,7 +274,8 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     num_methods = len(x_data)
     plist = []
     for i in range(num_methods):
-        p = plt.scatter(x_data[i], y_data[i], marker=markers[i], label=method_labels[i+1])
+        p = plt.scatter(x_data[i], y_data[i], marker=markers[i],
+            label=method_labels[i+1], alpha=0.6)
         plist.append(p)
 
     if what_for == 'paper':
@@ -393,7 +404,7 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
     #plt.show()
 
 
-def main(in_dict, conf_id_tag, plot=False):
+def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
     """
     For 2+ SDF files that are analogous in terms of molecules and their
     conformers, assess them with respective to a reference SDF file (e.g., QM).
@@ -410,12 +421,18 @@ def main(in_dict, conf_id_tag, plot=False):
         in different files
     plot : Boolean
         generate line plots of conformer energies
+    mol_slice : numpy slice object
+        The resulting integers are numerically sorted and duplicates removed.
+        e.g., slices = np.s_[0, 3:5, 6::3] would be parsed to return
+        [0, 3, 4, 6, 9, 12, 15, 18, ...]
+        Can also parse from end: [-3:] gets the last 3 molecules, and
+        [-2:-1] is the same as [-2] to get just next to last molecule.
 
     """
     method_labels = list(in_dict.keys())
 
     # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
-    enes_full, rmsds_full, tfds_full = compare_ffs(in_dict, conf_id_tag, 'refdata')
+    enes_full, rmsds_full, tfds_full = compare_ffs(in_dict, conf_id_tag, 'refdata', mol_slice)
 
     energies = []
     rmsds = []
@@ -436,7 +453,7 @@ def main(in_dict, conf_id_tag, plot=False):
             "RMSD ($\mathrm{\AA}$)",
             "ddE (kcal/mol)",
             "scatter_rmsd.png",
-            "paper")
+            "talk")
         draw_scatter(
             tfds,
             energies,
@@ -450,7 +467,7 @@ def main(in_dict, conf_id_tag, plot=False):
             "ddE (kcal/mol)",
             method_labels,
             "ridge_dde.png",
-            "paper")
+            "talk")
         draw_ridgeplot(
             rmsds,
             "RMSD ($\mathrm{\AA}$)",
@@ -464,6 +481,20 @@ def main(in_dict, conf_id_tag, plot=False):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
+
+    # parse slice if not analyzing full set
+    # https://stackoverflow.com/questions/18632320/numpy-array-indices-via-argparse-how-to-do-it-properly
+    def _parse_slice(inslice):
+        if inslice == 'all':
+            return slice(None)
+        try:
+            section = int(inslice)
+        except ValueError:
+            section = [int(s) if s else None for s in inslice.split(':')]
+            if len(section) > 3:
+                raise ValueError('error parsing input slice')
+            section = slice(*section)
+        return section
 
     parser.add_argument("-i", "--infile",
         help="Name of text file with force field in first column and molecule "
@@ -479,6 +510,12 @@ if __name__ == "__main__":
         help="Generate line plots for every molecule with the conformer "
              "relative energies.")
 
+    parser.add_argument("--molslice", nargs='+', type=_parse_slice, default=None,
+        help="Only analyze the selected molecules of the given slices. Slices "
+             "are integer-sorted upon processing, and duplicates removed. Internal"
+             " code can slice negative values like -2:-1 but argparse cannot."
+             "Example: --molslice 25 26 3:5 6::3")
+
     # parse arguments
     args = parser.parse_args()
     if not os.path.exists(args.infile):
@@ -493,5 +530,5 @@ if __name__ == "__main__":
     in_dict = reader.read_check_input(args.infile)
 
     # run main
-    main(in_dict, args.conftag, args.plot)
+    main(in_dict, args.conftag, args.plot, args.molslice)
 

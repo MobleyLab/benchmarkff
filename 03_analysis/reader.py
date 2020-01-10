@@ -7,7 +7,7 @@ Functions to parse input files (for Quanformer / BenchmarkFF) or
 OEMols from multi-molecule SDF files.
 
 By:      Victoria T. Lim
-Version: Jan 9 2020
+Version: Jan 10 2020
 
 """
 
@@ -29,62 +29,97 @@ def read_mols(in_file, mol_slice=None):
     ----------
     in_file : string
         name of input file with molecules
-    mol_slice : list[int]
-        list of indices from which to slice mols generator for read_mols
-        [start, stop, step]
+    mol_slice : numpy slice object
+        The resulting integers are numerically sorted and duplicates removed.
+        e.g., slices = np.s_[0, 3:5, 6::3] would be parsed to return
+        [0, 3, 4, 6, 9, 12, 15, 18, ...]
+        Can also parse from end: [-3:] gets the last 3 molecules, and
+        [-2:-1] is the same as [-2] to get just next to last molecule.
 
     Returns
     -------
     mols : OEMols
 
     """
+    def flatten(x):
+        # https://stackoverflow.com/questions/2158395/flatten-an-irregular-list-of-lists
+        if isinstance(x, collections.Iterable):
+            return [a for i in x for a in flatten(i)]
+        else:
+            return [x]
+
     ifs = oechem.oemolistream()
     ifs.SetConfTest(oechem.OEAbsCanonicalConfTest())
     if not ifs.open(in_file):
         raise FileNotFoundError(f"Unable to open {in_file} for reading")
     mols = ifs.GetOEMols()
 
-    if mol_slice is not None:
-        if len(mol_slice) != 3 or mol_slice[0] >= mol_slice[1] or mol_slice[2] <= 0:
-            raise ValueError("Check input to mol_slice. Should have len 3, "
-                "start value < stop value, step >= 1.")
+    if mol_slice is None:
+        return mols
 
-        # TODO more efficient. can't itertools bc lost mol info (name, SD) after next()
-        # adding copy/deepcopy doesnt work on generator objects
-        # also doesn't work to convert generator to list then slice list
-        #mols = itertools.islice(mols, mol_slice[0], mol_slice[1], mol_slice[2])
-        #mlist = mlist[mol_slice[0]:mol_slice[1]:mol_slice[2]]
+    # set max number of molecules for decoding slices
+    # TODO: how to get num_mols without re-reading file and loading all mols
+    ifs2 = oechem.oemolistream()
+    ifs2.SetConfTest(oechem.OEAbsCanonicalConfTest())
+    ifs2.open(in_file)
+    mols2 = ifs2.GetOEMols()
+    num_mols = len(list(mols2))
 
-        def incrementer(count, mols, step):
-            if step == 1:
-                count += 1
-                return count
-            # use step-1 because for loop already increments once
-            for j in range(step-1):
-                count += 1
-                next(mols)
-            return count
+    # parse mol_slice for multiple slice definitions provided
+    # e.g., (1, 4, 8) for second, fifth, and ninth molecules
+    # e.g., (0, slice(3, 5, None), slice(6, None, 3)) for example in docs
 
-        mlist = []
-        count = 0
-        for i, m in enumerate(mols):
+    if isinstance(mol_slice, tuple) or isinstance(mol_slice, list):
+        idx_to_keep = []
+        for s in mol_slice:
 
-            if count >= mol_slice[1]:
-                return mlist
-            elif count < mol_slice[0]:
-                count += 1
-                continue
+            # parse the slice object
+            if isinstance(s, slice):
+                idx_to_keep.append(list(range(num_mols))[s])
+
+            # else decode the negative int to positive int
+            elif isinstance(s, int) and s<0:
+                idx_to_keep.append(s + num_mols)
+
+            # else just append the positive int
+            elif isinstance(s, int):
+                idx_to_keep.append(s)
+
             else:
-                # important to append copy else still linked to orig generator
-                mlist.append(copy.copy(m))
-                try:
-                    count = incrementer(count, mols, mol_slice[2])
-                except StopIteration:
-                    return mlist
+                raise ValueError(f"ERROR in parsing 'mol_slice' from {mol_slice}"
+                                 f" due to {s} being neither slice nor int")
 
-        return mlist
+        # flatten to 1d, use set to remove duplicates, then sort list
+        idx_to_keep = list(set(flatten(idx_to_keep)))
+        idx_to_keep.sort()
+        #print(idx_to_keep)
 
-    return mols
+    elif isinstance(mol_slice, slice):
+        # parse the slice object
+        idx_to_keep = list(range(num_mols))[mol_slice]
+
+    # else just store the single value in a list
+    elif isinstance(mol_slice, int):
+        if mol_slice < 0:
+            mol_slice = mol_slice + num_mols
+        idx_to_keep = list(mol_slice)
+
+    else:
+        raise ValueError(f"ERROR in parsing 'mol_slice' from {mol_slice}")
+
+    # go through the generator and retrive the specified slices
+    mlist = []
+    for i, m in enumerate(mols):
+        if i in idx_to_keep:
+
+            # append a copy else still linked to orig generator
+            mlist.append(copy.copy(m))
+
+            # if this index is the last one in idx_to_keep, finish now
+            if i == idx_to_keep[-1]:
+                return mlist
+
+    return mlist
 
 
 def get_sd_list(mol, taglabel):
