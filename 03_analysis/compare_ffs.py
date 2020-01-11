@@ -71,7 +71,13 @@ def calc_tfd(ref_mol, query_mol):
 
     # calculate the TFD
     else:
-        tfd = TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
+        try:
+            tfd = TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
+        # triggered for molecules such as urea
+        except IndexError:
+            print(f"- Error calculating TFD on molecule '{ref_mol.GetTitle()}'."
+                  " Possibly no non-terminal rotatable bonds found.")
+            tfd = np.nan
 
     return tfd
 
@@ -268,7 +274,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
         "paper" or "talk"
 
     """
-    print(f"Number of data points in scatter plot: {len(flatten(x_data))}")
+    print(f"\nNumber of data points in scatter plot: {len(flatten(x_data))}")
     markers = ["o", "^", "d", "x", "s", "p"]
 
     num_methods = len(x_data)
@@ -530,5 +536,6 @@ if __name__ == "__main__":
     in_dict = reader.read_check_input(args.infile)
 
     # run main
+    print("Log file from compare_ffs.py")
     main(in_dict, args.conftag, args.plot, args.molslice)
 
