@@ -119,6 +119,8 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
         same format as that of enes_full but with conformer RMSDs
     tfds_full : 3D list
         same format as that of enes_full but with conformer TFDs
+    smiles_full : 3D list
+        same format as that of enes_full but with conformer SMILES strings
 
     """
     # set RMSD calculation parameters
@@ -130,6 +132,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
     enes_full = []
     rmsds_full = []
     tfds_full = []
+    smiles_full = []
 
     # get first filename representing the reference geometries
     sdf_ref = list(in_dict.values())[0]['sdfile']
@@ -149,6 +152,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
         enes_method = []
         rmsds_method = []
         tfds_method = []
+        smiles_method = []
 
         # open an output file to store query molecules with new SD tags
         out_file = f'{out_prefix}_{os.path.basename(sdf_que)}'
@@ -180,6 +184,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
             enes_que = []
             rmsds_mol = []
             tfds_mol = []
+            smiles_mol = []
 
             # loop over each conformer of this mol
             for ref_conf, que_conf in zip(rmol.GetConfs(), qmol.GetConfs()):
@@ -192,6 +197,9 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
                                     f" for mol: '{rmol_name}'. The conformer "
                                     f"IDs ({conf_id_tag}) for ref and query are:"
                                     f"\n{ref_id}\n{que_id}.")
+
+                # note the smiles id
+                smiles_mol.append(ref_id)
 
                 # get energies
                 enes_ref.append(float(oechem.OEGetSDData(ref_conf, tag_ref)))
@@ -223,16 +231,18 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
             enes_method.append(enes_mol)
             rmsds_method.append(np.array(rmsds_mol))
             tfds_method.append(np.array(tfds_mol))
+            smiles_method.append(smiles_mol)
             #print(rmsds_method, len(rmsds_method))
             #print(enes_method, len(enes_method))
 
         enes_full.append(enes_method)
         rmsds_full.append(rmsds_method)
         tfds_full.append(tfds_method)
+        smiles_full.append(smiles_method)
 
     ofs.close()
 
-    return enes_full, rmsds_full, tfds_full
+    return enes_full, rmsds_full, tfds_full, smiles_full
 
 
 def flatten(list_of_lists):
@@ -438,7 +448,28 @@ def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
     method_labels = list(in_dict.keys())
 
     # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
-    enes_full, rmsds_full, tfds_full = compare_ffs(in_dict, conf_id_tag, 'refdata', mol_slice)
+    enes_full, rmsds_full, tfds_full, smiles_full = compare_ffs(
+                                                        in_dict,
+                                                        conf_id_tag,
+                                                        'refdata',
+                                                        mol_slice)
+
+    # write enes_full to file since not so easy to save as SD tag
+    with open('ddE.dat', 'w') as outfile:
+        outfile.write("# Relative energies (kcal/mol) of ddE = dE (ref method) - dE (query method)\n")
+        outfile.write("# Each dE is the current conformer's energy minus the lowest energy conformer of the same molecule\n")
+        outfile.write("# ==================================================\n")
+
+        for i, (ddE_slice, smi_slice) in enumerate(zip(enes_full, smiles_full)):
+            outfile.write(f"# Relative energies for FF {method_labels[i+1]}\n")
+
+            # flatten the mol/conformer array
+            flat_enes =   np.array([item for sublist in ddE_slice for item in sublist])
+            flat_smiles = np.array([item for sublist in smi_slice for item in sublist])
+
+            # combine label and data, then write to file
+            smiles_and_enes = np.column_stack((flat_smiles, flat_enes))
+            np.savetxt(outfile, smiles_and_enes, fmt='%-60s', delimiter='\t')
 
     energies = []
     rmsds = []
