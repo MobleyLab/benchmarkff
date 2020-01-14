@@ -313,6 +313,9 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
         plt.yticks(fontsize=12)
         plt.legend(loc=(1.04,0.5), fontsize=12)
 
+    # set log scaling but use symmetric log for negative values
+    plt.yscale('symlog')
+
     plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
     #plt.show()
@@ -400,6 +403,9 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
 
     # add labels to each level and to whole x-axis
     g.map(label, datalabel)
+
+    # optional: set symmetric log scale on x-axis
+    #g.set(xscale = "symlog")
 
     # Set the subplots to overlap
     #g.fig.subplots_adjust(hspace=0.05)
