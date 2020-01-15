@@ -19,6 +19,7 @@ python compare_ffs.py -i match.in -t 'SMILES QCArchive' --plot --molslice 25 26 
 
 import os
 import numpy as np
+import pickle
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -324,7 +325,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     #plt.show()
 
 
-def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', same_subplot=False):
+def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw='scott', same_subplot=False, sym_log=False):
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
     segregated by each method (representing a different color/level).
@@ -336,19 +337,25 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', 
     ----------
     mydata : list of lists
         mydata[i][j] represents ith method and jth molecular structure
-    datalabel : string
-        name of the x-axis label
-        also used for pandas dataframe column name
     method_labels : list
         list of all the method names including reference method first
+    x_label : string
+        name of the x-axis label
+        also used for pandas dataframe column name
     out_file : string
         name of the output file
     what_for : string
         dictates figure size, text size of axis labels, legend, etc.
         "paper" or "talk"
+    bw : string or float
+        defines bandwidth for KDE as called in seaborn.kdeplot;
+        specify 'scott', 'silverman', or a scalar value
     same_subplot : Boolean
         False is default to have separate and slightly overlapping plots,
         True to plot all of them showing on the same subplot (no fill)
+    sym_log : Boolean
+        False is default to plot density estimate as is,
+        True to plot x-axis on symmetric log scale
 
     """
     # Define and use a simple function to label the plot in axes coordinates
@@ -367,7 +374,7 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', 
     # convert data to dataframes for ridge plot
     temp = []
     for i in range(num_methods):
-        df = pd.DataFrame(mydata[i], columns = [datalabel])
+        df = pd.DataFrame(mydata[i], columns = [x_label])
         df['method'] = method_labels[i+1]
         temp.append(df)
 
@@ -397,11 +404,13 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', 
     if not same_subplot:
 
         # draw filled-in densities, change bw for smoothing parameter
-        g.map(sns.kdeplot, datalabel, clip_on=False, shade=True, alpha=0.5,
-            lw=ridgedict["lw"], bw=.2)
+        g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
+            lw=ridgedict["lw"], bw=bw)
 
     # draw outline around densities; can also single outline color: color="k"
-    g.map(sns.kdeplot, datalabel, clip_on=False, lw=ridgedict["lw"], bw=.2)
+    g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
+    #histoptions = {"histtype": "step", "alpha": 0.6, "linewidth":ridgedict["lw"], 'range':(-20,20)}
+    #g.map(sns.distplot, x_label, hist=True, kde=False, hist_kws=histoptions)
 
     # draw horizontal line below densities
     g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
@@ -410,10 +419,11 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', 
     g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls='--', color='gray', clip_on=False)
 
     # add labels to each level and to whole x-axis
-    g.map(label, datalabel)
+    g.map(label, x_label)
 
     # optional: set symmetric log scale on x-axis
-    #g.set(xscale = "symlog")
+    if sym_log:
+        g.set(xscale = "symlog")
 
     # Set the subplots to overlap
     #g.fig.subplots_adjust(hspace=0.05)
@@ -429,7 +439,7 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', 
     g.despine(bottom=True, left=True)
 
     # adjust font sizes
-    plt.xlabel(datalabel, fontsize=ridgedict["xfontsize"])
+    plt.xlabel(x_label, fontsize=ridgedict["xfontsize"])
     plt.xticks(fontsize=ridgedict["xfontsize"])
 
     # save with transparency for overlapping plots
@@ -438,7 +448,7 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', 
     #plt.show()
 
 
-def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
+def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
     """
     For 2+ SDF files that are analogous in terms of molecules and their
     conformers, assess them with respective to a reference SDF file (e.g., QM).
@@ -450,6 +460,8 @@ def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
         dictionary from input file, where key is method and value is dictionary
         first entry should be reference method
         in sub-dictionary, keys are 'sdfile' and 'sdtag'
+    read_pickle : Boolean
+        read in data from metrics.pickle
     conf_id_tag : string
         label of the SD tag that should be the same for matching conformers
         in different files
@@ -465,29 +477,38 @@ def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
     """
     method_labels = list(in_dict.keys())
 
-    # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
-    enes_full, rmsds_full, tfds_full, smiles_full = compare_ffs(
-                                                        in_dict,
-                                                        conf_id_tag,
-                                                        'refdata',
-                                                        mol_slice)
+    # run comparison, unless reading in from pickle file
+    if read_pickle:
+        enes_full, rmsds_full, tfds_full, smiles_full = pickle.load(
+            open('metrics.pickle', 'rb'))
+    else:
+        # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
+        enes_full, rmsds_full, tfds_full, smiles_full = compare_ffs(
+                                                            in_dict,
+                                                            conf_id_tag,
+                                                            'refdata',
+                                                            mol_slice)
 
-    # write enes_full to file since not so easy to save as SD tag
-    with open('ddE.dat', 'w') as outfile:
-        outfile.write("# Relative energies (kcal/mol) of ddE = dE (ref method) - dE (query method)\n")
-        outfile.write("# Each dE is the current conformer's energy minus the lowest energy conformer of the same molecule\n")
-        outfile.write("# ==================================================\n")
+        # save results in pickle file
+        pickle.dump((enes_full, rmsds_full, tfds_full, smiles_full),
+            open('metrics.pickle', 'wb'))
 
-        for i, (ddE_slice, smi_slice) in enumerate(zip(enes_full, smiles_full)):
-            outfile.write(f"# Relative energies for FF {method_labels[i+1]}\n")
+        # write enes_full to file since not so easy to save as SD tag
+        with open('ddE.dat', 'w') as outfile:
+            outfile.write("# Relative energies (kcal/mol) of ddE = dE (ref method) - dE (query method)\n")
+            outfile.write("# Each dE is the current conformer's energy minus the lowest energy conformer of the same molecule\n")
+            outfile.write("# ==================================================\n")
 
-            # flatten the mol/conformer array
-            flat_enes =   np.array([item for sublist in ddE_slice for item in sublist])
-            flat_smiles = np.array([item for sublist in smi_slice for item in sublist])
+            for i, (ddE_slice, smi_slice) in enumerate(zip(enes_full, smiles_full)):
+                outfile.write(f"# Relative energies for FF {method_labels[i+1]}\n")
 
-            # combine label and data, then write to file
-            smiles_and_enes = np.column_stack((flat_smiles, flat_enes))
-            np.savetxt(outfile, smiles_and_enes, fmt='%-60s', delimiter='\t')
+                # flatten the mol/conformer array
+                flat_enes =   np.array([item for sublist in ddE_slice for item in sublist])
+                flat_smiles = np.array([item for sublist in smi_slice for item in sublist])
+
+                # combine label and data, then write to file
+                smiles_and_enes = np.column_stack((flat_smiles, flat_enes))
+                np.savetxt(outfile, smiles_and_enes, fmt='%-60s', delimiter='\t')
 
     energies = []
     rmsds = []
@@ -519,18 +540,22 @@ def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
             "talk")
         draw_ridgeplot(
             energies,
-            "ddE (kcal/mol)",
             method_labels,
+            "ddE (kcal/mol)",
             "ridge_dde.png",
             "talk",
-            True)
+            bw='scott',
+            same_subplot=True,
+            sym_log=False)
         draw_ridgeplot(
             rmsds,
-            "RMSD ($\mathrm{\AA}$)",
             method_labels,
+            "RMSD ($\mathrm{\AA}$)",
             "ridge_rmsd.png",
             "talk",
-            True)
+            bw='scott',
+            same_subplot=True,
+            sym_log=False)
 
 
 ### ------------------- Parser -------------------
@@ -556,6 +581,9 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--infile",
         help="Name of text file with force field in first column and molecule "
              "file in second column. Columns separated by commas.")
+
+    parser.add_argument("--readpickle", action="store_true", default=False,
+        help="Read in already-computed data from pickle file named \"metrics.pickle\"")
 
     parser.add_argument("-t", "--conftag",
         help="Name of the SD tag that distinguishes conformers. Within the "
@@ -588,5 +616,5 @@ if __name__ == "__main__":
 
     # run main
     print("Log file from compare_ffs.py")
-    main(in_dict, args.conftag, args.plot, args.molslice)
+    main(in_dict, args.readpickle, args.conftag, args.plot, args.molslice)
 
