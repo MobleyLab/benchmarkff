@@ -312,6 +312,9 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
         plt.xticks(fontsize=12)
         plt.yticks(fontsize=12)
         plt.legend(loc=(1.04,0.5), fontsize=12)
+        # make the marker size smaller
+        for p in plist:
+            p.set_sizes([4.0])
 
     # set log scaling but use symmetric log for negative values
     plt.yscale('symlog')
@@ -321,7 +324,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     #plt.show()
 
 
-def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
+def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk', same_subplot=False):
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
     segregated by each method (representing a different color/level).
@@ -343,6 +346,9 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
     what_for : string
         dictates figure size, text size of axis labels, legend, etc.
         "paper" or "talk"
+    same_subplot : Boolean
+        False is default to have separate and slightly overlapping plots,
+        True to plot all of them showing on the same subplot (no fill)
 
     """
     # Define and use a simple function to label the plot in axes coordinates
@@ -388,9 +394,11 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
     g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
         height=ridgedict["h"], palette=pal)
 
-    # draw filled-in densities, change bw for smoothing parameter
-    g.map(sns.kdeplot, datalabel, clip_on=False, shade=True, alpha=0.5,
-        lw=ridgedict["lw"], bw=.2)
+    if not same_subplot:
+
+        # draw filled-in densities, change bw for smoothing parameter
+        g.map(sns.kdeplot, datalabel, clip_on=False, shade=True, alpha=0.5,
+            lw=ridgedict["lw"], bw=.2)
 
     # draw outline around densities; can also single outline color: color="k"
     g.map(sns.kdeplot, datalabel, clip_on=False, lw=ridgedict["lw"], bw=.2)
@@ -409,7 +417,11 @@ def draw_ridgeplot(mydata, datalabel, method_labels, out_file, what_for='talk'):
 
     # Set the subplots to overlap
     #g.fig.subplots_adjust(hspace=0.05)
-    g.fig.subplots_adjust(hspace=-0.45)
+    if not same_subplot:
+        g.fig.subplots_adjust(hspace=-0.45)
+    else:
+        g.fig.subplots_adjust(hspace=-1.0)
+
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
@@ -510,13 +522,15 @@ def main(in_dict, conf_id_tag, plot=False, mol_slice=None):
             "ddE (kcal/mol)",
             method_labels,
             "ridge_dde.png",
-            "talk")
+            "talk",
+            True)
         draw_ridgeplot(
             rmsds,
             "RMSD ($\mathrm{\AA}$)",
             method_labels,
             "ridge_rmsd.png",
-            "talk")
+            "talk",
+            True)
 
 
 ### ------------------- Parser -------------------
