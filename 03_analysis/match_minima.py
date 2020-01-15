@@ -18,6 +18,8 @@ import pickle
 import itertools
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+import seaborn as sns
+import pandas as pd
 import openeye.oechem as oechem
 import reader
 
@@ -73,6 +75,52 @@ def compare_two_mols(rmol, qmol, rmsd_cutoff):
             molIndices.append(None)
 
     return molIndices
+
+
+def plot_violin_signed(mses, ff_list, what_for='talk'):
+    """
+    """
+
+    # create dataframe from list of lists
+    df = pd.DataFrame.from_records(mses, columns=ff_list)
+    print("\n\nDataframe of mean signed errors for each molecule, separated by force field\n")
+    print(df)
+
+    # reshape for grouped violin plots
+    df = df.melt(var_name='groups', value_name='values')
+
+    # set grid background style
+    sns.set(style="whitegrid")
+
+    if what_for == 'paper':
+        f, ax = plt.subplots(figsize=(5, 4))
+        large_font = 12
+        small_font = 8
+    elif what_for == 'talk':
+        f, ax = plt.subplots(figsize=(10, 8))
+        large_font = 16
+        small_font = 14
+
+    # show each distribution with both violins and points
+    sns.violinplot(x="groups", y="values", data=df, inner="box",
+        palette="tab10", linewidth=2)
+
+    # set alpha transparency
+    plt.setp(ax.collections, alpha=0.8)
+
+    # hide vertical plot boundaries
+    sns.despine(left=True)
+
+    # add labels and adjust font sizes
+    ax.set_xlabel("force field", size=large_font, labelpad=10)
+    ax.set_ylabel("mean signed error (kcal/mol)", size=large_font)
+    plt.xticks(fontsize=small_font)
+    plt.yticks(fontsize=large_font)
+
+    # save and close figure
+    plt.savefig('violin.png', bbox_inches='tight')
+    #plt.show()
+    plt.clf()
 
 
 def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs, what_for='talk'):
@@ -346,7 +394,7 @@ def match_minima(in_dict, rmsd_cutoff):
             # don't run match if query method is same as reference method
             # keep this section after sd tag extraction of energies
             if sdf_query == sdf_ref:
-                print("\nSkipping comparison against self.")
+                print("Skipping comparison against self.")
                 mol_dict[mol_name]['indices'].append([-1] * ref_nconfs)
                 continue
 
@@ -377,13 +425,17 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
     rms_array : 2D list
         RMS errors for each method with reference to first input method
         rms_array[i][j] represents ith mol, jth method's RMSE
+    mse_array : 2D list
+        same layout as that of rms_array except containing mean squared errors
 
     """
     rms_array = []
+    mse_array = []
 
     # iterate over each molecule
     for i, mol_array in enumerate(rel_energies):
         mol_rmses = []
+        mol_mses = []
 
         # iterate over each file (method)
         for j, filelist in enumerate(mol_array):
@@ -391,11 +443,11 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
             # subtract query file minus reference file
             errs = np.asarray(filelist) - np.asarray(mol_array[0])
 
+            # delete reference conformer since it has zero relative energy
+            errs = np.delete(errs, lowest_conf_indices[i])
+
             # square
             sqrs = errs**2.
-
-            # delete reference conformer since it has zero relative energy
-            sqrs = np.delete(sqrs, lowest_conf_indices[i])
 
             # also delete any nan values (TODO: treat this differently?)
             sqrs = sqrs[~np.isnan(sqrs)]
@@ -405,9 +457,15 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
             rmse = np.sqrt(mse)
             mol_rmses.append(rmse)
 
-        rms_array.append(mol_rmses)
+            # also calculate mse
+            sum_errs = np.sum(errs)
+            mse = sum_errs/len(errs)
+            mol_mses.append(mse)
 
-    return rms_array
+        rms_array.append(mol_rmses)
+        mse_array.append(mol_mses)
+
+    return rms_array, mse_array
 
 
 def calc_rel_ene(matched_enes):
@@ -689,7 +747,7 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
 
     # with matched energies, calculate relative values and RMS error
     rel_energies, lowest_conf_indices, eff_nconfs = calc_rel_ene(matched_enes)
-    rms_array = calc_rms_error(rel_energies, lowest_conf_indices)
+    rms_array, mse_array = calc_rms_error(rel_energies, lowest_conf_indices)
 
     # write out data file of relative energies
     mol_names = mol_dict.keys()
@@ -699,17 +757,24 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
         write_rel_ene(mn, rms_array[i], rel_energies[i], lowest_conf_indices[i], ff_list)
 
     if plot:
+
+        # plots combining all molecules -- skip reference bc 0 rmse to self
+        # rms_array[i][j] represents ith mol, jth method's RMSE
+        plot_violin_signed(np.array(mse_array)[:, 1:], ff_list[1:], 'talk')
+
+        # molecule-specific plots
         for i, mol_name in enumerate(mol_dict):
 
-            # only plot for single molecule by name
-            #if mol_name != 'AlkEthOH_c1178': continue
-
+            # line plots of relative energies
             plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
+
+            # optional: only plot single molecule by specified title
+            #if mol_name != 'AlkEthOH_c1178': continue
 
             # only plot selected methods by index
             #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
-            # plot RMSE bars -- don't plot reference which is 0 rmse to self
+            # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
             ref_nconfs = eff_nconfs[i][0]
             plot_mol_rmses(mol_name, rms_array[i][1:], ff_list[1:],
                            eff_nconfs[i][1:], ref_nconfs, 'talk')
@@ -745,6 +810,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if not os.path.exists(args.infile):
         parser.error(f"Input file {args.infile} does not exist.")
+
+    # suppress the following repeated warning
+    # Warning: Using automorph=true and heavyOnly=false in OERMSD.
+    # Warning: In some cases, this can lead to long runtimes due to a large number of automorph matches.
+    oechem.OEThrow.SetLevel(oechem.OEErrorLevel_Error)
 
     # read main input file and check that files within exist
     in_dict = reader.read_check_input(args.infile)
