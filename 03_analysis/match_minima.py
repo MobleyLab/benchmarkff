@@ -105,6 +105,9 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     sns.violinplot(x="groups", y="values", data=df, inner="box",
         palette="tab10", linewidth=2)
 
+    # represent the y-data on log scale
+    plt.yscale('symlog')
+
     # set alpha transparency
     plt.setp(ax.collections, alpha=0.8)
 
@@ -706,7 +709,7 @@ def extract_matches(mol_dict):
     return mol_dict
 
 
-def main(in_dict, readpickle, plot, rmsd_cutoff):
+def main(in_dict, read_pickle, plot, rmsd_cutoff):
     """
     Match conformers from sets of different optimizations.
     Compute relative energies of corresponding confs to a reference conformer.
@@ -718,7 +721,7 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
         dictionary from input file, where key is method and value is dictionary
         first entry should be reference method
         in sub-dictionary, keys are 'sdfile' and 'sdtag'
-    readpickle : Boolean
+    read_pickle : Boolean
         read in data from match.pickle
     plot : Boolean
         generate line plots of conformer energies
@@ -728,7 +731,7 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
     """
 
     # run matching, unless reading in from pickle file
-    if readpickle:
+    if read_pickle:
         mol_dict = pickle.load(open('match.pickle', 'rb'))
     else:
         # match conformers
@@ -758,8 +761,15 @@ def main(in_dict, readpickle, plot, rmsd_cutoff):
 
     if plot:
 
+        # customize: exclude outliers from violin plots
+        mol_names = list(mol_names)
+        violin_exclude = ['full_549', 'full_590', 'full_802', 'full_1691', 'full_1343', 'full_2471']
+        idx_of_exclude = [mol_names.index(x) for x in violin_exclude]
+        for idx in sorted(idx_of_exclude, reverse=True):
+            del mse_array[idx]
+
         # plots combining all molecules -- skip reference bc 0 rmse to self
-        # rms_array[i][j] represents ith mol, jth method's RMSE
+        # mse_array[i][j] represents ith mol, jth method's RMSE
         plot_violin_signed(np.array(mse_array)[:, 1:], ff_list[1:], 'talk')
 
         # molecule-specific plots
@@ -792,14 +802,13 @@ if __name__ == "__main__":
              "file in second column. Columns separated by commas.")
 
     parser.add_argument("--readpickle", action="store_true", default=False,
-        help="Read in data from pickle files named \"match.pickle\" from each "
-             "force field's directory.")
+        help="Read in already-matched data from pickle file named \"match.pickle\"")
 
     parser.add_argument("--plot", action="store_true", default=False,
         help="Generate line plots for every molecule with the conformer "
              "relative energies.")
 
-    parser.add_argument("--cutoff", type=float, default=0.5,
+    parser.add_argument("--cutoff", type=float, default=1.0,
         help="RMSD cutoff above which conformers are considered different "
              "enough to be distinct. Corresponding energies not considered. "
              "Measured by OpenEye in with automorph=True, heavyOnly=False, "
