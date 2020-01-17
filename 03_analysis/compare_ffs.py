@@ -20,6 +20,7 @@ python compare_ffs.py -i match.in -t 'SMILES QCArchive' --plot --molslice 25 26 
 import os
 import numpy as np
 import pickle
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -348,8 +349,9 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw
         dictates figure size, text size of axis labels, legend, etc.
         "paper" or "talk"
     bw : string or float
-        defines bandwidth for KDE as called in seaborn.kdeplot;
-        specify 'scott', 'silverman', or a scalar value
+        defines bandwidth for KDE as called in seaborn.kdeplot, OR don't use
+        kde at all and just histogram the data;
+        options: 'scott' (KDE), 'silverman' (KDE), scalar value (KDE), 'hist'
     same_subplot : Boolean
         False is default to have separate and slightly overlapping plots,
         True to plot all of them showing on the same subplot (no fill)
@@ -397,29 +399,51 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw
         }
 
     # Initialize the FacetGrid object
-    pal = sns.palplot(sns.color_palette("tab10"))
+    my_cmap = "tab10"
+    pal = sns.palplot(sns.color_palette(my_cmap))
     g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
         height=ridgedict["h"], palette=pal)
 
+    # draw filled-in densities
     if not same_subplot:
 
-        # draw filled-in densities, change bw for smoothing parameter
-        g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
-            lw=ridgedict["lw"], bw=bw)
+        if bw=='hist':
+            histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
+                "range":(-20,20), "align":"left"}
+            g.map(sns.distplot, x_label, hist=True, kde=False, hist_kws=histoptions)
+
+        else:
+            g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
+                lw=ridgedict["lw"], bw=bw)
 
     # draw outline around densities; can also single outline color: color="k"
-    g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
-    #histoptions = {"histtype": "step", "alpha": 0.6, "linewidth":ridgedict["lw"], 'range':(-20,20)}
-    #g.map(sns.distplot, x_label, hist=True, kde=False, hist_kws=histoptions)
+    if bw=='hist':
+        histoptions = {"histtype":"step", "alpha":0.8, "linewidth":ridgedict["lw"],
+            "range":(-20,20), "align":"left"}
+        g.map(sns.distplot, x_label, hist=True, kde=False, hist_kws=histoptions)
+
+    else:
+        g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
 
     # draw horizontal line below densities
     g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
 
     # draw a vertical line at x=0 for visual reference
     g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls='--', color='gray', clip_on=False)
+    #g.map(plt.axvline, x=0.12, lw=1, ls='--', color='gray', clip_on=False)
 
-    # add labels to each level and to whole x-axis
-    g.map(label, x_label)
+    # add labels to each level
+    if not same_subplot:
+        g.map(label, x_label)
+
+    # else if single subplot, generate a custom legend
+    else:
+        cmap = mpl.cm.tab10
+        patches = []
+        n_ffs = len(method_labels)-1
+        for i in range(n_ffs):
+            patches.append(mpl.patches.Patch(color=cmap(i/10), label=method_labels[i+1]))
+        plt.legend(handles=patches, fontsize=ridgedict["xfontsize"]/1.2)
 
     # optional: set symmetric log scale on x-axis
     if sym_log:
@@ -544,7 +568,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "ddE (kcal/mol)",
             "ridge_dde.png",
             "talk",
-            bw='scott',
+            bw='hist',
             same_subplot=True,
             sym_log=False)
         draw_ridgeplot(
@@ -552,6 +576,15 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
             "ridge_rmsd.png",
+            "talk",
+            bw='scott',
+            same_subplot=True,
+            sym_log=False)
+        draw_ridgeplot(
+            tfds,
+            method_labels,
+            "TFD",
+            "ridge_tfd.png",
             "talk",
             bw='scott',
             same_subplot=True,
