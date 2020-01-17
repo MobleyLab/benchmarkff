@@ -1,0 +1,2 @@
+# ignore ipynb in computing language stats
+*.ipynb linguist-documentation
