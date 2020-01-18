@@ -19,6 +19,7 @@ python compare_ffs.py -i match.in -t 'SMILES QCArchive' --plot --molslice 25 26 
 
 import os
 import numpy as np
+from scipy.interpolate import interpn
 import pickle
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -326,7 +327,9 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     #plt.show()
 
 
-def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw='scott', same_subplot=False, sym_log=False):
+def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
+        bw='scott', same_subplot=False, sym_log=False):
+
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
     segregated by each method (representing a different color/level).
@@ -442,7 +445,8 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw
         patches = []
         n_ffs = len(method_labels)-1
         for i in range(n_ffs):
-            patches.append(mpl.patches.Patch(color=cmap(i/10), label=method_labels[i+1]))
+            patches.append(mpl.patches.Patch(color=cmap(i/10),
+                label=method_labels[i+1]))
         plt.legend(handles=patches, fontsize=ridgedict["xfontsize"]/1.2)
 
     # optional: set symmetric log scale on x-axis
@@ -450,7 +454,6 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw
         g.set(xscale = "symlog")
 
     # Set the subplots to overlap
-    #g.fig.subplots_adjust(hspace=0.05)
     if not same_subplot:
         g.fig.subplots_adjust(hspace=-0.45)
     else:
@@ -468,6 +471,97 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk', bw
 
     # save with transparency for overlapping plots
     plt.savefig(out_file, bbox_inches='tight', transparent=True)
+    plt.clf()
+    #plt.show()
+
+
+def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='talk', xmax=4.0, zrange=None, bins=20):
+    """
+    Draw a scatter plot colored smoothly to represent the 2D density.
+    Based on: https://stackoverflow.com/a/53865762/8397754
+
+    Parameters
+    ----------
+    x_data : 1D list
+        represents x-axis data for all molecules of a given method
+    y_data : 1D list
+        should have same shape and correspond to x_data
+    title : string
+        title of the plot
+    x_label : string
+        name of the x-axis label
+    y_label : string
+        name of the y-axis label
+    out_file : string
+        name of the output file
+    what_for : string
+        dictates figure size, text size of axis labels, legend, etc.
+        "paper" or "talk"
+    xmax : float
+        max value of x-axis for setting consistent plot limits;
+        note that the min value is assumed to be zero
+    zrange : tuple of two floats
+        min and max values of density for setting a uniform color bar
+    bins : int
+        number of bins for np.histogram2d
+
+    """
+    print(f"\nNumber of data points in scatter plot: {len(x_data)}")
+
+    if what_for == 'paper':
+        ms = 2
+        size1 = 8
+        size2 = 10
+        fig = plt.gcf()
+        fig.set_size_inches(4, 3)
+    elif what_for == 'talk':
+        ms = 4
+        size1 = 14
+        size2 = 16
+    plt_options = {'s':ms, 'cmap':'coolwarm'}
+
+    # set log scaling but use symmetric log for negative values
+    plt.yscale('symlog')
+
+    # compute histogram in 2d
+    data, x_e, y_e = np.histogram2d(x_data, y_data, bins=bins)
+
+    # smooth/interpolate data
+    z = interpn( ( 0.5*(x_e[1:] + x_e[:-1]) , 0.5*(y_e[1:]+y_e[:-1]) ), data,
+        np.vstack([x_data, y_data]).T, method="splinef2d", bounds_error=False)
+
+    # sort the points by density, so that the densest points are plotted last
+    idx = z.argsort()
+    x, y, z = x_data[idx], y_data[idx], z[idx]
+
+    print(f"{title} ranges of data in density plot:\n\t\tmin\t\tmax"
+          f"\nx\t{np.min(x):10.4f}\t{np.max(x):10.4f}"
+          f"\ny\t{np.min(y):10.4f}\t{np.max(y):10.4f}"
+          f"\nz\t{np.min(data):10.4f}\t{np.max(data):10.4f} (histogrammed)"
+          f"\nz'\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interpolated)")
+
+    # add dummy points of user-specified min/max z for uniform color scaling
+    # similar to using vmin/vmax in pyplot pcolor
+    x = np.append(x, [-1, -1])
+    y = np.append(y, [0, 0])
+    z = np.append(z, [zrange[0], zrange[1]])
+
+    print(f"z''\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interp, scaled)")
+
+    # generate the plot
+    plt.scatter(x, y, c=z, **plt_options)
+
+    # label and adjust plot
+    plt.title(title, fontsize=size2)
+    plt.xlabel(x_label, fontsize=size2)
+    plt.ylabel(y_label, fontsize=size2)
+    plt.xlim(0, 3.7)
+    plt.xticks(fontsize=size1)
+    plt.yticks(fontsize=size1)
+    cb = plt.colorbar(label='counts (interpolated)')
+    cb.ax.tick_params(labelsize=size1)
+
+    plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
     #plt.show()
 
@@ -589,6 +683,19 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             bw='scott',
             same_subplot=True,
             sym_log=False)
+
+        for i, ml in enumerate(method_labels[1:]):
+            draw_density2d(
+                rmsds[i],
+                energies[i],
+                ml,
+                "RMSD ($\mathrm{\AA}$)",
+                "ddE (kcal/mol)",
+                f"density_rmsd_{ml}.png",
+                "talk",
+                xmax=3.7,
+                zrange=(-300,5500))
+
 
 
 ### ------------------- Parser -------------------
