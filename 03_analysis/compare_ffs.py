@@ -475,7 +475,9 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     #plt.show()
 
 
-def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='talk', xmax=4.0, zrange=None, bins=20):
+def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='talk',
+    bins=20, x_range=None, y_range=None, z_range=None, z_interp=True):
+
     """
     Draw a scatter plot colored smoothly to represent the 2D density.
     Based on: https://stackoverflow.com/a/53865762/8397754
@@ -497,15 +499,30 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     what_for : string
         dictates figure size, text size of axis labels, legend, etc.
         "paper" or "talk"
-    xmax : float
-        max value of x-axis for setting consistent plot limits;
-        note that the min value is assumed to be zero
-    zrange : tuple of two floats
-        min and max values of density for setting a uniform color bar
     bins : int
         number of bins for np.histogram2d
+    x_range : tuple of two floats
+        min and max values of x-axis
+    y_range : tuple of two floats
+        min and max values of y-axis
+    z_range : tuple of two floats
+        min and max values of density for setting a uniform color bar
+    z_interp : Boolean
+        True to smoothen the color scale for the scatter plot points;
+        False to
 
     """
+
+    def colorbar_and_finish(labelsize, fname):
+        cb = plt.colorbar()
+        cb.ax.tick_params(labelsize=labelsize)
+        cb.ax.set_title('counts', size=labelsize)
+
+        plt.savefig(fname, bbox_inches='tight')
+        plt.clf()
+        #plt.show()
+
+
     print(f"\nNumber of data points in scatter plot: {len(x_data)}")
 
     if what_for == 'paper':
@@ -520,11 +537,30 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         size2 = 16
     plt_options = {'s':ms, 'cmap':'coolwarm'}
 
-    # set log scaling but use symmetric log for negative values
-    plt.yscale('symlog')
+    # label and adjust plot
+    plt.title(title, fontsize=size2)
+    plt.xlabel(x_label, fontsize=size2)
+    plt.ylabel(y_label, fontsize=size2)
+    plt.xticks(fontsize=size1)
+    plt.yticks(fontsize=size1)
+
+    if x_range is not None:
+        plt.xlim(x_range[0], x_range[1])
+
+    if y_range is not None:
+        plt.ylim(y_range[0], y_range[1])
 
     # compute histogram in 2d
     data, x_e, y_e = np.histogram2d(x_data, y_data, bins=bins)
+
+    # plot colored 2d histogram if z_interp not specified
+    if not z_interp:
+        extent = [x_e[0], x_e[-1], y_e[0], y_e[-1]]
+        plt.imshow(data.T, extent=extent, origin='lower', aspect='auto',
+            cmap=plt_options['cmap'], vmin=z_range[0], vmax=z_range[1])
+
+        colorbar_and_finish(size1, out_file)
+        return
 
     # smooth/interpolate data
     z = interpn( ( 0.5*(x_e[1:] + x_e[:-1]) , 0.5*(y_e[1:]+y_e[:-1]) ), data,
@@ -544,26 +580,18 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     # similar to using vmin/vmax in pyplot pcolor
     x = np.append(x, [-1, -1])
     y = np.append(y, [0, 0])
-    z = np.append(z, [zrange[0], zrange[1]])
+    z = np.append(z, [z_range[0], z_range[1]])
 
-    print(f"z''\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interp, scaled)")
+    print(f"z''\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interp, bounded)")
 
     # generate the plot
     plt.scatter(x, y, c=z, **plt_options)
 
-    # label and adjust plot
-    plt.title(title, fontsize=size2)
-    plt.xlabel(x_label, fontsize=size2)
-    plt.ylabel(y_label, fontsize=size2)
-    plt.xlim(0, 3.7)
-    plt.xticks(fontsize=size1)
-    plt.yticks(fontsize=size1)
-    cb = plt.colorbar(label='counts (interpolated)')
-    cb.ax.tick_params(labelsize=size1)
+    # set log scaling but use symmetric log for negative values
+    #plt.yscale('symlog')
 
-    plt.savefig(out_file, bbox_inches='tight')
-    plt.clf()
-    #plt.show()
+    # configure color bar and finish plotting
+    colorbar_and_finish(size1, out_file)
 
 
 def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
@@ -693,8 +721,11 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 "ddE (kcal/mol)",
                 f"density_rmsd_{ml}.png",
                 "talk",
-                xmax=3.7,
-                zrange=(-300,5500))
+                x_range=(0, 3.7),
+                y_range=(-30, 55),
+                z_range=(-300, 5500),
+                #z_interp=False)
+                z_interp=True)
 
 
 
