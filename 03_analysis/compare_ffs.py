@@ -413,7 +413,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         if bw=='hist':
             histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
                 "range":(-20,20), "align":"left"}
-            g.map(sns.distplot, x_label, hist=True, kde=False, hist_kws=histoptions)
+            g.map(sns.distplot, x_label, hist=True, kde=False, bins=30, hist_kws=histoptions)
 
         else:
             g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
@@ -423,7 +423,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     if bw=='hist':
         histoptions = {"histtype":"step", "alpha":0.8, "linewidth":ridgedict["lw"],
             "range":(-20,20), "align":"left"}
-        g.map(sns.distplot, x_label, hist=True, kde=False, hist_kws=histoptions)
+        g.map(sns.distplot, x_label, hist=True, kde=False, bins=30, hist_kws=histoptions)
 
     else:
         g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
