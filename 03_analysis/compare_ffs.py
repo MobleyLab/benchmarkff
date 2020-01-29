@@ -588,7 +588,7 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     plt.scatter(x, y, c=z, **plt_options)
 
     # set log scaling but use symmetric log for negative values
-    #plt.yscale('symlog')
+    plt.yscale('symlog')
 
     # configure color bar and finish plotting
     colorbar_and_finish(size1, out_file)
