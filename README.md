@@ -1,11 +1,13 @@
-# Python workflow for benchmarking force fields
+# BenchmarkFF
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/vtlim/benchmarkff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vtlim/benchmarkff/context:python)
 
 README last updated: Jan 8 2020
 
 ## About
 
-This repository houses code pertaining to extracting molecule datasets from [QCArchive](https://qcarchive.molssi.org/), running energy minimizations with various force fields, then analyzing the resulting geometries and energies with respect to the QM data from the archive.
+Overview: Compare optimized geometries and energies from various force fields with respect to a QM reference.
+
+This repository comprises code to extract molecule datasets from [QCArchive](https://qcarchive.molssi.org/), run energy minimizations with various force fields, and analyze the resulting geometries and energies with respect to QM reference data from QCArchive.
 
 ## Major dependencies
 * Python (numpy, matplotlib, seaborn)
