@@ -140,45 +140,46 @@ def count_mols_by_param(full_params, params_id_all, params_id_out):
         nmols_cnt_all.append(cnt_all)
         nmols_cnt_out.append(cnt_out)
 
-    return nmols_cnt_all, nmols_cnt_out
+    return np.array(nmols_cnt_all), np.array(nmols_cnt_out)
 
 
-def plot_by_paramtype(prefix, full_params, fraction_cnt_all, fraction_cnt_out, metric_type):
+def plot_by_paramtype(prefix, max_ratio, labels, plot_data, metric_type):
     """
     prefix : string
         specify parameter type to generate plot.
         options: 'a' 'b' 'i' 'n' 't'
     """
 
-    plot_inds = [full_params.index(i) for i in full_params if i.startswith(prefix)]
-
     # create the plot and set label sizes
     fig, ax = plt.subplots()
-    fig.set_size_inches(5, len(plot_inds))
+    fig.set_size_inches(5, len(plot_data)/2)
     fs1 = 20
     fs2 = 16
 
     # set x locations and bar widths
-    y = np.arange(len(plot_inds))
+    y = np.arange(len(plot_data))
     width = 0.3
 
     # plot the bars
-    ax.barh(y - width/2, fraction_cnt_all[plot_inds], width, label='all', color='darkcyan')
-    ax.barh(y + width/2, fraction_cnt_out[plot_inds], width, label=f'{metric_type} outliers', color='chocolate')
+    ax.barh(y, plot_data, width, color='darkcyan')
 
     # add plot labels, ticks, and tick labels
-    ax.legend(fontsize=fs2, loc=4)
     ax.set_xlabel('fraction', fontsize=fs1)
     #ax.set_ylabel('force field parameter', fontsize=fs1)
     ax.set_yticks(y)
-    ax.set_yticklabels([full_params[index] for index in plot_inds], fontsize=fs2)
+    ax.set_yticklabels(labels, fontsize=fs2)
     plt.xticks(fontsize=fs2)
 
     # invert for horizontal bars
     plt.gca().invert_yaxis()
 
     # set plot limits
-    ax.set_xlim(0, 1)
+    ax.set_xlim(0, max_ratio)
+
+    # set alternating colors for background for ease of visualizing
+    locs, labels = plt.xticks()
+    for i in range(1, len(locs)-1, 2):
+        ax.axvspan(locs[i], locs[i+1], facecolor='lightgrey', alpha=0.25)
 
     # save figure
     plt.grid()
@@ -282,19 +283,39 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
         np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
 
     # compare fractions in the all set vs the outliers set
-    fraction_cnt_all = np.array(nmols_cnt_all)/uniq_n_all
-    fraction_cnt_out = np.array(nmols_cnt_out)/uniq_n_out
+    fraction_cnt_all = nmols_cnt_all/uniq_n_all
+    fraction_cnt_out = nmols_cnt_out/uniq_n_out
 
-    # exclude empty outliers
+    # exclude parameters for which outliers set AND full set
+    # both have less than 5 matches; do this BEFORE excluding nonzero_inds
+    # TODO: make this more general? e.g., nmols_cnt_all < nsamples
+    ones_nmols_all = np.where(nmols_cnt_all == 1)[0]
+    ones_nmols_out = np.where(nmols_cnt_out == 1)[0]
+    ones_both = np.intersect1d(ones_nmols_all, ones_nmols_out)
+    fraction_cnt_all = np.delete(fraction_cnt_all, ones_both)
+    fraction_cnt_out = np.delete(fraction_cnt_out, ones_both)
+    full_params = [v for index, v in enumerate(full_params) if index not in ones_both] # exclude ones
+
+    # exclude parameters which are not used in outliers set
     nonzero_inds = np.nonzero(fraction_cnt_out)
     fraction_cnt_out = fraction_cnt_out[nonzero_inds]
     fraction_cnt_all = fraction_cnt_all[nonzero_inds]
-    full_params = [full_params[i] for i in nonzero_inds[0]]
+    full_params = [full_params[i] for i in nonzero_inds[0]] # keep nonzeroes
+
+    # get ratio of fraction_outliers to fraction_all
+    fraction_ratio = fraction_cnt_out / fraction_cnt_all
+    max_ratio = np.max(fraction_ratio)
 
     # plot fraction of molecules which use each parameter
     # separate plot by parameter type
     for t in ['a', 'b', 'i', 'n', 't']:
-        plot_by_paramtype(t, full_params, fraction_cnt_all, fraction_cnt_out, metric_type)
+
+        # get the subset of data based on parameter type
+        plot_inds = [full_params.index(i) for i in full_params if i.startswith(t)]
+        fraction_subset = fraction_ratio[plot_inds]
+        label_subset = [full_params[index] for index in plot_inds]
+
+        plot_by_paramtype(t, max_ratio, label_subset, fraction_subset, metric_type)
 
 
 ### ------------------- Parser -------------------
