@@ -32,7 +32,6 @@ import matplotlib.pyplot as plt
 from collections import OrderedDict
 
 import openeye.oechem as oechem
-import openeye.oedepict as oedepict
 
 from openforcefield.topology import Molecule
 from openforcefield.typing.engines.smirnoff import ForceField
@@ -68,9 +67,6 @@ def write_mols(mols_dict, outfile):
 
     # open an outstream file
     ofs = oechem.oemolostream()
-#    if os.path.exists(outfile):
-#        raise FileExistsError("Output file {} already exists in {}".format(
-#            outfile, os.getcwd()))
     if not ofs.open(outfile):
         oechem.OEThrow.Fatal("Unable to open %s for writing" % outfile)
 
@@ -123,7 +119,7 @@ def get_parameters(mols_dict, ffxml):
     return parameters_by_molecule, parameters_by_ID, smi_dict
 
 
-def param_num_mols(full_params, params_id_all, params_id_out):
+def count_mols_by_param(full_params, params_id_all, params_id_out):
     """
     """
 
@@ -147,54 +143,55 @@ def param_num_mols(full_params, params_id_all, params_id_out):
     return nmols_cnt_all, nmols_cnt_out
 
 
-def plot_by_paramtype(prefix, full_params, fraction_cnt_all, fraction_cnt_out, metric_type, exclude_empty_outliers=False):
+def plot_by_paramtype(prefix, full_params, fraction_cnt_all, fraction_cnt_out, metric_type):
     """
     prefix : string
         specify parameter type to generate plot.
         options: 'a' 'b' 'i' 'n' 't'
     """
 
-    if exclude_empty_outliers:
-        pass
-        # TODO
-
     plot_inds = [full_params.index(i) for i in full_params if i.startswith(prefix)]
 
     # create the plot and set label sizes
     fig, ax = plt.subplots()
-    fig.set_size_inches(20,5)
-    size1 = 20
-    size2 = 16
+    fig.set_size_inches(5, len(plot_inds))
+    fs1 = 20
+    fs2 = 16
 
     # set x locations and bar widths
-    x = np.arange(len(plot_inds))
+    y = np.arange(len(plot_inds))
     width = 0.3
 
     # plot the bars
-    rects1 = ax.bar(x - width/2, fraction_cnt_all[plot_inds], width, label='all', color='darkcyan')
-    rects2 = ax.bar(x + width/2, fraction_cnt_out[plot_inds], width, label=f'{metric_type} outliers', color='chocolate')
+    ax.barh(y - width/2, fraction_cnt_all[plot_inds], width, label='all', color='darkcyan')
+    ax.barh(y + width/2, fraction_cnt_out[plot_inds], width, label=f'{metric_type} outliers', color='chocolate')
 
-    # add plot labels
-    ax.set_ylabel('fraction', fontsize=size1)
-    ax.set_xlabel('force field parameter', fontsize=size1)
-    ax.set_title('fraction of molecules having given parameter', fontsize=size1)
-    ax.set_xticks(x)
-    ax.set_xticklabels([full_params[index] for index in plot_inds], fontsize=size2)
-    plt.yticks(fontsize=size2)
-    ax.legend(fontsize=size2)
+    # add plot labels, ticks, and tick labels
+    ax.legend(fontsize=fs2, loc=4)
+    ax.set_xlabel('fraction', fontsize=fs1)
+    #ax.set_ylabel('force field parameter', fontsize=fs1)
+    ax.set_yticks(y)
+    ax.set_yticklabels([full_params[index] for index in plot_inds], fontsize=fs2)
+    plt.xticks(fontsize=fs2)
+
+    # invert for horizontal bars
+    plt.gca().invert_yaxis()
+
+    # set plot limits
+    ax.set_xlim(0, 1)
+
+    # save figure
+    plt.grid()
     fig.tight_layout()
     plt.savefig(f'bars_{metric_type.lower()}_params_{prefix}.png', bbox_inches='tight')
 
 
 def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
-    """
-    """
 
     # load molecules from open reference and query files
     print(f"Opening SDF file {in_sdf}...")
     mols = reader.read_mols(in_sdf)
     print(f"Looking for outlier molecules with {metric_type} above {cutoff}...\n")
-
 
     # find the molecules with the metric above the cutoff
     all_smiles    = []
@@ -224,14 +221,45 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
     params_mol_out, params_id_out, smi_dict_out = get_parameters(mols_out, ffxml)
     params_mol_all, params_id_all, smi_dict_all = get_parameters(mols_all, ffxml)
 
-    # save the params organized by id to pickle
-    pickle.dump(
-        (mols_out, params_id_out, smi_dict_out, mols_all, params_id_all, smi_dict_all),
-        open(f'tailed_{metric_type.lower()}.pickle', 'wb'))
+    # organize all computed data to encompassing dictionary
+    # all values in data_* are dictionaries except for data_*['count']
+    data_all = {'count': count_all, 'mols_dict': mols_all,
+        'params_mol': params_mol_all, 'params_id': params_id_all,
+        'smi_dict': smi_dict_all}
+    data_out = {'count': count_out, 'mols_dict': mols_out,
+        'params_mol': params_mol_out, 'params_id': params_id_out,
+        'smi_dict': smi_dict_out}
 
-    # count number of unique mol and unique params
+    # save the params organized by id to pickle
+    with open(f'tailed_{metric_type.lower()}.pickle', 'wb') as f:
+        pickle.dump((data_all, data_out), f)
+
+    return data_all, data_out
+
+
+def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
+    """
+    """
+
+    if inpickle is not None and os.path.exists(inpickle):
+
+        # load in analysis from pickle file
+        with open(inpickle, 'rb') as f:
+            data_all, data_out = pickle.load(f)
+
+    else:
+        data_all, data_out = tailed_parameters(
+            in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type)
+
+    # count number of unique mols
+    params_mol_all = data_all['params_mol']
+    params_mol_out = data_out['params_mol']
     uniq_n_all = len(params_mol_all)
     uniq_n_out = len(params_mol_out)
+
+    # count number of unique params
+    params_id_all = data_all['params_id']
+    params_id_out = data_out['params_id']
 
     full_params = list(set(params_id_all.keys()))
     full_params.sort(key=natural_keys)
@@ -240,15 +268,28 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
     uniq_p_out = len(list(set(params_id_out.keys())))
 
     # print stats on number of outliers
-    print(f"\nNumber of structures in full set: {count_all} ({uniq_n_all} unique)")
-    print(f"Number of structures in outlier set: {count_out} ({uniq_n_out} unique)")
+    print(f"\nNumber of structures in full set: {data_all['count']} ({uniq_n_all} unique)")
+    print(f"Number of structures in outlier set: {data_out['count']} ({uniq_n_out} unique)")
     print(f"Number of unique parameters in full set: {uniq_p_all}")
     print(f"Number of unique parameters in outlier set: {uniq_p_out}")
 
     # go through all parameters and find number of molecules which use each one
-    nmols_cnt_all, nmols_cnt_out = param_num_mols(full_params, params_id_all, params_id_out)
+    nmols_cnt_all, nmols_cnt_out = count_mols_by_param(full_params, params_id_all, params_id_out)
+    write_data = np.column_stack((full_params, nmols_cnt_out, nmols_cnt_all))
+    with open(f'params_{metric_type.lower()}.dat', 'w') as f:
+        f.write("# param\tnmols_out\tnmols_all\n")
+        f.write(f"NA_total\t{uniq_n_out}\t{uniq_n_all}\n")
+        np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
+
+    # compare fractions in the all set vs the outliers set
     fraction_cnt_all = np.array(nmols_cnt_all)/uniq_n_all
     fraction_cnt_out = np.array(nmols_cnt_out)/uniq_n_out
+
+    # exclude empty outliers
+    nonzero_inds = np.nonzero(fraction_cnt_out)
+    fraction_cnt_out = fraction_cnt_out[nonzero_inds]
+    fraction_cnt_all = fraction_cnt_all[nonzero_inds]
+    full_params = [full_params[i] for i in nonzero_inds[0]]
 
     # plot fraction of molecules which use each parameter
     # separate plot by parameter type
@@ -268,12 +309,6 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--ffxml", required=True,
             help="Open force field ffxml file")
 
-    parser.add_argument("--rmsd", action="store_true", default=False,
-        help="Tag and cutoff value refer to RMSD metrics.")
-
-    parser.add_argument("--tfd", action="store_true", default=False,
-        help="Tag and cutoff value refer to TFD metrics.")
-
     parser.add_argument("--cutoff", required=True, type=float,
             help="Cutoff value for which to separate outliers")
 
@@ -282,6 +317,17 @@ if __name__ == "__main__":
 
     parser.add_argument("--tag_smiles", required=True,
             help="SDF tag from which to identify conformers")
+
+    parser.add_argument("--rmsd", action="store_true", default=False,
+        help="Tag and cutoff value refer to RMSD metrics.")
+
+    parser.add_argument("--tfd", action="store_true", default=False,
+        help="Tag and cutoff value refer to TFD metrics.")
+
+    parser.add_argument("--inpickle", default=None,
+        help="Name of pickle file with already-computed data")
+
+    # TODO: plot what_for
 
     args = parser.parse_args()
     if args.rmsd:
@@ -292,6 +338,7 @@ if __name__ == "__main__":
         pass
         # TODO
 
-    tailed_parameters(args.infile, args.ffxml,
-        args.cutoff, args.tag, args.tag_smiles, metric_type)
+    main(args.infile, args.ffxml,
+        args.cutoff, args.tag, args.tag_smiles, metric_type,
+        args.inpickle)
 

@@ -30,21 +30,23 @@ from openforcefield.typing.engines.smirnoff import ForceField
 ### ------------------- Functions -------------------
 
 
-def probe_by_parameter(probe_param, ffxml, all_probe_mols, subdir, pickle_file):
+def probe_by_parameter(probe_param, ffxml, subdir, all_probe_mols, inpickle):
     """
     probe_param : string
         Name of the parameter to investigate
     ffxml : string
         Name of the FFXML force field file
-    pickle_file : string
+    inpickle : string
         Name of the pickle file from output of tailed_parameters.py
     """
     prefix_dict = {'a':'Angles', 'b':'Bonds', 'i':'ImproperTorsions', 'n':'vdW', 't':'ProperTorsions'}
 
     # load parameter dictionaries from pickle
-    mols_out, params_id_out, smi_dict_out, mols_all, params_id_all, smi_dict_all = pickle.load(open(pickle_file, 'rb'))
+    with open(inpickle, 'rb') as f:
+        data_all, data_out = pickle.load(f)
+    params_id_out = data_out['params_id']
 
-    # find the first outlier mol that has given param
+    # find the first mol in outlier set with given param
     mols_with_probe = list(params_id_out[probe_param])
     probe_mol = Molecule.from_smiles(mols_with_probe[0], allow_undefined_stereo=True)
     topology = Topology.from_molecules([probe_mol])
@@ -66,24 +68,26 @@ def probe_by_parameter(probe_param, ffxml, all_probe_mols, subdir, pickle_file):
 
     # find all molecules with this parameter and save to file.
     # conformers are not considered here so these smiles refer to
-    # arbitrary conformer from dict of zip
+    # an arbitrary conformer assigned in dict after zip
+    # (since duplicate keys are removed in dict)
+    outfile = f'{subdir}/param_{probe_param}.mol2'
     ofs = oechem.oemolostream()
-    if not ofs.open(f'{subdir}/param_{probe_param}.mol2'):
+    if not ofs.open(outfile):
         oechem.OEThrow.Fatal("Unable to open %s for writing" % outfile)
 
     for m in mols_with_probe:
-        key = smi_dict_out[m]
+        key = data_out['smi_dict'][m]
         print(f"writing out {key}")
-        mymol = mols_out[key]['structure']
+        mymol = data_out['mols_dict'][key]['structure']
         oechem.OEWriteConstMolecule(ofs, mymol)
 
-        # save to write full pdf
+        # save to write full pdf later on
         all_probe_mols[probe_param].append(oechem.OEGraphMol(mymol))
 
     return all_probe_mols
 
 
-def oedepict_pdf(all_probe_mols):
+def oedepict_pdf(all_probe_mols, subdir):
     multi = oedepict.OEMultiPageImageFile(oedepict.OEPageOrientation_Landscape,
                                           oedepict.OEPageSize_US_Letter)
     image = multi.NewPage()
@@ -121,7 +125,7 @@ def oedepict_pdf(all_probe_mols):
             oedepict.OEDrawBorder(cell, pen)
             citer.Next()
 
-    oedepict.OEWriteMultiPageImage("{subdir}/results.pdf", multi)
+    oedepict.OEWriteMultiPageImage(f"{subdir}/results.pdf", multi)
 
 
 
@@ -135,7 +139,7 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--ffxml", required=True,
             help="Open force field ffxml file")
 
-    parser.add_argument("-k", "--pickle", required=True,
+    parser.add_argument("-k", "--inpickle", required=True,
             help="Name of the pickle file from output of tailed_parameters.py")
 
     parser.add_argument("-s", "--subdir", default='probe_params',
@@ -146,13 +150,15 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    # create subdirectory to save output files
     if not os.path.exists(args.subdir):
         os.mkdir(args.subdir)
 
+    # go through molecule identification for each of parameters
     all_probe_mols = {}
-
     for p in args.params:
         all_probe_mols[p] = []
-        all_probe_mols = probe_by_parameter(p, args.ffxml, args.subdir, all_probe_mols)
+        all_probe_mols = probe_by_parameter(p, args.ffxml, args.subdir, all_probe_mols, args.inpickle)
 
-    oedepict_pdf(all_probe_mols)
+    # generate pdf report with all molecules, color-coded by parameter
+    oedepict_pdf(all_probe_mols, args.subdir)
