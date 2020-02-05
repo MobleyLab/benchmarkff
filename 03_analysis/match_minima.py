@@ -79,6 +79,20 @@ def compare_two_mols(rmol, qmol, rmsd_cutoff):
 
 def plot_violin_signed(mses, ff_list, what_for='talk'):
     """
+    Generate violin plots of the mean signed errors
+    of force field energies with respect to QM energies.
+
+    Parameters
+    ----------
+    mses : 2D list
+        Mean signed errors for each method with reference to first input method
+        mses[i][j] represents ith mol, jth method's MSE
+    ff_list : list
+        list of methods corresponding to energies in mses
+    what_for : string
+        dictates figure size, text size of axis labels, legend, etc.
+        "paper" or "talk"
+
     """
 
     # create dataframe from list of lists
@@ -196,6 +210,7 @@ def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs, what_fo
     ax2.set_ylabel('Number of conformers', fontsize=large_font)
     ax2.tick_params(axis='y', labelsize=small_font)
     ax2.yaxis.set_ticks(np.arange(min(eff_nconfs)-1, max(eff_nconfs)+2, 1))
+    ax2.grid(None)
     plt.legend()
 
     # save and close figure
