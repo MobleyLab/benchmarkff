@@ -227,8 +227,8 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
             rel_enes_ref = np.array(enes_ref) - enes_ref[lowest_ref_idx]
             rel_enes_que = np.array(enes_que) - enes_que[lowest_ref_idx]
 
-            # subtract them to get ddE = dE (ref method) - dE (query method)
-            enes_mol = np.array(rel_enes_ref) - np.array(rel_enes_que)
+            # subtract them to get ddE = dE (query method) - dE (ref method)
+            enes_mol = np.array(rel_enes_que) - np.array(rel_enes_ref)
 
             # store then move on
             enes_method.append(enes_mol)
@@ -645,7 +645,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
 
         # write enes_full to file since not so easy to save as SD tag
         with open('ddE.dat', 'w') as outfile:
-            outfile.write("# Relative energies (kcal/mol) of ddE = dE (ref method) - dE (query method)\n")
+            outfile.write("# Relative energies (kcal/mol) of ddE = dE (query method) - dE (ref method)\n")
             outfile.write("# Each dE is the current conformer's energy minus the lowest energy conformer of the same molecule\n")
             outfile.write("# ==================================================\n")
 
