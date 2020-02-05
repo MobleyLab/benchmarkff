@@ -143,11 +143,13 @@ def count_mols_by_param(full_params, params_id_all, params_id_out):
     return np.array(nmols_cnt_all), np.array(nmols_cnt_out)
 
 
-def plot_by_paramtype(prefix, max_ratio, labels, plot_data, metric_type):
+def plot_param_bars(plot_data, labels, max_ratio, suffix, num_sort=False):
     """
-    prefix : string
-        specify parameter type to generate plot.
-        options: 'a' 'b' 'i' 'n' 't'
+    suffix: string
+        label to append to end of plot filename
+    num_sort : Boolean
+        True to sort bar plot numerically, False for alphabetical order
+
     """
 
     # create the plot and set label sizes
@@ -156,9 +158,14 @@ def plot_by_paramtype(prefix, max_ratio, labels, plot_data, metric_type):
     fs1 = 20
     fs2 = 16
 
-    # set x locations and bar widths
+    # set y (parameter) locations and bar widths
     y = np.arange(len(plot_data))
     width = 0.3
+
+    # sort data numerically
+    if num_sort:
+        idx = plot_data.argsort()
+        plot_data, labels = plot_data[idx], labels[idx]
 
     # plot the bars
     ax.barh(y, plot_data, width, color='darkcyan')
@@ -176,6 +183,9 @@ def plot_by_paramtype(prefix, max_ratio, labels, plot_data, metric_type):
     # set plot limits
     ax.set_xlim(0, max_ratio)
 
+    # add a reference line at ratio = 1.0
+    ax.axvline(1.0, ls='--', c='purple', alpha=0.6)
+
     # set alternating colors for background for ease of visualizing
     locs, labels = plt.xticks()
     for i in range(1, len(locs)-1, 2):
@@ -184,7 +194,7 @@ def plot_by_paramtype(prefix, max_ratio, labels, plot_data, metric_type):
     # save figure
     plt.grid()
     fig.tight_layout()
-    plt.savefig(f'bars_{metric_type.lower()}_params_{prefix}.png', bbox_inches='tight')
+    plt.savefig(f'barparams_{suffix}.png', bbox_inches='tight')
 
 
 def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
@@ -192,7 +202,7 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
     # load molecules from open reference and query files
     print(f"Opening SDF file {in_sdf}...")
     mols = reader.read_mols(in_sdf)
-    print(f"Looking for outlier molecules with {metric_type} above {cutoff}...\n")
+    print(f"Looking for outlier molecules with {metric_type.upper()} above {cutoff}...\n")
 
     # find the molecules with the metric above the cutoff
     all_smiles    = []
@@ -216,7 +226,7 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
             count_all += 1
 
     # save outliers molecules to file
-    write_mols(mols_out, f'outliers_{metric_type.lower()}.mol2')
+    write_mols(mols_out, f'outliers_{metric_type}.mol2')
 
     # analyze parameters in the outlier and full sets
     params_mol_out, params_id_out, smi_dict_out = get_parameters(mols_out, ffxml)
@@ -232,7 +242,7 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
         'smi_dict': smi_dict_out}
 
     # save the params organized by id to pickle
-    with open(f'tailed_{metric_type.lower()}.pickle', 'wb') as f:
+    with open(f'tailed_{metric_type}.pickle', 'wb') as f:
         pickle.dump((data_all, data_out), f)
 
     return data_all, data_out
@@ -277,7 +287,7 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
     # go through all parameters and find number of molecules which use each one
     nmols_cnt_all, nmols_cnt_out = count_mols_by_param(full_params, params_id_all, params_id_out)
     write_data = np.column_stack((full_params, nmols_cnt_out, nmols_cnt_all))
-    with open(f'params_{metric_type.lower()}.dat', 'w') as f:
+    with open(f'params_{metric_type}.dat', 'w') as f:
         f.write("# param\tnmols_out\tnmols_all\n")
         f.write(f"NA_total\t{uniq_n_out}\t{uniq_n_all}\n")
         np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
@@ -298,8 +308,8 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
 
     # exclude parameters which are not used in outliers set
     nonzero_inds = np.nonzero(fraction_cnt_out)
-    fraction_cnt_out = fraction_cnt_out[nonzero_inds]
     fraction_cnt_all = fraction_cnt_all[nonzero_inds]
+    fraction_cnt_out = fraction_cnt_out[nonzero_inds]
     full_params = [full_params[i] for i in nonzero_inds[0]] # keep nonzeroes
 
     # get ratio of fraction_outliers to fraction_all
@@ -312,10 +322,12 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
 
         # get the subset of data based on parameter type
         plot_inds = [full_params.index(i) for i in full_params if i.startswith(t)]
-        fraction_subset = fraction_ratio[plot_inds]
-        label_subset = [full_params[index] for index in plot_inds]
+        subset_data = fraction_ratio[plot_inds]
+        subset_label = np.array(full_params)[plot_inds]
 
-        plot_by_paramtype(t, max_ratio, label_subset, fraction_subset, metric_type)
+        plot_param_bars(subset_data, subset_label, max_ratio,
+            suffix=metric_type+f'_{t}',
+            num_sort=True)
 
 
 ### ------------------- Parser -------------------
@@ -339,8 +351,8 @@ if __name__ == "__main__":
     parser.add_argument("--tag_smiles", required=True,
             help="SDF tag from which to identify conformers")
 
-    parser.add_argument("--rmsd", action="store_true", default=False,
-        help="Tag and cutoff value refer to RMSD metrics.")
+    parser.add_argument("--metric", default='metric',
+        help="Specify 'RMSD' or 'TFD' for which the tag and cutoff value refer")
 
     parser.add_argument("--tfd", action="store_true", default=False,
         help="Tag and cutoff value refer to TFD metrics.")
@@ -351,13 +363,10 @@ if __name__ == "__main__":
     # TODO: plot what_for
 
     args = parser.parse_args()
-    if args.rmsd:
-        metric_type = 'RMSD'
-    elif args.tfd:
-        metric_type = 'TFD'
-    else:
-        pass
-        # TODO
+    if args.metric == 'metric':
+        print("WARNING: No metric label of 'RMSD' or 'TFD' specified. "
+              "Will apply generic label.")
+    metric_type = args.metric.lower()
 
     main(args.infile, args.ffxml,
         args.cutoff, args.tag, args.tag_smiles, metric_type,
