@@ -287,7 +287,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
         "paper" or "talk"
 
     """
-    print(f"\nNumber of data points in scatter plot: {len(flatten(x_data))}")
+    print(f"\nNumber of data points in full scatter plot: {len(flatten(x_data))}")
     markers = ["o", "^", "d", "x", "s", "p"]
 
     num_methods = len(x_data)
@@ -506,10 +506,11 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     y_range : tuple of two floats
         min and max values of y-axis
     z_range : tuple of two floats
-        min and max values of density for setting a uniform color bar
+        min and max values of density for setting a uniform color bar;
+        these should be at or beyond the bounds of the min and max
     z_interp : Boolean
         True to smoothen the color scale for the scatter plot points;
-        False to
+        False to plot 2d histograms colored by cells (no scatter plot)
 
     """
 
@@ -522,9 +523,6 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         plt.clf()
         #plt.show()
 
-
-    print(f"\nNumber of data points in scatter plot: {len(x_data)}")
-
     if what_for == 'paper':
         ms = 2
         size1 = 8
@@ -535,7 +533,7 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         ms = 4
         size1 = 14
         size2 = 16
-    plt_options = {'s':ms, 'cmap':'coolwarm'}
+    plt_options = {'s':ms, 'cmap':'coolwarm_r'}
 
     # label and adjust plot
     plt.title(title, fontsize=size2)
@@ -550,6 +548,12 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     if y_range is not None:
         plt.ylim(y_range[0], y_range[1])
 
+    # remove any nans from x_data, such as TFD score for urea-like mols
+    nan_inds = np.isnan(x_data)
+    x_data = x_data[~nan_inds]
+    y_data = y_data[~nan_inds]
+    print(f"\nNumber of data points in FF scatter plot: {len(x_data)}")
+
     # compute histogram in 2d
     data, x_e, y_e = np.histogram2d(x_data, y_data, bins=bins)
 
@@ -563,7 +567,7 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         return
 
     # smooth/interpolate data
-    z = interpn( ( 0.5*(x_e[1:] + x_e[:-1]) , 0.5*(y_e[1:]+y_e[:-1]) ), data,
+    z = interpn( ( 0.5*(x_e[1:]+x_e[:-1]) , 0.5*(y_e[1:]+y_e[:-1]) ), data,
         np.vstack([x_data, y_data]).T, method="splinef2d", bounds_error=False)
 
     # sort the points by density, so that the densest points are plotted last
@@ -723,9 +727,22 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 "talk",
                 x_range=(0, 3.7),
                 y_range=(-30, 55),
-                z_range=(-300, 5500),
-                #z_interp=False)
+                z_range=(-270, 5320),
                 z_interp=True)
+
+            draw_density2d(
+                tfds[i],
+                energies[i],
+                ml,
+                "TFD",
+                "ddE (kcal/mol)",
+                f"density_tfd_{ml}.png",
+                "talk",
+                x_range=(0, 1.0),
+                y_range=(-30, 55),
+                z_range=(-302, 7060),
+                z_interp=True)
+
 
 
 
