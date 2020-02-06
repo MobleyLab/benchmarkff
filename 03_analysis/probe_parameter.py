@@ -10,7 +10,7 @@ Then (3) generate a PDF report of all molecules together, color-coded
 by parameter ID and labeled with parameter ID and SMILES tag.
 
 By:      Victoria T. Lim
-Version: Jan 28 2020
+Version: Feb 6 2020
 
 Examples:
 $ python probe_parameter.py -f openff_unconstrained-1.0.0-RC2.offxml -k tailed_rmsd.pickle -s probe_params_rmsd -p a20 b9 n3 t96
@@ -32,12 +32,28 @@ from openforcefield.typing.engines.smirnoff import ForceField
 
 def probe_by_parameter(probe_param, ffxml, subdir, all_probe_mols, inpickle):
     """
+    For a single force field parameter, (1) find all molecules that use this
+    parameter, and (2) save them to a mol2 file labeled with the parameter ID.
+
+    Parameters
+    ----------
     probe_param : string
         Name of the parameter to investigate
     ffxml : string
         Name of the FFXML force field file
+    subdir : string
+        Name of subdirectory in which to save mol2 files for each parameter
+    all_probe_mols : dict
+        key is string of a parameter id to be probed;
+        value is an empty list
     inpickle : string
         Name of the pickle file from output of tailed_parameters.py
+
+    Returns
+    -------
+    all_probe_mols:
+        key is string of a parameter id to be probed;
+        value is a list of oegraphmols with this parameter id
     """
     prefix_dict = {'a':'Angles', 'b':'Bonds', 'i':'ImproperTorsions', 'n':'vdW', 't':'ProperTorsions'}
 
@@ -88,6 +104,18 @@ def probe_by_parameter(probe_param, ffxml, subdir, all_probe_mols, inpickle):
 
 
 def oedepict_pdf(all_probe_mols, subdir):
+    """
+    Generate a PDF report of all molecules together, color-coded
+    by parameter ID and labeled with parameter ID and SMILES tag.
+
+    Parameters
+    ----------
+    all_probe_mols:
+        key is string of a parameter id to be probed;
+        value is a list of oegraphmols with this parameter id
+    subdir : string
+        Name of subdirectory in which to save results.pdf file
+    """
     multi = oedepict.OEMultiPageImageFile(oedepict.OEPageOrientation_Landscape,
                                           oedepict.OEPageSize_US_Letter)
     image = multi.NewPage()
@@ -126,8 +154,6 @@ def oedepict_pdf(all_probe_mols, subdir):
             citer.Next()
 
     oedepict.OEWriteMultiPageImage(f"{subdir}/results.pdf", multi)
-
-
 
 
 ### ------------------- Parser -------------------
