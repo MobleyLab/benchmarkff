@@ -208,54 +208,85 @@ def plot_param_bars(plot_data, labels, max_ratio, suffix, num_sort=False, what_f
         dictates figure size, text size of axis labels, legend, etc.
         "paper" or "talk"
     """
+    def single_subplot(ax, y, plot_data, labels):
+        ax.barh(y, plot_data, bar_width, color='darkcyan')
 
-    # create the plot and set label sizes
-    fig, ax = plt.subplots()
+        # add plot labels, ticks, and tick labels
+        ax.set_xlabel('fraction', fontsize=fs1)
+        ax.tick_params(axis='x', labelsize=fs2)
 
+        ax.set_yticks(y)
+        ax.set_yticklabels(labels, fontsize=fs2)
+
+        # invert for horizontal bars
+        ax.invert_yaxis()
+
+        # set plot limits by rounding max_ratio to the nearest 0.5
+        x_max = round(max_ratio * 2) / 2
+        ax.set_xlim(0, x_max)
+        ax.set_xticks(np.linspace(0, x_max, 6))
+
+        # set grid
+        ax.grid(True)
+
+        # add a reference line at ratio = 1.0
+        ax.axvline(1.0, ls='--', c='purple', alpha=0.6)
+
+        # set alternating colors for background for ease of visualizing
+        locs, values = plt.xticks()
+        for i in range(1, len(locs)-1, 2):
+            ax.axvspan(locs[i], locs[i+1], facecolor='lightgrey', alpha=0.25)
+
+    n_bars = len(plot_data)
     if what_for == 'talk':
-        fig.set_size_inches(5, len(plot_data)/2)
+        width = 5
+        height = n_bars/2
         fs1 = 20
         fs2 = 16
     elif what_for == 'paper':
-        fig.set_size_inches(3, len(plot_data)/4)
+        width = 3
+        height = n_bars/2.5
         fs1 = 14
         fs2 = 12
 
     # set y (parameter) locations and bar widths
-    y = np.arange(len(plot_data))
-    width = 0.3
+    y = np.arange(n_bars)
+    bar_width = 0.3
 
     # sort data numerically
     if num_sort:
         idx = plot_data.argsort()
         plot_data, labels = plot_data[idx], labels[idx]
 
-    # plot the bars
-    ax.barh(y, plot_data, width, color='darkcyan')
+    # dynamically create subplots if lots of data
+    n_groups = 1
+    if not n_bars <= 20:
+        n_groups = round(n_bars/20)
+        y_array = np.array_split(y, n_groups)
+        data_array = np.array_split(plot_data, n_groups)
+        label_array = np.array_split(labels, n_groups)
+        print(f"\nsplitting {suffix} data into {n_groups} subplots")
 
-    # add plot labels, ticks, and tick labels
-    ax.set_xlabel('fraction', fontsize=fs1)
-    #ax.set_ylabel('force field parameter', fontsize=fs1)
-    ax.set_yticks(y)
-    ax.set_yticklabels(labels, fontsize=fs2)
-    plt.xticks(fontsize=fs2)
+    if n_groups == 1:
 
-    # invert for horizontal bars
-    plt.gca().invert_yaxis()
+        # create figure
+        fig, ax = plt.subplots()
+        fig.set_size_inches(width, height)
 
-    # set plot limits
-    ax.set_xlim(0, max_ratio)
+        # plot the bars
+        single_subplot(ax, y, plot_data, labels)
 
-    # add a reference line at ratio = 1.0
-    ax.axvline(1.0, ls='--', c='purple', alpha=0.6)
+    else:
 
-    # set alternating colors for background for ease of visualizing
-    locs, labels = plt.xticks()
-    for i in range(1, len(locs)-1, 2):
-        ax.axvspan(locs[i], locs[i+1], facecolor='lightgrey', alpha=0.25)
+        # create figure
+        fig, axs = plt.subplots(ncols=n_groups, sharex=True,
+            figsize=(width*n_groups, height/n_groups))
 
-    # save figure
-    plt.grid()
+        # plot the bars
+        for i, ax in enumerate(axs):
+            single_subplot(ax, y_array[i], data_array[i], label_array[i])
+
+    # finish tweaking and save figure
     fig.tight_layout()
     plt.savefig(f'barparams_{suffix}.png', bbox_inches='tight')
 
@@ -463,7 +494,7 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
         plot_param_bars(subset_data, subset_label, max_ratio,
             suffix=metric_type+f'_{t}',
             num_sort=True,
-            what_for='paper')
+            what_for='talk')
 
 
 ### ------------------- Parser -------------------
