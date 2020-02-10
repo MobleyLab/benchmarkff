@@ -138,6 +138,10 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     plt.savefig('violin.png', bbox_inches='tight')
     #plt.show()
     plt.clf()
+    plt.close(plt.gcf())
+
+    # reset plot parameters (white grid)
+    sns.reset_orig()
 
 
 def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs, what_for='talk'):
@@ -209,14 +213,14 @@ def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs, what_fo
     # format line graph properties, then add plot legend
     ax2.set_ylabel('Number of conformers', fontsize=large_font)
     ax2.tick_params(axis='y', labelsize=small_font)
-    ax2.yaxis.set_ticks(np.arange(min(eff_nconfs)-1, max(eff_nconfs)+2, 1))
-    ax2.grid(None)
+    ax2.yaxis.set_ticks(np.arange(min(eff_nconfs)-1, ref_nconfs+2, 1))
     plt.legend()
 
     # save and close figure
     plt.savefig(figname, bbox_inches='tight')
     #plt.show()
     plt.clf()
+    plt.close(plt.gcf())
 
 
 def plot_mol_minima(mol_name, minimaE, legend, what_for='talk', selected=None):
@@ -788,16 +792,19 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
         plot_violin_signed(np.array(mse_array)[:, 1:], ff_list[1:], 'talk')
 
         # molecule-specific plots
+        print("\nGenerating bar and line plots for individual mols. This might take a while.")
         for i, mol_name in enumerate(mol_dict):
+            print(mol_name)
+
+            # optional: only plot single molecule by specified title
+            #if mol_name != 'full_549': continue
+            if mol_name in violin_exclude: continue
+
+            # optional: only plot selected force fields by index
+            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
             # line plots of relative energies
             plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
-
-            # optional: only plot single molecule by specified title
-            #if mol_name != 'AlkEthOH_c1178': continue
-
-            # only plot selected methods by index
-            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
             # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
             ref_nconfs = eff_nconfs[i][0]
