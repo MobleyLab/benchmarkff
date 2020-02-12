@@ -302,12 +302,12 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
         fig.set_size_inches(4, 3)
         plt.xlabel(x_label, fontsize=10)
         plt.ylabel(y_label, fontsize=10)
-        plt.xticks(fontsize=8)
-        plt.yticks(fontsize=8)
-        plt.legend(loc=(1.04,0.5), fontsize=8)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.legend(loc=(1.04,0.4), fontsize=10)
         # make the marker size smaller
         for p in plist:
-            p.set_sizes([12.0])
+            p.set_sizes([8.0])
 
     elif what_for == 'talk':
         plt.xlabel(x_label, fontsize=14)
@@ -388,10 +388,10 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
 
     if what_for == 'paper':
         ridgedict = {
-            "h":0.5,
+            "h":0.45,
             "lw":0.7,
-            "vl":0.25,
-            "xfontsize":8,
+            "vl":0.1,
+            "xfontsize":10,
         }
     elif what_for == 'talk':
         ridgedict = {
@@ -524,11 +524,11 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         #plt.show()
 
     if what_for == 'paper':
-        ms = 2
-        size1 = 8
+        ms = 1
+        size1 = 10
         size2 = 10
         fig = plt.gcf()
-        fig.set_size_inches(4, 3)
+        fig.set_size_inches(6, 3)
     elif what_for == 'talk':
         ms = 4
         size1 = 14
