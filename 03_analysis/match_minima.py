@@ -97,6 +97,8 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
 
     # create dataframe from list of lists
     df = pd.DataFrame.from_records(mses, columns=ff_list)
+    medians = df.median(axis=0)
+
     print("\n\nDataframe of mean signed errors for each molecule, separated by force field\n")
     print(df)
 
@@ -107,17 +109,30 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     sns.set(style="whitegrid")
 
     if what_for == 'paper':
-        f, ax = plt.subplots(figsize=(5, 4))
-        large_font = 12
+        f, ax = plt.subplots(figsize=(4, 3))
+        large_font = 10
         small_font = 8
+        lw = 1
+        med_pt = 2
+        xrot = 45
+        xha = 'right'
     elif what_for == 'talk':
         f, ax = plt.subplots(figsize=(10, 8))
         large_font = 16
         small_font = 14
+        lw = 2
+        med_pt = 10
+        xrot = 0
+        xha = 'center'
 
     # show each distribution with both violins and points
     sns.violinplot(x="groups", y="values", data=df, inner="box",
-        palette="tab10", linewidth=2)
+        palette="tab10", linewidth=lw)
+
+    # replot the median point for larger marker, zorder to plot points on top
+    xlocs = ax.get_xticks()
+    for i, x in enumerate(xlocs):
+        plt.scatter(x, medians[i], marker='o', color='white', s=med_pt, zorder=100)
 
     # represent the y-data on log scale
     plt.yscale('symlog')
@@ -129,9 +144,9 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     sns.despine(left=True)
 
     # add labels and adjust font sizes
-    ax.set_xlabel("force field", size=large_font, labelpad=10)
+    ax.set_xlabel("")
     ax.set_ylabel("mean signed error (kcal/mol)", size=large_font)
-    plt.xticks(fontsize=small_font)
+    plt.xticks(fontsize=small_font, rotation=xrot, ha=xha)
     plt.yticks(fontsize=large_font)
 
     # save and close figure
