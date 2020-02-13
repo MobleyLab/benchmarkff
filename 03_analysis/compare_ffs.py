@@ -374,18 +374,6 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         ax.text(0, .2, label, fontweight="bold", color=color, fontsize=fs,
                 ha="left", va="center", transform=ax.transAxes)
 
-    num_methods = len(mydata)
-
-    # convert data to dataframes for ridge plot
-    temp = []
-    for i in range(num_methods):
-        df = pd.DataFrame(mydata[i], columns = [x_label])
-        df['method'] = method_labels[i+1]
-        temp.append(df)
-
-    # list of dataframes concatenated to single dataframe
-    df = pd.concat(temp, ignore_index = True)
-
     if what_for == 'paper':
         ridgedict = {
             "h":0.45,
@@ -401,15 +389,27 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
             "xfontsize":16,
         }
 
+    num_methods = len(mydata)
+
+    # convert data to dataframes for ridge plot
+    temp = []
+    for i in range(num_methods):
+        df = pd.DataFrame(mydata[i], columns = [x_label])
+        df['method'] = method_labels[i+1]
+        temp.append(df)
+
+    # list of dataframes concatenated to single dataframe
+    df = pd.concat(temp, ignore_index = True)
+
     # Initialize the FacetGrid object
     my_cmap = "tab10"
     pal = sns.palplot(sns.color_palette(my_cmap))
     g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
         height=ridgedict["h"], palette=pal)
 
-    # draw filled-in densities
     if not same_subplot:
 
+        # draw filled-in densities
         if bw=='hist':
             histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
                 "range":(-20,20), "align":"mid"}
@@ -418,6 +418,14 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         else:
             g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
                 lw=ridgedict["lw"], bw=bw)
+
+        # draw colored horizontal line below densities
+        g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
+
+    else:
+
+        # draw black horizontal line below densities
+        plt.axhline(y=0, color='black')
 
     # draw outline around densities; can also single outline color: color="k"
     if bw=='hist':
@@ -428,11 +436,10 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     else:
         g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
 
-    # draw horizontal line below densities
-    g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
-
     # draw a vertical line at x=0 for visual reference
     g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls='--', color='gray', clip_on=False)
+
+    # optional: add custom vertical line
     #g.map(plt.axvline, x=0.12, lw=1, ls='--', color='gray', clip_on=False)
 
     # add labels to each level
@@ -458,7 +465,6 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         g.fig.subplots_adjust(hspace=-0.45)
     else:
         g.fig.subplots_adjust(hspace=-1.0)
-
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
