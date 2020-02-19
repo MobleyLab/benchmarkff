@@ -33,7 +33,7 @@ import reader
 ### ------------------- Functions -------------------
 
 
-def calc_tfd(ref_mol, query_mol):
+def calc_tfd(ref_mol, query_mol, conf_id_tag):
     """
     Calculate Torsion Fingerprint Deviation between two molecular structures.
     RDKit is required for TFD calculation.
@@ -50,6 +50,9 @@ def calc_tfd(ref_mol, query_mol):
     ----------
     ref_mol : OEMol
     query_mol : OEMol
+    conf_id_tag : string
+        label of the SD tag that should be the same for matching conformers
+        in different files
 
     Returns
     -------
@@ -63,14 +66,21 @@ def calc_tfd(ref_mol, query_mol):
     # convert querymol to one readable by RDKit
     que_rdmol = reader.rdmol_from_oemol(query_mol)
 
-    # check if there was a mistake in the conversion process
+    # check if the molecules are the same
+    # tfd requires the two molecules must be instances of the same molecule
     rsmiles = Chem.MolToSmiles(ref_rdmol)
     qsmiles = Chem.MolToSmiles(que_rdmol)
     if rsmiles != qsmiles:
-        raise ValueError("ERROR: SMILES strings no longer match after "
-                 f"conversion of offending molecules: \'{ref_mol.GetTitle()}\'"
-                 f" and \'{query_mol.GetTitle()}\'\n"
-                 f"Their SMILES strings are:\n{rsmiles}\n{qsmiles}")
+        print(f"- WARNING: The reference mol \'{ref_mol.GetTitle()}\' and "
+                 f"query mol \'{query_mol.GetTitle()}\' do NOT have the same "
+                 "SMILES strings as determined by RDKit MolToSmiles. It is "
+                 "possible that they did not have matching SMILES even before "
+                 "conversion from OEMol to RDKit mol. Listing in order the "
+                 "QCArchive SMILES string, RDKit SMILES for ref mol, and "
+                 "RDKit SMILES for query mol:"
+                 f"\n {oechem.OEGetSDData(ref_mol, conf_id_tag)}"
+                 f"\n {rsmiles}\n {qsmiles}")
+        tfd = np.nan
 
     # calculate the TFD
     else:
@@ -214,7 +224,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
                 rmsds_mol.append(rmsd)
 
                 # compute TFD between reference and query conformers
-                tfd = calc_tfd(ref_conf, que_conf)
+                tfd = calc_tfd(ref_conf, que_conf, conf_id_tag)
                 tfds_mol.append(tfd)
 
                 # store data in SD tags for query conf, and write conf to file
