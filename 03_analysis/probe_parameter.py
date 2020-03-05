@@ -51,7 +51,7 @@ def probe_by_parameter(probe_param, ffxml, subdir, all_probe_mols, inpickle):
 
     Returns
     -------
-    all_probe_mols:
+    all_probe_mols : dict
         key is string of a parameter id to be probed;
         value is a list of oegraphmols with this parameter id
     """
