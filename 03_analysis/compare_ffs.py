@@ -298,7 +298,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
 
     """
     print(f"\nNumber of data points in full scatter plot: {len(flatten(x_data))}")
-    markers = ["o", "^", "d", "x", "s", "p"]
+    markers = ["o", "^", "d", "x", "s", "p", "P", "3", ">"]
 
     num_methods = len(x_data)
     plist = []
@@ -338,7 +338,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
 
 
 def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
-        bw='scott', same_subplot=False, sym_log=False):
+        bw='scott', same_subplot=False, sym_log=False, hist_range=(-20,20)):
 
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
@@ -371,6 +371,9 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     sym_log : Boolean
         False is default to plot density estimate as is,
         True to plot x-axis on symmetric log scale
+    hist_range : tuple
+        tuple of min and max values to use for histogram;
+        only needed if bw is set to 'hist'
 
     """
     # Define and use a simple function to label the plot in axes coordinates
@@ -422,7 +425,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         # draw filled-in densities
         if bw=='hist':
             histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
-                "range":(-20,20), "align":"mid"}
+                "range":hist_range, "align":"mid"}
             g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
 
         else:
@@ -440,7 +443,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     # draw outline around densities; can also single outline color: color="k"
     if bw=='hist':
         histoptions = {"histtype":"step", "alpha":0.8, "linewidth":ridgedict["lw"],
-            "range":(-20,20), "align":"mid"}
+            "range":hist_range, "align":"mid"}
         g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
 
     else:
@@ -720,6 +723,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "ridge_rmsd.png",
             "talk",
             bw='scott',
+            #bw='hist', hist_range=(0,4),
             same_subplot=True,
             sym_log=False)
         draw_ridgeplot(
@@ -729,6 +733,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "ridge_tfd.png",
             "talk",
             bw='scott',
+            #bw='hist', hist_range=(0,1),
             same_subplot=True,
             sym_log=False)
 
