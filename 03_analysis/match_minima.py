@@ -97,6 +97,8 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
 
     # create dataframe from list of lists
     df = pd.DataFrame.from_records(mses, columns=ff_list)
+    medians = df.median(axis=0)
+
     print("\n\nDataframe of mean signed errors for each molecule, separated by force field\n")
     print(df)
 
@@ -107,17 +109,30 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     sns.set(style="whitegrid")
 
     if what_for == 'paper':
-        f, ax = plt.subplots(figsize=(5, 4))
-        large_font = 12
+        f, ax = plt.subplots(figsize=(4, 3))
+        large_font = 10
         small_font = 8
+        lw = 1
+        med_pt = 2
+        xrot = 45
+        xha = 'right'
     elif what_for == 'talk':
         f, ax = plt.subplots(figsize=(10, 8))
         large_font = 16
         small_font = 14
+        lw = 2
+        med_pt = 10
+        xrot = 0
+        xha = 'center'
 
     # show each distribution with both violins and points
     sns.violinplot(x="groups", y="values", data=df, inner="box",
-        palette="tab10", linewidth=2)
+        palette="tab10", linewidth=lw)
+
+    # replot the median point for larger marker, zorder to plot points on top
+    xlocs = ax.get_xticks()
+    for i, x in enumerate(xlocs):
+        plt.scatter(x, medians[i], marker='o', color='white', s=med_pt, zorder=100)
 
     # represent the y-data on log scale
     plt.yscale('symlog')
@@ -129,15 +144,19 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     sns.despine(left=True)
 
     # add labels and adjust font sizes
-    ax.set_xlabel("force field", size=large_font, labelpad=10)
+    ax.set_xlabel("")
     ax.set_ylabel("mean signed error (kcal/mol)", size=large_font)
-    plt.xticks(fontsize=small_font)
+    plt.xticks(fontsize=small_font, rotation=xrot, ha=xha)
     plt.yticks(fontsize=large_font)
 
     # save and close figure
     plt.savefig('violin.png', bbox_inches='tight')
     #plt.show()
     plt.clf()
+    plt.close(plt.gcf())
+
+    # reset plot parameters (white grid)
+    sns.reset_orig()
 
 
 def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs, what_for='talk'):
@@ -209,14 +228,14 @@ def plot_mol_rmses(mol_name, rmses, xticklabels, eff_nconfs, ref_nconfs, what_fo
     # format line graph properties, then add plot legend
     ax2.set_ylabel('Number of conformers', fontsize=large_font)
     ax2.tick_params(axis='y', labelsize=small_font)
-    ax2.yaxis.set_ticks(np.arange(min(eff_nconfs)-1, max(eff_nconfs)+2, 1))
-    ax2.grid(None)
+    ax2.yaxis.set_ticks(np.arange(min(eff_nconfs)-1, ref_nconfs+2, 1))
     plt.legend()
 
     # save and close figure
     plt.savefig(figname, bbox_inches='tight')
     #plt.show()
     plt.clf()
+    plt.close(plt.gcf())
 
 
 def plot_mol_minima(mol_name, minimaE, legend, what_for='talk', selected=None):
@@ -788,16 +807,19 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
         plot_violin_signed(np.array(mse_array)[:, 1:], ff_list[1:], 'talk')
 
         # molecule-specific plots
+        print("\nGenerating bar and line plots for individual mols. This might take a while.")
         for i, mol_name in enumerate(mol_dict):
+            print(mol_name)
+
+            # optional: only plot single molecule by specified title
+            #if mol_name != 'full_549': continue
+            if mol_name in violin_exclude: continue
+
+            # optional: only plot selected force fields by index
+            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
             # line plots of relative energies
             plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
-
-            # optional: only plot single molecule by specified title
-            #if mol_name != 'AlkEthOH_c1178': continue
-
-            # only plot selected methods by index
-            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
             # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
             ref_nconfs = eff_nconfs[i][0]

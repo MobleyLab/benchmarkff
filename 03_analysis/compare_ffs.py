@@ -33,7 +33,7 @@ import reader
 ### ------------------- Functions -------------------
 
 
-def calc_tfd(ref_mol, query_mol):
+def calc_tfd(ref_mol, query_mol, conf_id_tag):
     """
     Calculate Torsion Fingerprint Deviation between two molecular structures.
     RDKit is required for TFD calculation.
@@ -50,6 +50,9 @@ def calc_tfd(ref_mol, query_mol):
     ----------
     ref_mol : OEMol
     query_mol : OEMol
+    conf_id_tag : string
+        label of the SD tag that should be the same for matching conformers
+        in different files
 
     Returns
     -------
@@ -63,14 +66,21 @@ def calc_tfd(ref_mol, query_mol):
     # convert querymol to one readable by RDKit
     que_rdmol = reader.rdmol_from_oemol(query_mol)
 
-    # check if there was a mistake in the conversion process
+    # check if the molecules are the same
+    # tfd requires the two molecules must be instances of the same molecule
     rsmiles = Chem.MolToSmiles(ref_rdmol)
     qsmiles = Chem.MolToSmiles(que_rdmol)
     if rsmiles != qsmiles:
-        raise ValueError("ERROR: SMILES strings no longer match after "
-                 f"conversion of offending molecules: \'{ref_mol.GetTitle()}\'"
-                 f" and \'{query_mol.GetTitle()}\'\n"
-                 f"Their SMILES strings are:\n{rsmiles}\n{qsmiles}")
+        print(f"- WARNING: The reference mol \'{ref_mol.GetTitle()}\' and "
+                 f"query mol \'{query_mol.GetTitle()}\' do NOT have the same "
+                 "SMILES strings as determined by RDKit MolToSmiles. It is "
+                 "possible that they did not have matching SMILES even before "
+                 "conversion from OEMol to RDKit mol. Listing in order the "
+                 "QCArchive SMILES string, RDKit SMILES for ref mol, and "
+                 "RDKit SMILES for query mol:"
+                 f"\n {oechem.OEGetSDData(ref_mol, conf_id_tag)}"
+                 f"\n {rsmiles}\n {qsmiles}")
+        tfd = np.nan
 
     # calculate the TFD
     else:
@@ -214,7 +224,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
                 rmsds_mol.append(rmsd)
 
                 # compute TFD between reference and query conformers
-                tfd = calc_tfd(ref_conf, que_conf)
+                tfd = calc_tfd(ref_conf, que_conf, conf_id_tag)
                 tfds_mol.append(tfd)
 
                 # store data in SD tags for query conf, and write conf to file
@@ -288,7 +298,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
 
     """
     print(f"\nNumber of data points in full scatter plot: {len(flatten(x_data))}")
-    markers = ["o", "^", "d", "x", "s", "p"]
+    markers = ["o", "^", "d", "x", "s", "p", "P", "3", ">"]
 
     num_methods = len(x_data)
     plist = []
@@ -302,12 +312,12 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
         fig.set_size_inches(4, 3)
         plt.xlabel(x_label, fontsize=10)
         plt.ylabel(y_label, fontsize=10)
-        plt.xticks(fontsize=8)
-        plt.yticks(fontsize=8)
-        plt.legend(loc=(1.04,0.5), fontsize=8)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.legend(loc=(1.04,0.4), fontsize=10)
         # make the marker size smaller
         for p in plist:
-            p.set_sizes([12.0])
+            p.set_sizes([8.0])
 
     elif what_for == 'talk':
         plt.xlabel(x_label, fontsize=14)
@@ -328,7 +338,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
 
 
 def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
-        bw='scott', same_subplot=False, sym_log=False):
+        bw='scott', same_subplot=False, sym_log=False, hist_range=(-20,20)):
 
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
@@ -361,6 +371,9 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     sym_log : Boolean
         False is default to plot density estimate as is,
         True to plot x-axis on symmetric log scale
+    hist_range : tuple
+        tuple of min and max values to use for histogram;
+        only needed if bw is set to 'hist'
 
     """
     # Define and use a simple function to label the plot in axes coordinates
@@ -374,6 +387,21 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         ax.text(0, .2, label, fontweight="bold", color=color, fontsize=fs,
                 ha="left", va="center", transform=ax.transAxes)
 
+    if what_for == 'paper':
+        ridgedict = {
+            "h":0.45,
+            "lw":0.7,
+            "vl":0.1,
+            "xfontsize":10,
+        }
+    elif what_for == 'talk':
+        ridgedict = {
+            "h":1.0,
+            "lw":1.5,
+            "vl":0.5,
+            "xfontsize":16,
+        }
+
     num_methods = len(mydata)
 
     # convert data to dataframes for ridge plot
@@ -386,53 +414,45 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     # list of dataframes concatenated to single dataframe
     df = pd.concat(temp, ignore_index = True)
 
-    if what_for == 'paper':
-        ridgedict = {
-            "h":0.5,
-            "lw":0.7,
-            "vl":0.25,
-            "xfontsize":8,
-        }
-    elif what_for == 'talk':
-        ridgedict = {
-            "h":1.0,
-            "lw":1.5,
-            "vl":0.5,
-            "xfontsize":16,
-        }
-
     # Initialize the FacetGrid object
     my_cmap = "tab10"
     pal = sns.palplot(sns.color_palette(my_cmap))
     g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
         height=ridgedict["h"], palette=pal)
 
-    # draw filled-in densities
     if not same_subplot:
 
+        # draw filled-in densities
         if bw=='hist':
             histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
-                "range":(-20,20), "align":"mid"}
+                "range":hist_range, "align":"mid"}
             g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
 
         else:
             g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
                 lw=ridgedict["lw"], bw=bw)
 
+        # draw colored horizontal line below densities
+        g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
+
+    else:
+
+        # draw black horizontal line below densities
+        plt.axhline(y=0, color='black')
+
     # draw outline around densities; can also single outline color: color="k"
     if bw=='hist':
         histoptions = {"histtype":"step", "alpha":0.8, "linewidth":ridgedict["lw"],
-            "range":(-20,20), "align":"mid"}
+            "range":hist_range, "align":"mid"}
         g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
 
     else:
         g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
 
-    # draw horizontal line below densities
-    g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
-
     # draw a vertical line at x=0 for visual reference
     g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls='--', color='gray', clip_on=False)
+
+    # optional: add custom vertical line
     #g.map(plt.axvline, x=0.12, lw=1, ls='--', color='gray', clip_on=False)
 
     # add labels to each level
@@ -458,7 +478,6 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         g.fig.subplots_adjust(hspace=-0.45)
     else:
         g.fig.subplots_adjust(hspace=-1.0)
-
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
@@ -524,11 +543,11 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         #plt.show()
 
     if what_for == 'paper':
-        ms = 2
-        size1 = 8
+        ms = 1
+        size1 = 10
         size2 = 10
         fig = plt.gcf()
-        fig.set_size_inches(4, 3)
+        fig.set_size_inches(6, 3)
     elif what_for == 'talk':
         ms = 4
         size1 = 14
@@ -704,6 +723,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "ridge_rmsd.png",
             "talk",
             bw='scott',
+            #bw='hist', hist_range=(0,4),
             same_subplot=True,
             sym_log=False)
         draw_ridgeplot(
@@ -713,6 +733,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "ridge_tfd.png",
             "talk",
             bw='scott',
+            #bw='hist', hist_range=(0,1),
             same_subplot=True,
             sym_log=False)
 
