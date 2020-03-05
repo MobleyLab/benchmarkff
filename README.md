@@ -63,3 +63,17 @@ File descriptions:
 The OEChem scripts referred to above are located [here](https://docs.eyesopen.com/toolkits/python/oechemtk/oechem_examples_summary.html).
 * `molextract.py`
 * `molchunk.py` -- VTL modified to use `OEAbsCanonicalConfTest`
+
+## Contributors
+* Victoria Lim
+* Jeffrey Wagner (code review)
+* Daniel Smith (code review)
+
+## Big picture wish list / to do tasks
+See more specific issues in the Github issue tracker.
+* Format code with YAPF/Black
+* Use logging module instead of print statements
+* Look into automatically serializable representations (e.g., Pydantic) instead of pickle
+* Use type hints for functions
+* Allow user to pass in dict for plotting parameters (i.e., talk or paper font sizes)
+* Generate plots with Plotly
