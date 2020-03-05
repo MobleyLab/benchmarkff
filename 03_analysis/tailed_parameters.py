@@ -114,6 +114,7 @@ def get_parameters(mols_dict, ffxml):
 
     # convert OEMols to open force field molecules
     off_mols = []
+    smi_dict = {}
 
     for i, key in enumerate(mols_dict):
         # get mol from the dict
@@ -124,12 +125,11 @@ def get_parameters(mols_dict, ffxml):
         off_mol = Molecule.from_openeye(mymol, allow_undefined_stereo=True)
         off_mols.append(off_mol)
 
-    # form a dictionary to backtrace the iso_smiles to original molecule
-    iso_smiles = [ molecule.to_smiles() for molecule in off_mols ]
-    smi_list = mols_dict.keys()
-    smi_dict = dict(zip(iso_smiles, smi_list))
+        # form a dictionary to backtrace the iso_smiles to original molecule
+        smi_dict[off_mol.to_smiles()] = key
 
     # remove duplicate molecules (else get_molecule_parameterIDs gives err)
+    iso_smiles = [ molecule.to_smiles() for molecule in off_mols ]
     idx_of_duplicates = [idx for idx, item in enumerate(iso_smiles) if item in iso_smiles[:idx]]
     for index in sorted(idx_of_duplicates, reverse=True):
         del off_mols[index]
