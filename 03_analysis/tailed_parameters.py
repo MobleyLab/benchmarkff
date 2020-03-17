@@ -452,15 +452,18 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
 
     # go through all parameters and find number of molecules which use each one
     nmols_cnt_all, nmols_cnt_out = count_mols_by_param(full_params, params_id_all, params_id_out)
-    write_data = np.column_stack((full_params, nmols_cnt_out, nmols_cnt_all))
-    with open(f'params_{metric_type}.dat', 'w') as f:
-        f.write("# param\tnmols_out\tnmols_all\n")
-        f.write(f"NA_total\t{uniq_n_out}\t{uniq_n_all}\n")
-        np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
 
     # compare fractions in the all set vs the outliers set
     fraction_cnt_all = nmols_cnt_all/uniq_n_all
     fraction_cnt_out = nmols_cnt_out/uniq_n_out
+
+    # write information in output dat file
+    write_data = np.column_stack((full_params, nmols_cnt_out, nmols_cnt_all,
+        fraction_cnt_out, fraction_cnt_all))
+    with open(f'params_{metric_type}.dat', 'w') as f:
+        f.write("# param\tnmols_out\tnmols_all\tfrac_out\tfrac_all\n")
+        f.write(f"NA_total\t{uniq_n_out}\t{uniq_n_all}\n")
+        np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
 
     # exclude parameters for which outliers set AND full set
     # both have only 1 match; do this BEFORE excluding nonzero_inds

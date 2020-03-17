@@ -542,16 +542,17 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         plt.clf()
         #plt.show()
 
+    fig = plt.gcf()
     if what_for == 'paper':
         ms = 1
         size1 = 10
         size2 = 10
-        fig = plt.gcf()
         fig.set_size_inches(6, 3)
     elif what_for == 'talk':
         ms = 4
         size1 = 14
         size2 = 16
+        fig.set_size_inches(15.5, 6)
     plt_options = {'s':ms, 'cmap':'coolwarm_r'}
 
     # label and adjust plot
