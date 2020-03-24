@@ -125,6 +125,10 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
         xrot = 0
         xha = 'center'
 
+        # overlapping violins
+        #lw=1.0
+        #f, ax = plt.subplots(figsize=(4, 8))
+
     # show each distribution with both violins and points
     sns.violinplot(x="groups", y="values", data=df, inner="box",
         palette="tab10", linewidth=lw)
@@ -148,6 +152,10 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     ax.set_ylabel("mean signed error (kcal/mol)", size=large_font)
     plt.xticks(fontsize=small_font, rotation=xrot, ha=xha)
     plt.yticks(fontsize=large_font)
+
+    # settings for overlapping violins
+    #plt.xticks([])
+    #plt.xlim(-1, 1)
 
     # save and close figure
     plt.savefig('violin.png', bbox_inches='tight')
