@@ -25,7 +25,7 @@ import openeye.oechem as oechem
 import reader
 
 def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
-    x_label, y_label, out_file, what_for='talk',
+    labels_subset, x_label, y_label, out_file, what_for='talk',
     x_range=None, y_range=None):
 
     """
@@ -41,6 +41,8 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
         should have same shape and correspond to x_data
     all_y_subset : list of np arrays
         subsets of y_data with points to highlight in color
+    labels_subset : list of strings
+        labels taken from subset file names to label on plot legend
     x_label : string
         name of the x-axis label
     y_label : string
@@ -77,6 +79,7 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
         plt.xticks(fontsize=10)
         plt.yticks(fontsize=10)
         plt_options = {'s':10, 'alpha':1.0}
+        plt.rc('legend',fontsize=10)
 
     elif what_for == 'talk':
         fig = plt.gcf()
@@ -86,6 +89,7 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
         plt.xticks(fontsize=12)
         plt.yticks(fontsize=12)
         plt_options = {'s':10, 'alpha':1.0}
+        plt.rc('legend',fontsize=14)
 
     # generate the plot with full set
     plt.scatter(x_data, y_data,
@@ -93,11 +97,11 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
 
     # generate the plot with subset(s)
     subset_colors = ['#01959f', '#614051', '#e96058']  # todo generalize
-    for i, (x_subset, y_subset) in enumerate(zip(all_x_subset, all_y_subset)):
-        print(f"Number of data points in subset {i}: {len(x_subset)}")
-        plt.scatter(x_subset, y_subset,
-            c=subset_colors[i], zorder=2, **plt_options)
+    for i, (xs, ys, lab) in enumerate(zip(all_x_subset, all_y_subset, labels_subset)):
+        print(f"Number of data points in subset {i}: {len(xs)}")
+        plt.scatter(xs, ys, label=lab, c=subset_colors[i], zorder=2, **plt_options)
 
+    plt.legend()
     plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
     #plt.show()
@@ -131,7 +135,9 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
         open(pickle_file, 'rb'))
 
     all_smi_subsets = []
+    labels_subset = []
     for sf in smi_files:
+        labels_subset.append(os.path.splitext(os.path.basename(sf))[0])
         with open(sf) as f:
             smiles_subset = f.readlines()
         smiles_subset = [x.strip() for x in smiles_subset]
@@ -182,7 +188,7 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
 
         draw_scatter_moiety(
             x_data, y_data,
-            all_x_subset, all_y_subset,
+            all_x_subset, all_y_subset, labels_subset,
             "TFD",
             "ddE (kcal/mol)",
             out_file,
