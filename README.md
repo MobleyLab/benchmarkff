@@ -66,11 +66,13 @@ The OEChem scripts referred to above are located [here](https://docs.eyesopen.co
 
 ## Contributors
 * Victoria Lim
+* David Mobley (advising)
+* Lee-Ping Wang (discussions)
 * Jeffrey Wagner (code review)
 * Daniel Smith (code review)
 
 ## Big picture wish list / to do tasks
-See more specific issues in the Github issue tracker.
+See more science-focused issues in the Github issue tracker.
 * Format code with YAPF/Black
 * Use logging module instead of print statements
 * Look into automatically serializable representations (e.g., Pydantic) instead of pickle
