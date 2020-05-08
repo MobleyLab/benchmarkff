@@ -77,30 +77,32 @@ def compare_two_mols(rmol, qmol, rmsd_cutoff):
     return molIndices
 
 
-def plot_violin_signed(mses, ff_list, what_for='talk'):
+def plot_violin_signed(msds, ff_list, what_for='talk'):
     """
     Generate violin plots of the mean signed errors
     of force field energies with respect to QM energies.
 
     Parameters
     ----------
-    mses : 2D list
-        Mean signed errors for each method with reference to first input method
-        mses[i][j] represents ith mol, jth method's MSE
+    msds : 2D numpy array
+        Mean signed deviations for each method with reference to first method
+        msds[i][j] represents ith mol, jth method's MSE
     ff_list : list
-        list of methods corresponding to energies in mses
+        list of methods corresponding to energies in msds
     what_for : string
         dictates figure size, text size of axis labels, legend, etc.
         "paper" or "talk"
 
     """
+    # print stats on number of datapoints in each method
+    temp = msds.T
+    for l in temp:
+        print(f"Total number of unique molecules: {l.shape}")
+        print(f"Count of non-nan molecules: {np.count_nonzero(~np.isnan(l))}")
 
     # create dataframe from list of lists
-    df = pd.DataFrame.from_records(mses, columns=ff_list)
+    df = pd.DataFrame.from_records(msds, columns=ff_list)
     medians = df.median(axis=0)
-
-    print("\n\nDataframe of mean signed errors for each molecule, separated by force field\n")
-    print(df)
 
     # reshape for grouped violin plots
     df = df.melt(var_name='groups', value_name='values')
@@ -149,7 +151,7 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
 
     # add labels and adjust font sizes
     ax.set_xlabel("")
-    ax.set_ylabel("mean signed error (kcal/mol)", size=large_font)
+    ax.set_ylabel("mean signed deviation (kcal/mol)", size=large_font)
     plt.xticks(fontsize=small_font, rotation=xrot, ha=xha)
     plt.yticks(fontsize=large_font)
 
@@ -158,7 +160,7 @@ def plot_violin_signed(mses, ff_list, what_for='talk'):
     #plt.xlim(-1, 1)
 
     # save and close figure
-    plt.savefig('violin.png', bbox_inches='tight')
+    plt.savefig('violin.svg', bbox_inches='tight')
     #plt.show()
     plt.clf()
     plt.close(plt.gcf())
@@ -470,17 +472,17 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
     rms_array : 2D list
         RMS errors for each method with reference to first input method
         rms_array[i][j] represents ith mol, jth method's RMSE
-    mse_array : 2D list
-        same layout as that of rms_array except containing mean squared errors
+    msd_array : 2D list
+        same layout as rms_array except containing mean squared deviations
 
     """
     rms_array = []
-    mse_array = []
+    msd_array = []
 
     # iterate over each molecule
     for i, mol_array in enumerate(rel_energies):
         mol_rmses = []
-        mol_mses = []
+        mol_msds = []
 
         # iterate over each file (method)
         for j, filelist in enumerate(mol_array):
@@ -494,7 +496,8 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
             # square
             sqrs = errs**2.
 
-            # also delete any nan values (TODO: treat this differently?)
+            # delete any nan values (TODO: treat this differently?)
+            # this is only for rms_array; msds still have nans
             sqrs = sqrs[~np.isnan(sqrs)]
 
             # mean, root, store
@@ -504,13 +507,13 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
 
             # also calculate mse
             sum_errs = np.sum(errs)
-            mse = sum_errs/len(errs)
-            mol_mses.append(mse)
+            msd = sum_errs/len(errs)
+            mol_msds.append(msd)
 
         rms_array.append(mol_rmses)
-        mse_array.append(mol_mses)
+        msd_array.append(mol_msds)
 
-    return rms_array, mse_array
+    return rms_array, msd_array
 
 
 def calc_rel_ene(matched_enes):
@@ -608,7 +611,7 @@ def calc_rel_ene(matched_enes):
     return rel_energies, lowest_conf_indices, eff_nconfs
 
 
-def write_rel_ene(mol_name, rmse, rel_enes, low_ind, ff_list, prefix='relene'):
+def write_rel_ene(mol_name, ff_list, low_ind, rmse, msd, rel_enes, prefix):
     """
     Write the relative energies and RMSEs in an output text file.
 
@@ -616,14 +619,16 @@ def write_rel_ene(mol_name, rmse, rel_enes, low_ind, ff_list, prefix='relene'):
     ----------
     mol_name : string
         title of the mol being written out
-    rmse : list
-        1D list of RMSEs for all the compared methods against ref method
-    rel_enes : 2D list
-        rel_enes[i][j] represents energy of ith method and jth conformer
-    low_ind : int
-        integer of the index of the lowest energy conformer
     ff_list : list
         list of methods including reference as the first
+    low_ind : int
+        integer of the index of the lowest energy conformer
+    rmse : list
+        1D list of RMSEs for all compared methods against ref method
+    msd : list
+        1D list of MSDs for all compared methods against ref method
+    rel_enes : 2D list
+        rel_enes[i][j] represents energy of ith method and jth conformer
     prefix : string
         prefix of output dat file
 
@@ -635,17 +640,27 @@ def write_rel_ene(mol_name, rmse, rel_enes, low_ind, ff_list, prefix='relene'):
     ofile.write(f"\n# Energies are relative to conformer {low_ind}.\n")
     ofile.write("# Rows represent conformers; columns represent methods.\n")
 
-    # write methods, RMSEs, integer column header
+    # put together strings to write out data
     rmsheader = "\n# "
+    msdheader = "\n# "
     colheader = "\n\n# "
     for i, method in enumerate(ff_list):
         ofile.write(f"\n# {i+1} {method}")
         rmsheader += f"\t{rmse[i]:.4f}"
+        msdheader += f"\t{msd[i]:.4f}"
         colheader += f"\t\t{i+1}"
 
+    # write out RMSEs
     ofile.write("\n\n# RMS errors by method, with respect to the " +
                 "first method listed:")
     ofile.write(rmsheader)
+
+    # write out MSDs
+    ofile.write("\n# MSD errors by method, with respect to the " +
+                "first method listed:")
+    ofile.write(msdheader)
+
+    # write out integer column headers
     ofile.write(colheader)
 
     # write each ff's relative energies
@@ -694,6 +709,9 @@ def extract_matches(mol_dict):
         mol_dict['mol_name']['energies_matched']
 
     """
+    # collect stats of number of matches in full set
+    tot_count = 0
+    match_counts = []
 
     # iterate over each molecule
     for m in mol_dict:
@@ -708,9 +726,12 @@ def extract_matches(mol_dict):
 
         # based on the indices, extract the matching energies
         updated = []
+        mol_counts = []
 
         for i, file_indices in enumerate(queried_indices):
-            fileData = []
+            file_data = []
+            file_count = 0
+            tot_count += 1
 
             for j, conf_index in enumerate(file_indices):
 
@@ -719,7 +740,7 @@ def extract_matches(mol_dict):
                 if conf_index is None:
                     print(f"No matching conformer within RMSD cutoff for {j}th"
                           f" conf of {m} mol in {i}th file.")
-                    fileData.append(np.nan)
+                    file_data.append(np.nan)
 
                 # the query molecule was missing
                 elif conf_index == -2:
@@ -727,26 +748,34 @@ def extract_matches(mol_dict):
                     if j == 0:
                         print(f"!!!! The entire {m} mol is not found in "
                               f"{i}th file. !!!!")
-                    fileData.append(np.nan)
+                    file_data.append(np.nan)
 
                 # energies are missing somehow?
                 elif len(energy_array[i]) == 0:
                     print(f"!!!! Mol {m} was found and confs were matched by "
                           f"RMSD but there are no energies of {i}th method. !!!!")
-                    fileData.append(np.nan)
+                    file_data.append(np.nan)
 
                 # conformers not matched bc query file = reference file
                 # reference indices therefore equals query indices
                 elif conf_index == -1:
-                    fileData.append(float(energy_array[i][j]))
+                    file_data.append(float(energy_array[i][j]))
 
                 # conformers matched and there exists match within cutoff
                 else:
-                    fileData.append(float(energy_array[i][conf_index]))
+                    file_data.append(float(energy_array[i][conf_index]))
+                    file_count += 1
 
-            updated.append(fileData)
+            updated.append(file_data)
+            mol_counts.append(file_count)
 
         mol_dict[m]['energies_matched'] = updated
+        match_counts.append(mol_counts)
+
+    match_counts = np.array(match_counts).T
+    sum_match_counts = np.sum(match_counts, axis=1)
+    print(f"\nTotal number of structures and their match count: {tot_count} "
+          f"{sum_match_counts[1:]}\n")
 
     return mol_dict
 
@@ -792,14 +821,15 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
 
     # with matched energies, calculate relative values and RMS error
     rel_energies, lowest_conf_indices, eff_nconfs = calc_rel_ene(matched_enes)
-    rms_array, mse_array = calc_rms_error(rel_energies, lowest_conf_indices)
+    rms_array, msd_array = calc_rms_error(rel_energies, lowest_conf_indices)
 
     # write out data file of relative energies
     mol_names = mol_dict.keys()
     ff_list = list(in_dict.keys())
 
     for i, mn in enumerate(mol_names):
-        write_rel_ene(mn, rms_array[i], rel_energies[i], lowest_conf_indices[i], ff_list)
+        write_rel_ene(mn, ff_list, lowest_conf_indices[i],
+            rms_array[i], msd_array[i], rel_energies[i], prefix='relene')
 
     if plot:
 
@@ -808,11 +838,11 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
         violin_exclude = ['full_549', 'full_590', 'full_802', 'full_1691', 'full_1343', 'full_2471']
         idx_of_exclude = [mol_names.index(x) for x in violin_exclude]
         for idx in sorted(idx_of_exclude, reverse=True):
-            del mse_array[idx]
+            del msd_array[idx]
 
         # plots combining all molecules -- skip reference bc 0 rmse to self
-        # mse_array[i][j] represents ith mol, jth method's RMSE
-        plot_violin_signed(np.array(mse_array)[:, 1:], ff_list[1:], 'talk')
+        # msd_array[i][j] represents ith mol, jth method's MSD
+        plot_violin_signed(np.array(msd_array)[:, 1:], ff_list[1:], 'paper')
 
         # molecule-specific plots
         print("\nGenerating bar and line plots for individual mols. This might take a while.")
