@@ -95,7 +95,7 @@ def calc_tfd(ref_mol, query_mol, conf_id_tag):
     return tfd
 
 
-def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
+def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice=None):
     """
     For 2+ SDF files that are analogous in terms of molecules and their
     conformers, assess them by RMSD, TFD, and relative energy differences.
@@ -112,6 +112,13 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
     out_prefix : string
         prefix appended to sdf file name to write out new SDF file
         with RMSD and TFD info added as SD tags
+    keep_ref_conf : Boolean
+        True to keep reference conformer energy for each molecule
+        False to remove reference conformer energy;
+        note that qm ref conf defines where dE=0 for a certain molecule
+        so if qm ref conf is same as ff ref conf, ddE=0 may be inflated;
+        qm ref conf may or may not be the same as ff ref conf;
+        ref conf data also removed for RMSD/TFD data (for scatter plots)
     mol_slice : numpy slice object
         The resulting integers are numerically sorted and duplicates removed.
         e.g., slices = np.s_[0, 3:5, 6::3] would be parsed to return
@@ -237,6 +244,14 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, mol_slice=None):
             rel_enes_ref = np.array(enes_ref) - enes_ref[lowest_ref_idx]
             rel_enes_que = np.array(enes_que) - enes_que[lowest_ref_idx]
 
+            # remove the reference conformer of dE = 0
+            if not keep_ref_conf:
+                rel_enes_ref = np.delete(rel_enes_ref, lowest_ref_idx)
+                rel_enes_que = np.delete(rel_enes_que, lowest_ref_idx)
+                rmsds_mol.pop(lowest_ref_idx)
+                tfds_mol.pop(lowest_ref_idx)
+                smiles_mol.pop(lowest_ref_idx)
+
             # subtract them to get ddE = dE (query method) - dE (ref method)
             enes_mol = np.array(rel_enes_que) - np.array(rel_enes_ref)
 
@@ -338,7 +353,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
 
 
 def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
-        bw='scott', same_subplot=False, sym_log=False, hist_range=(-20,20)):
+        bw='scott', same_subplot=False, sym_log=False, hist_range=(-15,15)):
 
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
@@ -390,7 +405,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     if what_for == 'paper':
         ridgedict = {
             "h":0.45,
-            "lw":0.7,
+            "lw":1.0,
             "vl":0.1,
             "xfontsize":10,
         }
@@ -426,7 +441,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         if bw=='hist':
             histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
                 "range":hist_range, "align":"mid"}
-            g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
+            g.map(sns.distplot, x_label, hist=True, kde=False, bins=21, hist_kws=histoptions)
 
         else:
             g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
@@ -442,9 +457,9 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
 
     # draw outline around densities; can also single outline color: color="k"
     if bw=='hist':
-        histoptions = {"histtype":"step", "alpha":0.8, "linewidth":ridgedict["lw"],
+        histoptions = {"histtype":"step", "alpha":1.0, "linewidth":ridgedict["lw"],
             "range":hist_range, "align":"mid"}
-        g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
+        g.map(sns.distplot, x_label, hist=True, kde=False, bins=21, hist_kws=histoptions)
 
     else:
         g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
@@ -483,10 +498,15 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     g.set_titles("")
     g.set(yticks=[])
     g.despine(bottom=True, left=True)
+    if what_for == 'paper':
+        plt.gcf().set_size_inches(5, 3)
+    elif what_for == 'talk':
+        plt.gcf().set_size_inches(12, 9)
 
     # adjust font sizes
     plt.xlabel(x_label, fontsize=ridgedict["xfontsize"])
     plt.xticks(fontsize=ridgedict["xfontsize"])
+
 
     # save with transparency for overlapping plots
     plt.savefig(out_file, bbox_inches='tight', transparent=True)
@@ -547,12 +567,12 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
         ms = 1
         size1 = 10
         size2 = 10
-        fig.set_size_inches(6, 3)
+        fig.set_size_inches(4, 3)
     elif what_for == 'talk':
         ms = 4
         size1 = 14
         size2 = 16
-        fig.set_size_inches(15.5, 6)
+        fig.set_size_inches(9, 6)
     plt_options = {'s':ms, 'cmap':'coolwarm_r'}
 
     # label and adjust plot
@@ -657,6 +677,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                                                             in_dict,
                                                             conf_id_tag,
                                                             'refdata',
+                                                            False,
                                                             mol_slice)
 
         # save results in pickle file
@@ -699,7 +720,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "RMSD ($\mathrm{\AA}$)",
             "ddE (kcal/mol)",
             "scatter_rmsd.png",
-            "talk")
+            "paper")
         draw_scatter(
             tfds,
             energies,
@@ -707,13 +728,13 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "TFD",
             "ddE (kcal/mol)",
             "scatter_tfd.png",
-            "talk")
+            "paper")
         draw_ridgeplot(
             energies,
             method_labels,
             "ddE (kcal/mol)",
             "ridge_dde.png",
-            "talk",
+            "paper",
             bw='hist',
             same_subplot=True,
             sym_log=False)
@@ -721,20 +742,20 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             rmsds,
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
-            "ridge_rmsd.png",
-            "talk",
-            bw='scott',
-            #bw='hist', hist_range=(0,4),
+            "ridge_rmsd.svg",
+            "paper",
+            #bw='scott',
+            bw='hist', hist_range=(0,4),
             same_subplot=True,
             sym_log=False)
         draw_ridgeplot(
             tfds,
             method_labels,
             "TFD",
-            "ridge_tfd.png",
-            "talk",
-            bw='scott',
-            #bw='hist', hist_range=(0,1),
+            "ridge_tfd.svg",
+            "paper",
+            #bw='scott',
+            bw='hist', hist_range=(0,1),
             same_subplot=True,
             sym_log=False)
 
@@ -746,10 +767,10 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 "RMSD ($\mathrm{\AA}$)",
                 "ddE (kcal/mol)",
                 f"density_rmsd_{ml}.png",
-                "talk",
+                "paper",
                 x_range=(0, 3.7),
-                y_range=(-30, 55),
-                z_range=(-270, 5320),
+                y_range=(-50, 30),
+                z_range=(-260, 5200),
                 z_interp=True)
 
             draw_density2d(
@@ -759,10 +780,10 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 "TFD",
                 "ddE (kcal/mol)",
                 f"density_tfd_{ml}.png",
-                "talk",
-                x_range=(0, 1.0),
-                y_range=(-30, 55),
-                z_range=(-302, 7060),
+                "paper",
+                x_range=(0, 0.8),
+                y_range=(-50, 30),
+                z_range=(-160, 5600),
                 z_interp=True)
 
 
