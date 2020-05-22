@@ -39,8 +39,13 @@ File descriptions:
 |-------------|----------------------------------|-------------|
 |`01_setup`   |`extract_qcarchive_dataset.ipynb` |write out molecules from a QCArchive database which have completed QM calculations|
 |`01_setup`   |`combine_conformers.ipynb`        |of the molecules from `extract_qcarchive_dataset.ipynb`, combine conformers that are labeled as different molecules|
-|`02_calc`    |`minimize_ffs.py`                 | ...         |
-|`03_analysis`|`cat_mols.py`                     |OpenEye script, modified to ... |
+|`02_calc`    |`minimize_ffs.py`                 |minimize all molecules in an input SDF file with a specified force field|
+|`03_analysis`|`color_by_moiety.py`              |generate ddE vs TFD (or RMSD) scatter plots highglighting specific moieties by color|
+|`03_analysis`|`compare_ffs.py`                  |compare FF-minimized molecules on their geometries and energies (no conformer matching)|
+|`03_analysis`|`match_minima.py`                 |similar to `compare_ffs` of comparing geometries and energies but analyzing RMSD-matched structures|
+|`03_analysis`|`probe_parameter.py`              |find all molecules in a set that use certain specified parameter(s)|
+|`03_analysis`|`reader.py`                       |reader for molecule sets and text input files called by the other analysis scripts|
+|`03_analysis`|`tailed_parameters.py`            |identify parameters that may be overrepresented in high RMSD/TFD tails for FFXML force fields|
 
 
 ## Brief overview
@@ -67,9 +72,8 @@ The OEChem scripts referred to above are located [here](https://docs.eyesopen.co
 ## Contributors
 * Victoria Lim
 * David Mobley (advising)
-* Lee-Ping Wang (discussions)
-* Jeffrey Wagner (code review)
-* Daniel Smith (code review)
+* Jessica Maat, Caitlin Bannan, Lee-Ping Wang (discussions)
+* Jeffrey Wagner, Daniel Smith (code review)
 
 ## Big picture wish list / to do tasks
 See more science-focused issues in the Github issue tracker.
@@ -79,3 +83,5 @@ See more science-focused issues in the Github issue tracker.
 * Use type hints for functions
 * Allow user to pass in dict for plotting parameters (i.e., talk or paper font sizes)
 * Generate plots with Plotly
+
+
