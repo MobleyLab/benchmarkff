@@ -79,7 +79,7 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
         plt.xticks(fontsize=10)
         plt.yticks(fontsize=10)
         plt_options = {'s':10, 'alpha':1.0}
-        plt.rc('legend',fontsize=10)
+        plt.rc('legend', fontsize=10)
 
     elif what_for == 'talk':
         fig = plt.gcf()
@@ -89,7 +89,7 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
         plt.xticks(fontsize=12)
         plt.yticks(fontsize=12)
         plt_options = {'s':10, 'alpha':1.0}
-        plt.rc('legend',fontsize=14)
+        plt.rc('legend', fontsize=14)
 
     # generate the plot with full set
     plt.scatter(x_data, y_data,
@@ -101,7 +101,7 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
         print(f"Number of data points in subset {i}: {len(xs)}")
         plt.scatter(xs, ys, label=lab, c=subset_colors[i], zorder=2, **plt_options)
 
-    plt.legend()
+    plt.legend(loc=(0.2, 1.04))
     plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
     #plt.show()
@@ -192,9 +192,9 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
             "TFD",
             "ddE (kcal/mol)",
             out_file,
-            what_for='talk',
-            x_range=(0, 1.0),
-            y_range=(-60, 35))
+            what_for='paper',
+            x_range=(0, 0.8),
+            y_range=(-50, 30))
 
 
 ### ------------------- Parser -------------------
