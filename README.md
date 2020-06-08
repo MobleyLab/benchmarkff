@@ -1,7 +1,7 @@
 # BenchmarkFF
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/vtlim/benchmarkff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vtlim/benchmarkff/context:python)
 
-README last updated: Jan 8 2020
+README last updated: June 7 2020
 
 ## About
 
@@ -58,22 +58,25 @@ File descriptions:
     4. Read in the whole set with proper conformers, and rename titles for numeric order, using `combine_conformers.ipynb`.
     5. (opt) Write out associated SMILES: `awk '/SMILES/{getline; print}' whole_05_renew.sdf > whole_05_renew.smi`
     6. (opt) Generate molecular structures in PDF format, using [`mols2pdf.py`](https://docs.eyesopen.com/toolkits/python/_downloads/mols2pdf.py).
-3. Break up the full set into smaller chunks for managable computations, using `molchunk.py`.
+3. (opt) Break up the full set into smaller chunks for managable computations, using `molchunk.py`.
 4. Run the minimizations, using `minimize_ffs.py`.
 5. Remove the molecules that were unable to minimize (e.g., due to missing parameters) from all files, using `cat_mols.py`.
-6. Cat all the constituent files back together, using `cat` or `cat_mols.py`.
-7. Analyze with `match_minima.py` and `compare_ffs.py`. 
-    1. (opt) If some conformers (not full molecules) are outliers, can remove using `get_by_tag.py`
+6. (opt) If the full set was broken up, concatenate all the constituent files back together, using `cat` or `cat_mols.py`.
+7. Analyze geometries and relative energies with `compare_ffs.py`.
+    1. (opt) If some conformers (not full molecules) are outliers, can remove using `get_by_tag.py`.
+    2. Mark certain moieties of interest in energy v. geometry scatter plots using `color_by_moiety.py`.
+8. Analyze energies of structurally similar conformers using `match_minima.py`.
+9. Explore parameters overrepresented in high TFD/RMSD regions using `tailed_parameters.py` and `probe_parameter.py`.
 
 The OEChem scripts referred to above are located [here](https://docs.eyesopen.com/toolkits/python/oechemtk/oechem_examples_summary.html).
 * `molextract.py`
 * `molchunk.py` -- VTL modified to use `OEAbsCanonicalConfTest`
 
 ## Contributors
-* Victoria Lim
+* Victoria Lim (author)
 * David Mobley (advising)
-* Jessica Maat, Caitlin Bannan, Lee-Ping Wang (discussions)
 * Jeffrey Wagner, Daniel Smith (code review)
+* Jessica Maat, Caitlin Bannan, Hyesu Jang, Lee-Ping Wang, Chris Bayly (discussions)
 
 ## Big picture wish list / to do tasks
 See more science-focused issues in the Github issue tracker.
@@ -83,5 +86,4 @@ See more science-focused issues in the Github issue tracker.
 * Use type hints for functions
 * Allow user to pass in dict for plotting parameters (i.e., talk or paper font sizes)
 * Generate plots with Plotly
-
 
