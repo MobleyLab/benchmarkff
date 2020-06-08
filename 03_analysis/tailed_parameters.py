@@ -487,15 +487,15 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
 
     # plot fraction of molecules which use each parameter
     # separate plot by parameter type
-    for t in ['a', 'b', 'i', 'n', 't']:
+    for fftype in ['a', 'b', 'i', 'n', 't']:
 
         # get the subset of data based on parameter type
-        plot_inds = [full_params.index(i) for i in full_params if i.startswith(t)]
+        plot_inds = [full_params.index(i) for i in full_params if i.startswith(fftype)]
         subset_data = fraction_ratio[plot_inds]
         subset_label = np.array(full_params)[plot_inds]
 
         plot_param_bars(subset_data, subset_label, max_ratio,
-            suffix=metric_type+f'_{t}',
+            suffix=metric_type+f'_{fftype}',
             num_sort=True,
             what_for='talk')
 
