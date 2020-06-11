@@ -226,24 +226,16 @@ def plot_fracs_ratios(plot_data, labels, max_ratio, suffix, num_sort=False, what
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=fs2)
 
-        # invert for horizontal bars
-        ax.invert_yaxis()
-
         # set plot limits by rounding max_ratio to the nearest 0.5
         x_max = round(max_ratio * 2) / 2
         ax.set_xlim(0, x_max)
         ax.set_xticks(np.linspace(0, x_max, 6))
 
-        # set grid
-        ax.grid(True)
-
         # add a reference line at ratio = 1.0
         ax.axvline(1.0, ls='--', c='purple', alpha=0.6)
 
-        # set alternating colors for background for ease of visualizing
-        locs, values = plt.xticks()
-        for i in range(1, len(locs)-1, 2):
-            ax.axvspan(locs[i], locs[i+1], facecolor='lightgrey', alpha=0.25)
+        # general formatting
+        general_barh_formatting(ax)
 
     n_bars = len(plot_data)
     if what_for == 'talk':
@@ -299,7 +291,7 @@ def plot_fracs_ratios(plot_data, labels, max_ratio, suffix, num_sort=False, what
     plt.savefig(f'barparams_ratio_{suffix}.png', bbox_inches='tight')
 
 
-def general_barh_formatting():
+def general_barh_formatting(ax):
 
     # invert y-axis for horizontal bars
     ax.invert_yaxis()
@@ -368,12 +360,11 @@ def plot_fracs_diff(population_dat, sample_dat, sample_std, labels, suffix):
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.10))
 
     # general formatting
-    general_barh_formatting()
+    general_barh_formatting(ax)
 
     # save figure
     fig.tight_layout()
     plt.savefig(f'barparams_diff_{suffix}.png', bbox_inches='tight')
-    plt.show()
 
 
 def one_proportion_z(sample_p, sample_n, population_p):
@@ -403,7 +394,7 @@ def one_proportion_z(sample_p, sample_n, population_p):
 
     Formula
     -------
-                sample_p - population_p
+                           sample_p - population_p
         z  =  ----------------------------------------------------
               sqrt[ population_p * (1 - population_p) / sample_n ]
 
@@ -560,11 +551,11 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
         name of the pickle file with already-computed parameter analysis
 
     """
-    def remove_small_counts(fracs_population, fracs_sample, params_list):
-        # exclude parameters for which outliers set has <= 20 hits
+    def remove_small_counts(fracs_population, fracs_sample, params_list, size_limit):
+        # exclude parameters for which outliers set has <= size_limit hits
         # TODO: this could be made more general
 
-        inds_few = np.where(counts_sample <= 20)[0]
+        inds_few = np.where(counts_sample <= size_limit)[0]
         fracs_population = np.delete(fracs_population, inds_few)
         fracs_sample = np.delete(fracs_sample, inds_few)
         params_list = [v for index, v in enumerate(params_list) if
@@ -621,6 +612,8 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
         np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
 
 
+    size_limit = 20
+
     # get diff of fracs_outliers to fracs_all
     if comp == 'diff':
 
@@ -643,7 +636,7 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
             # sample_fraction compared to population_fraction
             if p < 0.05:
                 outstring += "*"
-                params_sig.append(params[i])
+                params_sig.append(params_list[i])
 
         with open(f'params_{metric_type}_pvalues.dat', 'w') as f:
             f.write("# param\t\tp-value\t\tfrac_out\thalf_err_bar")
@@ -653,15 +646,16 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
 
         # remove those with small sample size for outlier set
         fracs_population, fracs_sample, params_list, inds_few = remove_small_counts(
-            fracs_population, fracs_sample, params_list)
+            fracs_population, fracs_sample, params_list, size_limit)
         half_errbars = np.delete(np.array(half_errbars), inds_few)
 
-        # plot 20 params at a time to not overload a single plot
+        # plot N params at a time to not overload a single plot
+        bars_per_plot = 20
         trimmed_params_cnt = len(params_list)
 
         if trimmed_params_cnt == 0:
-            print("\nThe outlier sample size for each parameter is below 20. "
-                  "Nothing to plot.")
+            print("\nThe outlier sample size for each parameter is below "
+                  f"{size_limit}. Nothing to plot.")
             return
 
         elif trimmed_params_cnt == 1:
@@ -670,7 +664,7 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
             return
 
         bars_max = trimmed_params_cnt + 1
-        bars_per_plot = min(20, trimmed_params_cnt)
+        bars_per_plot = min(bars_per_plot, trimmed_params_cnt)
 
         for segment in range(0, bars_max, bars_per_plot):
             plot_i = segment
@@ -685,7 +679,10 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
             sample_std     = half_errbars[plot_i:plot_j]
             labels         = params_list[plot_i:plot_j]
 
-            plot_fracs_diff(population_dat, sample_dat, sample_std, labels, plot_i)
+            plot_fracs_diff(population_dat, sample_dat, sample_std, labels,
+                metric_type + f'_{plot_i}')
+
+        return
 
 
     # get ratio of fracs_outliers to fracs_all
@@ -695,7 +692,7 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
 
         # remove those with small sample size for outlier set
         fracs_population, fracs_sample, params_list, inds_few = remove_small_counts(
-            fracs_population, fracs_sample, params_list)
+            fracs_population, fracs_sample, params_list, size_limit)
 
         # plot fraction of molecules which use each parameter
         # separate plot by parameter type
@@ -707,9 +704,9 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=Non
             subset_label = np.array(params_list)[plot_inds]
 
             plot_fracs_ratios(subset_data, subset_label, max_ratio,
-                suffix=metric_type+f'_{fftype}',
-                num_sort=True,
-                what_for='talk')
+                suffix = metric_type + f'_{fftype}',
+                num_sort = True,
+                what_for = 'talk')
 
 
 ### ------------------- Parser -------------------
