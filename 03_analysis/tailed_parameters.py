@@ -10,13 +10,18 @@ molecule set, determine the fraction of outlier molecules with that parameter.
 Compare that to the fraction of all molecules that use that parameter.
 
 By:      Victoria T. Lim
-Version: Feb 6 2020
+Version: Jun 10 2020
 
 References:
 https://github.com/openforcefield/openforcefield/blob/master/examples/inspect_assigned_parameters/inspect_assigned_parameters.ipynb
 
 Note:
 - Make sure to use the same FFXML file corresponding to the minimized geometries.
+- When specifying "--comparison" flag, 'diff' is recommended over 'ratio.'
+  This is because ratios can appear significant even though not due to
+  (1) too small a sample size, i.e., too few molecules with that parameter, and
+  (2) the effect of small numbers, i.e., 0.002 is 2x more than 0.001 though
+      the actual effect may be negligible.
 
 Examples:
 $ python tailed_parameters.py -i refdata_parsley.sdf -f openff_unconstrained-1.0.0-RC2.offxml --rmsd --cutoff 1.0  --tag "RMSD to qcarchive.sdf" --tag_smiles "SMILES QCArchive" > tailed.dat
@@ -27,6 +32,7 @@ $ python tailed_parameters.py -i refdata_parsley.sdf -f openff_unconstrained-1.0
 import os
 import re
 import numpy as np
+import scipy.stats
 import pickle
 import matplotlib.pyplot as plt
 from collections import OrderedDict
@@ -130,45 +136,47 @@ def get_parameters(mols_dict, ffxml):
 
     # remove duplicate molecules (else get_molecule_parameterIDs gives err)
     iso_smiles = [ molecule.to_smiles() for molecule in off_mols ]
-    idx_of_duplicates = [idx for idx, item in enumerate(iso_smiles) if item in iso_smiles[:idx]]
+    idx_of_duplicates = [idx for idx, item in enumerate(iso_smiles) if
+        item in iso_smiles[:idx]]
     for index in sorted(idx_of_duplicates, reverse=True):
         del off_mols[index]
 
     # create dictionaries describing parameter assignment,
     # grouped both by molecule and by parameter
-    parameters_by_molecule, parameters_by_ID = get_molecule_parameterIDs(off_mols, ff)
+    parameters_by_molecule, parameters_by_ID = get_molecule_parameterIDs(
+                                                    off_mols, ff)
 
     return parameters_by_molecule, parameters_by_ID, smi_dict
 
 
-def count_mols_by_param(full_params, params_id_all, params_id_out):
+def count_mols_by_param(params_list, params_id_all, params_id_out):
     """
     Count the number of mols from the full set and the outlier set
     that have each parameter.
 
     Parameters
     ----------
-    full_params : list
+    params_list : list
         alphabetized list of all parameters in the whole set of molecules
     params_id_all : dict
         key is parameter ID;
         value is a list of isosmiles for all the molecules that have this ID
     params_id_out : dict
-        same format as params_id_all but with only the subset of outlier mols
+        same format as params_id_all but with only subset of outlier mols
 
     Returns
     -------
-    nmols_cnt_all : 1D numpy array
-        nmols_cnt_all[i] is the count of molecules that have the parameter
-        found in full_params[i]
-    nmols_cnt_out : 1D numpy array
-        same format as nmols_cnt_all but with only the subset of outlier mols
+    counts_population : 1D numpy array
+        counts_population[i] is the count of molecules that have the parameter
+        found in params_list[i]
+    counts_sample : 1D numpy array
+        same format as counts_population but with only subset of outlier mols
     """
 
-    nmols_cnt_all = []
-    nmols_cnt_out = []
+    counts_population = []
+    counts_sample = []
 
-    for i, p in enumerate(full_params):
+    for i, p in enumerate(params_list):
 
         # count number of mols in the COMPLETE set which use this parameter
         cnt_all = len(params_id_all[p])
@@ -179,13 +187,13 @@ def count_mols_by_param(full_params, params_id_all, params_id_out):
         except KeyError:
             cnt_out = 0
 
-        nmols_cnt_all.append(cnt_all)
-        nmols_cnt_out.append(cnt_out)
+        counts_population.append(cnt_all)
+        counts_sample.append(cnt_out)
 
-    return np.array(nmols_cnt_all), np.array(nmols_cnt_out)
+    return np.array(counts_population), np.array(counts_sample)
 
 
-def plot_param_bars(plot_data, labels, max_ratio, suffix, num_sort=False, what_for='talk'):
+def plot_fracs_ratios(plot_data, labels, max_ratio, suffix, num_sort=False, what_for='talk'):
     """
     Generate bar plots of the ratio of (fraction of outlier mols with
     a given parameter) to (fraction of all mols with a given parameter).
@@ -218,24 +226,16 @@ def plot_param_bars(plot_data, labels, max_ratio, suffix, num_sort=False, what_f
         ax.set_yticks(y)
         ax.set_yticklabels(labels, fontsize=fs2)
 
-        # invert for horizontal bars
-        ax.invert_yaxis()
-
         # set plot limits by rounding max_ratio to the nearest 0.5
         x_max = round(max_ratio * 2) / 2
         ax.set_xlim(0, x_max)
         ax.set_xticks(np.linspace(0, x_max, 6))
 
-        # set grid
-        ax.grid(True)
-
         # add a reference line at ratio = 1.0
         ax.axvline(1.0, ls='--', c='purple', alpha=0.6)
 
-        # set alternating colors for background for ease of visualizing
-        locs, values = plt.xticks()
-        for i in range(1, len(locs)-1, 2):
-            ax.axvspan(locs[i], locs[i+1], facecolor='lightgrey', alpha=0.25)
+        # general formatting
+        general_barh_formatting(ax)
 
     n_bars = len(plot_data)
     if what_for == 'talk':
@@ -288,7 +288,139 @@ def plot_param_bars(plot_data, labels, max_ratio, suffix, num_sort=False, what_f
 
     # finish tweaking and save figure
     fig.tight_layout()
-    plt.savefig(f'barparams_{suffix}.png', bbox_inches='tight')
+    plt.savefig(f'barparams_ratio_{suffix}.png', bbox_inches='tight')
+
+
+def general_barh_formatting(ax):
+
+    # invert y-axis for horizontal bars
+    ax.invert_yaxis()
+
+    # set grid
+    ax.grid(True)
+
+    # set alternating colors for background for ease of visualizing
+    # do this after setting xlim range
+    locs, values = plt.xticks()
+    for i in range(1, len(locs)-1, 2):
+        ax.axvspan(locs[i], locs[i+1], facecolor='lightgrey',
+            alpha=0.25, zorder=-100)
+
+
+def plot_fracs_diff(population_dat, sample_dat, sample_std, labels, suffix):
+    """
+    Generate bar plots of (fraction of outlier mols with
+    a given parameter) AND (fraction of all mols with a given parameter).
+    The fractions of outlier molecules are plotted with 95% confidence
+    intervals from the one proportion Z-test.
+
+    Parameters
+    ----------
+    population_dat : 1D numpy array
+        array of fractions of population
+    sample_dat : 1D numpy array
+        array of fractions of sample
+    sample_dat : 1D numpy array
+        array of confidence intervals (error bars) of sample
+    labels : 1D numpy array
+        array of strings that correspond to plot_data
+    suffix: string
+        label to append to end of plot filename
+
+    todo
+    ----
+    num_sort    like in plot_fracs_ratios
+    what_for    flag for talk or paper formatting
+
+    """
+    population_std = [0]*len(population_dat)
+
+    # set x locations for the groups as well bar widths
+    ind = np.arange(len(population_dat))
+    width = 0.35
+
+    # create figure object and resize
+    fig, ax = plt.subplots()
+    fig.set_size_inches(3, 8)
+
+    # plot population proportions in blue bars
+    rects1 = ax.barh(ind - width/2, population_dat, width,
+                xerr=population_std, label='Entire set', color="#4F81BD")
+
+    # plot sample proportions in red bars
+    rects2 = ax.barh(ind + width/2, sample_dat, width,
+                xerr=sample_std, label='High TFD subset', color="#C0504D")
+
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax.set_xlim(-0.05, 1.05)
+    ax.set_xlabel('representation ratio')
+    ax.set_ylabel('parameter')
+    ax.set_yticks(ind)
+    ax.set_yticklabels(labels)
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.10))
+
+    # general formatting
+    general_barh_formatting(ax)
+
+    # save figure
+    fig.tight_layout()
+    plt.savefig(f'barparams_diff_{suffix}.png', bbox_inches='tight')
+
+
+def one_proportion_z(sample_p, sample_n, population_p):
+    """
+    Calculate test statistic, p-value, and 95% confidence interval
+        for a one-sample, two-tailed Z test of proportions.
+
+    Parameters
+    ----------
+    sample_p : float
+        Proportion of sample
+    sample_n : integer
+        Sample size
+    population_p : float
+        Proportion of population
+
+    Returns
+    -------
+    z_score : float
+        test statistic
+    p_value : float
+        p-value
+    lower_bound : float
+        lower bound of 95% confidence interval
+    upper_bound : float
+        upper bound of 95% confidence interval
+
+    Formula
+    -------
+                           sample_p - population_p
+        z  =  ----------------------------------------------------
+              sqrt[ population_p * (1 - population_p) / sample_n ]
+
+    Null hypothesis: p  = population_p
+    Alt  hypothesis: p != population_p
+
+    """
+    numerator = sample_p - population_p
+    radicand = population_p * (1-population_p) / sample_n
+    denom = np.sqrt(radicand)
+
+    # reject null hypothesis is |z| > 1.96 for 0.05 significance level
+    z_score = numerator/denom
+
+    # calculate p value for a two-tailed test
+    p_value = scipy.stats.norm.sf(abs(z_score))*2
+
+    # calculate 95% confidence interval, which corresponds to
+    # two-tailed z-scores of -1.96 and +1.96
+    rad2 = sample_p * (1-sample_p) / sample_n
+    term2 = 1.96*np.sqrt(rad2)
+    #lower_bound = sample_p - term2
+    #upper_bound = sample_p + term2
+    #return z_score, p_value, lower_bound, upper_bound
+
+    return p_value, term2
 
 
 def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
@@ -335,7 +467,7 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
     """
 
     # load molecules from open reference and query files
-    print(f"Opening SDF file {in_sdf}...")
+    print(f"\n\n\nOpening SDF file {in_sdf}...")
     mols = reader.read_mols(in_sdf)
     print(f"Looking for outlier molecules with {metric_type.upper()} above {cutoff}...\n")
 
@@ -355,7 +487,7 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
                 value  = float(oechem.OEGetSDData(conf, tag))
             except ValueError as e:
                 raise ValueError("There was an error while obtaining the SD "
-                     f"tag value of '{oechem.OEGetSDData(conf, tag)}'. Did you "
+                     f"tag data of '{oechem.OEGetSDData(conf, tag)}'. Did you "
                      f"specify the correct SD tag of '{tag}'?")
 
             if value >= cutoff:
@@ -389,7 +521,7 @@ def tailed_parameters(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type):
     return data_all, data_out
 
 
-def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
+def main(in_sdf, ffxml, cutoff, tag, tag_smiles, comp, metric_type, inpickle=None):
     """
     For distributions of RMSD or TFDs of force field geometries with respect to
     reference geometries, identify outlier molecules in the high RMSD (TFD) tails
@@ -410,6 +542,8 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
         name of the SD tag in the SDF file with the metric information
     tag_smiles : string
         name of the SD tag in the SDF file with the molecule identifier
+    comp : string
+        'diff' or 'ratio' on how the representation ratios will be compared
     metric_type : string
         what metric the tag and cutoff refer to (e.g., TFD or RMSD)
         for plot and figure labeling
@@ -417,6 +551,17 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
         name of the pickle file with already-computed parameter analysis
 
     """
+    def remove_small_counts(fracs_population, fracs_sample, params_list, size_limit):
+        # exclude parameters for which outliers set has <= size_limit hits
+        # TODO: this could be made more general
+
+        inds_few = np.where(counts_sample <= size_limit)[0]
+        fracs_population = np.delete(fracs_population, inds_few)
+        fracs_sample = np.delete(fracs_sample, inds_few)
+        params_list = [v for index, v in enumerate(params_list) if
+            index not in inds_few]
+
+        return fracs_population, fracs_sample, params_list, inds_few
 
     if inpickle is not None and os.path.exists(inpickle):
 
@@ -431,73 +576,137 @@ def main(in_sdf, ffxml, cutoff, tag, tag_smiles, metric_type, inpickle=None):
     # count number of unique mols
     params_mol_all = data_all['params_mol']
     params_mol_out = data_out['params_mol']
-    uniq_n_all = len(params_mol_all)
-    uniq_n_out = len(params_mol_out)
+    uniq_n_population = len(params_mol_all)
+    uniq_n_sample = len(params_mol_out)
 
     # count number of unique params
     params_id_all = data_all['params_id']
     params_id_out = data_out['params_id']
 
-    full_params = list(set(params_id_all.keys()))
-    full_params.sort(key=natural_keys)
+    params_list = list(set(params_id_all.keys()))
+    params_list.sort(key=natural_keys)
 
-    uniq_p_all = len(full_params)
+    uniq_p_all = len(params_list)
     uniq_p_out = len(list(set(params_id_out.keys())))
 
     # print stats on number of outliers
-    print(f"\nNumber of structures in full set: {data_all['count']} ({uniq_n_all} unique)")
-    print(f"Number of structures in outlier set: {data_out['count']} ({uniq_n_out} unique)")
+    print(f"\nNumber of structures in full set: {data_all['count']} ({uniq_n_population} unique)")
+    print(f"Number of structures in outlier set: {data_out['count']} ({uniq_n_sample} unique)")
     print(f"Number of unique parameters in full set: {uniq_p_all}")
     print(f"Number of unique parameters in outlier set: {uniq_p_out}")
 
     # go through all parameters and find number of molecules which use each one
-    nmols_cnt_all, nmols_cnt_out = count_mols_by_param(full_params, params_id_all, params_id_out)
+    counts_population, counts_sample = count_mols_by_param(
+        params_list, params_id_all, params_id_out)
 
-    # compare fractions in the all set vs the outliers set
-    fraction_cnt_all = nmols_cnt_all/uniq_n_all
-    fraction_cnt_out = nmols_cnt_out/uniq_n_out
+    # calculate fractions in the all set and the outliers set
+    fracs_population = counts_population / uniq_n_population
+    fracs_sample = counts_sample / uniq_n_sample
 
     # write information in output dat file
-    write_data = np.column_stack((full_params, nmols_cnt_out, nmols_cnt_all,
-        fraction_cnt_out, fraction_cnt_all))
+    write_data = np.column_stack((params_list, counts_sample, counts_population,
+        fracs_sample, fracs_population))
     with open(f'params_{metric_type}.dat', 'w') as f:
         f.write("# param\tnmols_out\tnmols_all\tfrac_out\tfrac_all\n")
-        f.write(f"NA_total\t{uniq_n_out}\t{uniq_n_all}\n")
+        f.write(f"NA_total\t{uniq_n_sample}\t{uniq_n_population}\n")
         np.savetxt(f, write_data, fmt='%-8s', delimiter='\t')
 
-    # exclude parameters for which outliers set AND full set
-    # both have only 1 match; do this BEFORE excluding nonzero_inds
-    # TODO: this could be made more general. e.g., nmols_cnt_all < nsamples
-    ones_nmols_all = np.where(nmols_cnt_all == 1)[0]
-    ones_nmols_out = np.where(nmols_cnt_out == 1)[0]
-    ones_both = np.intersect1d(ones_nmols_all, ones_nmols_out)
-    fraction_cnt_all = np.delete(fraction_cnt_all, ones_both)
-    fraction_cnt_out = np.delete(fraction_cnt_out, ones_both)
-    full_params = [v for index, v in enumerate(full_params) if index not in ones_both] # exclude ones
 
-    # exclude parameters which are not used in outliers set
-    nonzero_inds = np.nonzero(fraction_cnt_out)
-    fraction_cnt_all = fraction_cnt_all[nonzero_inds]
-    fraction_cnt_out = fraction_cnt_out[nonzero_inds]
-    full_params = [full_params[i] for i in nonzero_inds[0]] # keep nonzeroes
+    size_limit = 20
 
-    # get ratio of fraction_outliers to fraction_all
-    fraction_ratio = fraction_cnt_out / fraction_cnt_all
-    max_ratio = np.max(fraction_ratio)
+    # get diff of fracs_outliers to fracs_all
+    if comp == 'diff':
 
-    # plot fraction of molecules which use each parameter
-    # separate plot by parameter type
-    for fftype in ['a', 'b', 'i', 'n', 't']:
+        half_errbars = []
+        params_sig = []
+        outstring = ""
 
-        # get the subset of data based on parameter type
-        plot_inds = [full_params.index(i) for i in full_params if i.startswith(fftype)]
-        subset_data = fraction_ratio[plot_inds]
-        subset_label = np.array(full_params)[plot_inds]
+        for i in range(uniq_p_all):
 
-        plot_param_bars(subset_data, subset_label, max_ratio,
-            suffix=metric_type+f'_{fftype}',
-            num_sort=True,
-            what_for='talk')
+            # for each parameter and perform z test
+            p, half_errbar = one_proportion_z(
+                fracs_sample[i], counts_sample[i], fracs_population[i])
+            half_errbars.append(half_errbar)
+
+            # write out results
+            outstring += f"\n{params_list[i]}\t\t{p:.4f}\t\t{fracs_sample[i]:.2f}\t"
+            outstring += f"{half_errbar:.2f}\t"
+
+            # denote parameters with statistically significant different
+            # sample_fraction compared to population_fraction
+            if p < 0.05:
+                outstring += "*"
+                params_sig.append(params_list[i])
+
+        with open(f'params_{metric_type}_pvalues.dat', 'w') as f:
+            f.write("# param\t\tp-value\t\tfrac_out\thalf_err_bar")
+            f.write(f"{outstring}")
+            f.write(f"\n\n{len(params_sig)} parameters with "
+                    f"p-values < 0.05:\n{params_sig}")
+
+        # remove those with small sample size for outlier set
+        fracs_population, fracs_sample, params_list, inds_few = remove_small_counts(
+            fracs_population, fracs_sample, params_list, size_limit)
+        half_errbars = np.delete(np.array(half_errbars), inds_few)
+
+        # plot N params at a time to not overload a single plot
+        bars_per_plot = 20
+        trimmed_params_cnt = len(params_list)
+
+        if trimmed_params_cnt == 0:
+            print("\nThe outlier sample size for each parameter is below "
+                  f"{size_limit}. Nothing to plot.")
+            return
+
+        elif trimmed_params_cnt == 1:
+            plot_fracs_diff(fracs_population, fracs_sample, half_errbars,
+                params_list, "only")
+            return
+
+        bars_max = trimmed_params_cnt + 1
+        bars_per_plot = min(bars_per_plot, trimmed_params_cnt)
+
+        for segment in range(0, bars_max, bars_per_plot):
+            plot_i = segment
+            plot_j = segment + bars_per_plot
+
+            if plot_j > trimmed_params_cnt:
+                plot_j = trimmed_params_cnt
+
+            # assign variables of data to be plotted
+            population_dat = fracs_population[plot_i:plot_j]
+            sample_dat     = fracs_sample[plot_i:plot_j]
+            sample_std     = half_errbars[plot_i:plot_j]
+            labels         = params_list[plot_i:plot_j]
+
+            plot_fracs_diff(population_dat, sample_dat, sample_std, labels,
+                metric_type + f'_{plot_i}')
+
+        return
+
+
+    # get ratio of fracs_outliers to fracs_all
+    elif comp == 'ratio':
+        fracs_ratio = fracs_sample / fracs_population
+        max_ratio = np.max(fracs_ratio)
+
+        # remove those with small sample size for outlier set
+        fracs_population, fracs_sample, params_list, inds_few = remove_small_counts(
+            fracs_population, fracs_sample, params_list, size_limit)
+
+        # plot fraction of molecules which use each parameter
+        # separate plot by parameter type
+        for fftype in ['a', 'b', 'i', 'n', 't']:
+
+            # get the subset of data based on parameter type
+            plot_inds = [params_list.index(i) for i in params_list if i.startswith(fftype)]
+            subset_data = fracs_ratio[plot_inds]
+            subset_label = np.array(params_list)[plot_inds]
+
+            plot_fracs_ratios(subset_data, subset_label, max_ratio,
+                suffix = metric_type + f'_{fftype}',
+                num_sort = True,
+                what_for = 'talk')
 
 
 ### ------------------- Parser -------------------
@@ -521,8 +730,15 @@ if __name__ == "__main__":
     parser.add_argument("--tag_smiles", required=True,
             help="SDF tag from which to identify conformers")
 
+    parser.add_argument("--comparison", default='diff',
+            help="'diff' or 'ratio' for if you want to take ratios of "
+                "tail to full set fractions or if you want to take "
+                "differences thereof; 'diff' is recommended")
+
     parser.add_argument("--metric", default='metric',
-        help="Specify 'RMSD' or 'TFD' for which the tag and cutoff value refer")
+        help="Specify 'RMSD' or 'TFD' for which the tag/cutoff value refer. "
+             "This is purely for file/plot labeling.")
+
 
     parser.add_argument("--inpickle", default=None,
         help="Name of pickle file with already-computed data")
@@ -535,6 +751,6 @@ if __name__ == "__main__":
     metric_type = args.metric.lower()
 
     main(args.infile, args.ffxml,
-        args.cutoff, args.tag, args.tag_smiles, metric_type,
-        args.inpickle)
+        args.cutoff, args.tag, args.tag_smiles, args.comparison,
+        metric_type, args.inpickle)
 

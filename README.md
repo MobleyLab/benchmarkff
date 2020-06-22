@@ -29,8 +29,8 @@ conda install -c openeye -c conda-forge -c omnia rdkit openeye-toolkits qcfracta
 Directories in this repo:
 
 * `01_setup`: Extract molecules from [QCArchive](https://qcarchive.molssi.org/), convert to OpenEye mols, and standardize conformers and titles.
-* `02_calc`
-* `03_analysis`
+* `02_calc`: Run energy minimizations for various force fields
+* `03_analysis`: Analyze output energies and geometries
 * `examples`: See this directory for example results and plots.
 
 File descriptions:
@@ -50,27 +50,37 @@ File descriptions:
 
 ## Brief overview
 
+### Setup
 1. Write out from a QCArchive database which have completed QM calculations, using `extract_qcarchive_dataset.ipynb`.
 2. Reorganize up the molecule set for conformers which are labeled as different molecules:
     1. Group all the same conformers together since they are separated by intervening molecules, using `combine_conformers.ipynb`.
-    2. Of the full set, write out the good molecules that don't need conformer reorganization, using `molextract.py` from OEChem.
+    2. Of the full set, write out the good molecules that don't need conformer reorganization, using `molextract.py`\* from OEChem.
     3. Combine the results of steps 2.1 and 2.2: `cat whole_02_good.sdf whole_03_redosort.sdf > whole_04_combine.sdf`
     4. Read in the whole set with proper conformers, and rename titles for numeric order, using `combine_conformers.ipynb`.
     5. (opt) Write out associated SMILES: `awk '/SMILES/{getline; print}' whole_05_renew.sdf > whole_05_renew.smi`
     6. (opt) Generate molecular structures in PDF format, using [`mols2pdf.py`](https://docs.eyesopen.com/toolkits/python/_downloads/mols2pdf.py).
-3. (opt) Break up the full set into smaller chunks for managable computations, using `molchunk.py`.
+
+### FF calculations
+3. (opt) Break up the full set into smaller chunks for managable computations, using `molchunk.py`.\*
 4. Run the minimizations, using `minimize_ffs.py`.
-5. Remove the molecules that were unable to minimize (e.g., due to missing parameters) from all files, using `cat_mols.py`.
-6. (opt) If the full set was broken up, concatenate all the constituent files back together, using `cat` or `cat_mols.py`.
+5. Remove the molecules that were unable to minimize (e.g., due to missing parameters) from all files, using `cat_mols.py`.\*
+6. (opt) If the full set was broken up, concatenate all the constituent files back together, using `cat` or `cat_mols.py`.\*
+
+### Analysis
 7. Analyze geometries and relative energies with `compare_ffs.py`.
     1. (opt) If some conformers (not full molecules) are outliers, can remove using `get_by_tag.py`.
     2. Mark certain moieties of interest in energy v. geometry scatter plots using `color_by_moiety.py`.
 8. Analyze energies of structurally similar conformers using `match_minima.py`.
 9. Explore parameters overrepresented in high TFD/RMSD regions using `tailed_parameters.py` and `probe_parameter.py`.
 
-The OEChem scripts referred to above are located [here](https://docs.eyesopen.com/toolkits/python/oechemtk/oechem_examples_summary.html).
+\*The OEChem scripts referred to above are located [here](https://docs.eyesopen.com/toolkits/python/oechemtk/oechem_examples_summary.html).
 * `molextract.py`
 * `molchunk.py` -- VTL modified to use `OEAbsCanonicalConfTest`
+
+**Note**: Some of the analysis can take a long time for multiple force fields and many molecules
+(e.g. up to 2 hours on `compare_ffs.py` or 30-45 min on `tailed_parameters.py`).
+To explore the analyzed data, adjust plots, etc. without re-analyzing data, you can
+input the pickle file written out from the previously run analysis.
 
 ## Contributors
 * Victoria Lim (author)
