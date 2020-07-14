@@ -310,6 +310,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     if what_for == 'paper':
         fig = plt.gcf()
         fig.set_size_inches(4, 3)
+        plt.subplots_adjust(left=0.16, right=.72,top=0.9, bottom=0.2)
         plt.xlabel(x_label, fontsize=10)
         plt.ylabel(y_label, fontsize=10)
         plt.xticks(fontsize=10)
@@ -336,8 +337,68 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     plt.clf()
     #plt.show()
 
+def draw_corr(x_data, y_data, method_labels, x_label, y_label, out_file, what_for='talk'):
+    """
+    Draw scatter plot, such as of (ddE vs RMSD) or (ddE vs TFD).
 
-def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
+    Parameters
+    ----------
+    x_data : list of lists
+        x_data[i][j] represents ith method and jth molecular structure
+    y_data : list of lists
+        should have same shape and correspond to x_data
+    method_labels : list
+        list of all the method names including reference method first
+    x_label : string
+        name of the x-axis label
+    y_label : string
+        name of the y-axis label
+    out_file : string
+        name of the output file
+    what_for : string
+        dictates figure size, text size of axis labels, legend, etc.
+        "paper" or "talk"
+
+    """
+    print(f"\nNumber of data points in full scatter plot: {len(flatten(x_data))}")
+    markers = ["o", "^", "d", "x", "s", "p", "P", "3", ">"]
+
+    num_methods = len(x_data)
+    plist = []
+    for i in range(num_methods):
+        p = plt.scatter(x_data[i], y_data[i], marker=markers[i],
+            label=method_labels[i+1], alpha=0.6)
+        plist.append(p)
+
+    if what_for == 'paper':
+        fig = plt.gcf()
+        fig.set_size_inches(5, 4)
+        plt.subplots_adjust(left=0.16, right=.72,top=0.9, bottom=0.2)
+        plt.xlabel(x_label, fontsize=10)
+        plt.ylabel(y_label, fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.legend(loc=(1.04,0.4), fontsize=10)
+        # make the marker size smaller
+        for p in plist:
+            p.set_sizes([8.0])
+
+    elif what_for == 'talk':
+        plt.xlabel(x_label, fontsize=14)
+        plt.ylabel(y_label, fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.legend(loc=(1.04,0.5), fontsize=12)
+        # make the marker size smaller
+        for p in plist:
+            p.set_sizes([4.0])
+
+    plt.savefig(out_file, bbox_inches='tight')
+    plt.clf()
+    #plt.show()
+
+
+def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='paper',
         bw='scott', same_subplot=False, sym_log=False, hist_range=(-20,20)):
 
     """
@@ -381,7 +442,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         ax = plt.gca()
 
         # set axis font size
-        if what_for == 'paper': fs = 8
+        if what_for == 'paper': fs = 14
         elif what_for == 'talk': fs = 14
 
         ax.text(0, .2, label, fontweight="bold", color=color, fontsize=fs,
@@ -389,20 +450,27 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
 
     if what_for == 'paper':
         ridgedict = {
-            "h":0.45,
-            "lw":0.7,
-            "vl":0.1,
-            "xfontsize":10,
+            "h":0.9,
+            "lw":2.0,
+            "vl":1.0,
+            "xfontsize":14,
         }
     elif what_for == 'talk':
         ridgedict = {
-            "h":1.0,
-            "lw":1.5,
-            "vl":0.5,
+            "h":2.0,
+            "lw":3.0,
+            "vl":1.0,
             "xfontsize":16,
         }
 
     num_methods = len(mydata)
+
+    # Initialize the FacetGrid object
+    my_cmap = "tab10"
+    pal = sns.palplot(sns.color_palette(my_cmap))
+    colors = sns.color_palette(my_cmap)
+    all_labels = ['MMFF94S', 'GAFF2', 'OPLS3e', 'OpenFF-1.2.0', 'OpenFF-1.0.0', 'Smirnoff99Frosst', 'MMFF94', 'GAFF',  'B3LYP-D3BJ/DZVP', 'OpenFF-1.1.1']
+    cdict = {m: c for m, c in zip(all_labels, colors)}
 
     # convert data to dataframes for ridge plot
     temp = []
@@ -414,11 +482,9 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     # list of dataframes concatenated to single dataframe
     df = pd.concat(temp, ignore_index = True)
 
-    # Initialize the FacetGrid object
-    my_cmap = "tab10"
-    pal = sns.palplot(sns.color_palette(my_cmap))
-    g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
-        height=ridgedict["h"], palette=pal)
+#    print(method_labels)
+    g = sns.FacetGrid(df, row="method", hue="method", aspect=10,
+        height=ridgedict["h"], palette=cdict)
 
     if not same_subplot:
 
@@ -426,7 +492,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         if bw=='hist':
             histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
                 "range":hist_range, "align":"mid"}
-            g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
+            g.map(sns.distplot, x_label, hist=True, kde=False, bins=15, norm_hist=True, hist_kws=histoptions)
 
         else:
             g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
@@ -444,7 +510,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     if bw=='hist':
         histoptions = {"histtype":"step", "alpha":0.8, "linewidth":ridgedict["lw"],
             "range":hist_range, "align":"mid"}
-        g.map(sns.distplot, x_label, hist=True, kde=False, bins=51, hist_kws=histoptions)
+        g.map(sns.distplot, x_label, hist=True, kde=False, bins=15, norm_hist=True, hist_kws=histoptions)
 
     else:
         g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
@@ -465,7 +531,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         patches = []
         n_ffs = len(method_labels)-1
         for i in range(n_ffs):
-            patches.append(mpl.patches.Patch(color=cmap(i/10),
+            patches.append(mpl.patches.Patch(color=cdict[method_labels[i+1]],
                 label=method_labels[i+1]))
         plt.legend(handles=patches, fontsize=ridgedict["xfontsize"]/1.2)
 
@@ -481,15 +547,20 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
-    g.set(yticks=[])
-    g.despine(bottom=True, left=True)
+#    g.set(yticks=[])
+    g.despine(bottom=True)#, left=True)
+    # ax = plt.gca()
+    # ax.spines['left'].set_visible(True)
+    # ax.spines['left'].set_position('zero')
+    # ax.set_yticks([0.4])
 
     # adjust font sizes
     plt.xlabel(x_label, fontsize=ridgedict["xfontsize"])
+    plt.ylabel('Fraction', fontsize=ridgedict["xfontsize"])
     plt.xticks(fontsize=ridgedict["xfontsize"])
 
     # save with transparency for overlapping plots
-    plt.savefig(out_file, bbox_inches='tight', transparent=True)
+    plt.savefig(out_file, transparent=True, bbox_inches='tight')
     plt.clf()
     #plt.show()
 
@@ -686,43 +757,79 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
 
     # flatten all confs/molecules into same list but keep methods distinct
     # energies and rmsds are now 2d lists
+    enes_full=np.array(enes_full)
+    print(enes_full)
+#    print(np.isclose(enes_full, np.zeros_like(enes_full)))
+#    print(np.sum(np.argwhere(np.array(enes_full)==0.)))
+    print(np.array(enes_full).shape)
+        
     for a, b, c in zip(enes_full, rmsds_full, tfds_full):
+        print(np.array(a).shape)
+        isclose = np.isclose(flatten(a), np.zeros_like(flatten(a)), rtol=1e-23)
+        print(np.sum(isclose))
         energies.append(flatten(a))
         rmsds.append(flatten(b))
         tfds.append(flatten(c))
 
     if plot:
+        for i in range(len(energies)):
+            for j in range(i+1, len(energies)):
+                draw_corr(
+                    [rmsds[i]],
+                    [rmsds[j]],
+                    [None, f'{method_labels[j+1]} vs. {method_labels[i+1]}'],
+                    f"RMSD {method_labels[i+1]}"+"($\mathrm{\AA}$)",
+                    f"RMSD {method_labels[j+1]}"+"($\mathrm{\AA}$)",
+                    f"fig_scatter_rmsd_{method_labels[j+1]}_{method_labels[i+1]}.png".replace("/", ""),
+                    "paper")
+                draw_corr(
+                    [tfds[i]],
+                    [tfds[j]],
+                    [None, f'{method_labels[j+1]} vs. {method_labels[i+1]}'],
+                    f"TFD {method_labels[i+1]}",
+                    f"TFD {method_labels[j+1]}",
+                    f"fig_scatter_tfd_{method_labels[j+1]}_{method_labels[i+1]}.png".replace("/", ""),
+                    "paper")
+                draw_corr(
+                    [energies[i]],
+                    [energies[j]],
+                    [None, f'{method_labels[j+1]} vs. {method_labels[i+1]}'],
+                    f"ddE {method_labels[i+1]} (kcal/mol)",
+                    f"ddE {method_labels[j+1]} (kcal/mol)",
+                    f"fig_scatter_energies_{method_labels[j+1]}_{method_labels[i+1]}.png".replace("/", ""),
+                    "paper")
         draw_scatter(
             rmsds,
             energies,
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
             "ddE (kcal/mol)",
-            "scatter_rmsd.png",
-            "talk")
+            "fig_scatter_rmsd.png",
+            "paper")
         draw_scatter(
             tfds,
             energies,
             method_labels,
             "TFD",
             "ddE (kcal/mol)",
-            "scatter_tfd.png",
-            "talk")
+            "fig_scatter_tfd.png",
+            "paper")
         draw_ridgeplot(
             energies,
             method_labels,
             "ddE (kcal/mol)",
-            "ridge_dde.png",
-            "talk",
+            "fig_ridge_dde.png",
+            "paper",
             bw='hist',
             same_subplot=True,
-            sym_log=False)
+            sym_log=False,
+            hist_range=(-15,15))
         draw_ridgeplot(
             rmsds,
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
-            "ridge_rmsd.png",
-            "talk",
+            "fig_ridge_rmsd.png",
+            "paper",
             bw='scott',
             #bw='hist', hist_range=(0,4),
             same_subplot=True,
@@ -731,8 +838,8 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             tfds,
             method_labels,
             "TFD",
-            "ridge_tfd.png",
-            "talk",
+            "fig_ridge_tfd.png",
+            "paper",
             bw='scott',
             #bw='hist', hist_range=(0,1),
             same_subplot=True,
@@ -745,8 +852,8 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "RMSD ($\mathrm{\AA}$)",
                 "ddE (kcal/mol)",
-                f"density_rmsd_{ml}.png",
-                "talk",
+                f"fig_density_rmsd_{ml}.png",
+                "paper",
                 x_range=(0, 3.7),
                 y_range=(-30, 55),
                 z_range=(-270, 5320),
@@ -758,8 +865,8 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "TFD",
                 "ddE (kcal/mol)",
-                f"density_tfd_{ml}.png",
-                "talk",
+                f"fig_density_tfd_{ml}.png",
+                "paper",
                 x_range=(0, 1.0),
                 y_range=(-30, 55),
                 z_range=(-302, 7060),

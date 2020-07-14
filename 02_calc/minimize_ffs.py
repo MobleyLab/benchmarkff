@@ -169,11 +169,11 @@ def min_gaffx(mol, ofs, gaff2=False):
         openmoltools.amber.run_antechamber(title, tmol2, charge_method=None,
             gaff_mol2_filename = gmol2, frcmod_filename = frc,
             gaff_version = invar)
-    except Exception:
+    except Exception as e:
         # earlier smilabel seems to be missing
         smilabel = oechem.OEGetSDData(mol, "SMILES QCArchive")
         print( ' >>> Antechamber failed to produce GAFF mol2 file: '
-               f'{title} {smilabel}')
+               f'{title} {smilabel}: {e}')
         return
 
     # generate gaff inpcrd and prmtop files
@@ -220,10 +220,10 @@ def min_ffxml(mol, ofs, ffxml):
         #system = ff.create_openmm_system(topology, charge_from_molecules=[off_mol])
         system = ff.create_openmm_system(topology)
 
-    except Exception:
+    except Exception as e:
         smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
         print( ' >>> openforcefield failed to create OpenMM system: '
-               f'{oe_mol.GetTitle()} {smilabel}')
+               f'{oe_mol.GetTitle()} {smilabel}: {e}')
         return
 
     positions = structure.extractPositionsFromOEMol(oe_mol)
