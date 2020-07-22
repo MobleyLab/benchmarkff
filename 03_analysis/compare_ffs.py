@@ -632,7 +632,7 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     plt.scatter(x, y, c=z, **plt_options)
 
     # set log scaling but use symmetric log for negative values
-    plt.yscale('symlog')
+#    plt.yscale('symlog')
 
     # configure color bar and finish plotting
     colorbar_and_finish(size1, out_file)
@@ -742,20 +742,20 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             rmsds,
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
-            "ridge_rmsd.svg",
+            "ridge_rmsd.png",
             "paper",
-            #bw='scott',
-            bw='hist', hist_range=(0,4),
+            bw='scott',
+            #bw='hist', hist_range=(0,4),
             same_subplot=True,
             sym_log=False)
         draw_ridgeplot(
             tfds,
             method_labels,
             "TFD",
-            "ridge_tfd.svg",
+            "ridge_tfd.png",
             "paper",
-            #bw='scott',
-            bw='hist', hist_range=(0,1),
+            bw='scott',
+            #bw='hist', hist_range=(0,1),
             same_subplot=True,
             sym_log=False)
 
@@ -810,8 +810,9 @@ if __name__ == "__main__":
         return section
 
     parser.add_argument("-i", "--infile",
-        help="Name of text file with force field in first column and molecule "
-             "file in second column. Columns separated by commas.")
+        help="CSV input file with arbitrary label in column 1, molecule "
+             "file in column 2, and name of SD tag in molecule file with "
+             "energies in column 3.")
 
     parser.add_argument("--readpickle", action="store_true", default=False,
         help="Read in already-computed data from pickle file named \"metrics.pickle\"")

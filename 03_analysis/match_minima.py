@@ -873,8 +873,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-i", "--infile",
-        help="Name of text file with force field in first column and molecule "
-             "file in second column. Columns separated by commas.")
+        help="CSV input file with arbitrary label in column 1, molecule "
+             "file in column 2, and name of SD tag in molecule file with "
+             "energies in column 3.")
 
     parser.add_argument("--readpickle", action="store_true", default=False,
         help="Read in already-matched data from pickle file named \"match.pickle\"")
