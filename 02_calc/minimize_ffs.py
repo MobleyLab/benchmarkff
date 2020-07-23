@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 
 """
+minimize_ffs.py
+
+Charge molecules using AM1-BCC ELF10 scheme, then perform energy minimization
+with OESzybki (MMFF94(S)) or OpenMM.
+
+Supported force fields: GAFF, GAFF2, MMFF94, MMFF94S, any OpenFF FFXML file
+
+Version: Nov 16 2019
 """
 
 import os
@@ -20,7 +28,6 @@ from openforcefield.utils import structure
 
 def run_openmm(topology, system, positions):
     """
-
     Minimize molecule with specified topology, system, and positions
        using OpenMM. Return the positions of the optimized moelcule.
 
@@ -63,6 +70,18 @@ def run_openmm(topology, system, positions):
 
 
 def charge_mol(mol):
+    """
+    Charge molecule using AM1-BCC ELF10 scheme.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+
+    Returns
+    -------
+    chg_mol : OpenEye single-conformer molecule with charges
+
+    """
 
     # make copy of the input mol
     oe_mol = oechem.OEMol(mol)
@@ -82,6 +101,16 @@ def charge_mol(mol):
 def charge_conf(chg_mol, conf):
     """
     Apply charges from chg_mol onto conf.
+
+    Parameters
+    ----------
+    chg_mol : OpenEye conformer with charges
+    conf    : OpenEye conformer without charges
+
+    Returns
+    -------
+    chg_conf : OpenEye conformer with charges
+
     """
 
     # make copy of the input mol
@@ -95,6 +124,17 @@ def charge_conf(chg_mol, conf):
 
 
 def min_mmff94x(mol, ofs, mmff94s=False):
+    """
+    Minimize the mol with MMFF94 or MMFF94S force field.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+    mmff94s : Boolean
+        True to minimize with MMFF94S
+
+    """
 
     # make copy of the input mol
     oe_mol = oechem.OEGraphMol(mol)
@@ -134,6 +174,17 @@ def min_mmff94x(mol, ofs, mmff94s=False):
 
 
 def min_gaffx(mol, ofs, gaff2=False):
+    """
+    Minimize the mol with GAFF or GAFF2 force field.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+    gaff2 : Boolean
+        True to minimize with GAFF2
+
+    """
 
     # make copy of the input mol
     oe_mol = oechem.OEMol(mol)
@@ -202,6 +253,17 @@ def min_gaffx(mol, ofs, gaff2=False):
 
 
 def min_ffxml(mol, ofs, ffxml):
+    """
+    Minimize the mol with force field input from FFXML file.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+    ffxml : string
+        name of FFXML file
+
+    """
 
     # make copy of the input mol
     oe_mol = oechem.OEGraphMol(mol)
@@ -270,6 +332,20 @@ def find_unspecified_stereochem(mol):
 
 
 def main(infile, outfile, ffxml, minimizer):
+    """
+    Process molecules and handle minimization.
+
+    Parameters
+    ----------
+    infile : string
+        name of file with input molecules
+    outfile : string
+        name of file for output molecules
+    ffxml : string
+        name of FFXML file, may be None if not provided
+    minimizer : string
+        name of the force field for which to do minimizations
+    """
 
     # open multi-molecule, multi-conformer file
     ifs = oechem.oemolistream()

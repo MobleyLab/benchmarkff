@@ -25,10 +25,11 @@ def min_ffxml(mol, ffxml):
         #system = ff.create_openmm_system(topology, charge_from_molecules=[off_mol])
         system = ff.create_openmm_system(topology)
 
-    except Exception:
+    except Exception as e:
         smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
         print( ' >>> openforcefield failed to create OpenMM system: '
-               f'{oe_mol.GetTitle()} {smilabel}')
+               f"'{oe_mol.GetTitle()}' '{smilabel}'")
+        print(f"{e}\n")
         return
 
     print(" >>> successful OpenMM system creation for openforcefield "

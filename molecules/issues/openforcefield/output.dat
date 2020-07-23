@@ -1,0 +1,2972 @@
+ >>> openforcefield failed to create OpenMM system: 'full_99' 'O[P@@](=O)([O-])OP(=O)([O-])[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_99' 'O[P@@](=O)([O-])OP(=O)([O-])[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_99' 'O[P@](=O)([O-])OP(=O)([O-])[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_99' 'O[P@](=O)([O-])OP(=O)([O-])[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_119' 'C(CC(O)(P(=O)([O-])[O-])P(=O)([O-])[O-])C[NH3+]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_119' 'C(CC(O)(P(=O)([O-])[O-])P(=O)([O-])[O-])C[NH3+]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_120' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_132' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)COP(=O)([O-])[O-])O)O)F)N-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@](=O)(O)[O-])O)O)F)N-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_134' 'c1nc2c(nc(nc2n1[C@H]3[C@H]([C@@H]([C@H](O3)CO[P@@](=O)(O)[O-])O)O)F)N-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_175' 'C([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_187' 'CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@](=O)(O)[O-]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_228' 'C[C@H](Cn1cnc2c1ncnc2N)OC[P@@](=O)(O)[O-]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_230' 'C[C@H](Cn1cnc2c1ncnc2N)OCP(=O)([O-])[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_302' 'C[C@H]1[C@H](O1)[P@@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_302' 'C[C@H]1[C@H](O1)[P@@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_302' 'C[C@H]1[C@H](O1)[P@@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_342' '[O-]S(=O)(=S)[O-]-0'
+BondHandler was not able to find parameters for the following valence terms:
+
+- Topology indices (3, 4): names and elements ( S), ( S), 
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_373' 'C(=O)([O-])[P@@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_373' 'C(=O)([O-])[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_377' 'C(C[NH3+])C(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-1'
+ProperTorsionHandler was not able to find parameters for the following valence terms:
+
+- Topology indices (7, 18, 20, 14): names and elements ( H), ( O), ( P), ( O), 
+- Topology indices (7, 18, 20, 15): names and elements ( H), ( O), ( P), ( O), 
+- Topology indices (7, 18, 20, 10): names and elements ( H), ( O), ( P), ( C), 
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@@](=O)(O)[O-])c3ccccc3-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_531' 'c1ccc(cc1)C2(C(=O)N(C(=O)N2)CO[P@](=O)(O)[O-])c3ccccc3-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_547' 'CCCNC(=O)N=[S@](=O)(c1ccc(cc1)Cl)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_552' 'c1cc(cnc1)CC(O)([P@@](=O)(O)[O-])[P@@](=O)(O)[O-]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_591' 'CNC1=Nc2ccc(cc2[C@H]([N+](=O)C1)c3ccccc3)Cl-0'
+Unable to assign charges
+
+ >>> openforcefield failed to create OpenMM system: 'full_591' 'CNC1=Nc2ccc(cc2[C@H]([N+](=O)C1)c3ccccc3)Cl-1'
+Unable to assign charges
+
+ >>> openforcefield failed to create OpenMM system: 'full_592' 'CNC1=C[N+](=O)[C@H](c2cc(ccc2N1)Cl)c3ccccc3-0'
+Unable to assign charges
+
+ >>> openforcefield failed to create OpenMM system: 'full_592' 'CNC1=C[N+](=O)[C@H](c2cc(ccc2N1)Cl)c3ccccc3-1'
+Unable to assign charges
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_650' 'COc1cccc(c1)[N@]2CCCNCC2-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_674' 'c1cc(c(cc1Br)[N@@]2CCC[C@@H]2C(=O)O)[N+](=O)[O-]-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_674
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-12'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-13'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-14'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-15'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-16'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-17'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_707' 'Cc1ccc(cn1)C(=O)N2CCC3(CCC[N@@]3S(=O)(=O)C)CC2-18'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_707
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 41, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 45, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_856' 'CS(=O)(=O)[N@]1CCC[C@]12CCCN(C2)C(=O)CC#N-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_856
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: True
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1284' 'CN1CCC[C@@]2(C1=O)CC[N@](C2)c3ccc(cn3)C(F)(F)F-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1284
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1284' 'CN1CCC[C@@]2(C1=O)CC[N@](C2)c3ccc(cn3)C(F)(F)F-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1284
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1284' 'CN1CCC[C@@]2(C1=O)CC[N@](C2)c3ccc(cn3)C(F)(F)F-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1284
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1284' 'CN1CCC[C@@]2(C1=O)CC[N@](C2)c3ccc(cn3)C(F)(F)F-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1284
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1284' 'CN1CCC[C@@]2(C1=O)CC[N@](C2)c3ccc(cn3)C(F)(F)F-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1284
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1284' 'CN1CCC[C@@]2(C1=O)CC[N@](C2)c3ccc(cn3)C(F)(F)F-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1284
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1601' 'c1cnc(nc1)[N@]2C[C@H]3COC[C@H]([C@@H]3C2)C(=O)N4CCC(CC4)F-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1601
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1601' 'c1cnc(nc1)[N@]2C[C@H]3COC[C@H]([C@@H]3C2)C(=O)N4CCC(CC4)F-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1601
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-12'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-13'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-14'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-15'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1735' 'c1cnc(nc1)[N@@]2CCC[C@@]3(C2)CCN(C3)C(=O)C4CCOCC4-16'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1735
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 46, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 36, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-12'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-13'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-14'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-15'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-16'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-17'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-18'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-19'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-20'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-21'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-22'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-23'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-24'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-25'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-26'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-27'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-28'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1741' 'Cc1cc(nc(n1)N)[N@@](C)Cc2ccncc2C-29'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1741
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 34, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1748' 'Cc1nccc(n1)[N@@]2C[C@](C(C2)(C)C)(C)O-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1748
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1748' 'Cc1nccc(n1)[N@@]2C[C@](C(C2)(C)C)(C)O-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1748
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1748' 'Cc1nccc(n1)[N@@]2C[C@](C(C2)(C)C)(C)O-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1748
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1748' 'Cc1nccc(n1)[N@@]2C[C@](C(C2)(C)C)(C)O-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1748
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1786' 'c1cnc(nc1)[N@@]2C[C@H]3COC[C@@H]([C@@H]3C2)C(=O)N4CCOCC4-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1786
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 25, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1786' 'c1cnc(nc1)[N@@]2C[C@H]3COC[C@@H]([C@@H]3C2)C(=O)N4CCOCC4-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1786
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 25, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1963' 'CN1CCC[C@]2(C1=O)CC[N@](C2)c3ccc(cn3)Cl-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1963
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1963' 'CN1CCC[C@]2(C1=O)CC[N@](C2)c3ccc(cn3)Cl-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1963
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1963' 'CN1CCC[C@]2(C1=O)CC[N@](C2)c3ccc(cn3)Cl-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1963
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_1963' 'CN1CCC[C@]2(C1=O)CC[N@](C2)c3ccc(cn3)Cl-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_1963
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 33, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2047' 'c1c(cnc(n1)[N@]2C[C@H]([C@@H]3CCO[C@@H]3C2)C(=O)N4CCCC4)F-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2047
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2095' 'Cc1ccc(nn1)[N@@]2C[C@H]([C@@]3(C2)CCN(C3=O)c4ccsc4)C-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2095
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 40, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 27, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 32, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2338' 'Cc1ccc(c(c1)S(=O)(=O)[N@@]2CCCc3c2cc(c(c3)F)F)O-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2338
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 31, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 22, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 16, name: , idx: 37, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-12'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-13'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-14'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-15'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-16'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-17'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-18'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-19'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-20'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-21'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2650' 'Cc1cc(nc(c1C#N)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C-22'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2650
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-12'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-13'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2684' 'CC(C)N1CCC[C@]2(C1=O)CC[N@](C2)c3ccnc(n3)SC-14'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2684
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 42, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 26, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 33, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 34, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-12'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-13'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-14'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-15'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-16'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-17'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-18'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-19'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-20'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-21'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-22'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_2890' 'Cc1cc(c(nc1C)[N@]2CC[C@]3(C2)CCCN(C3=O)CC4CC4)C#N-23'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_2890
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 48, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 39, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 40, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3023' 'CCc1cc(nc(n1)N(C)C)[N@@]2C[C@@](C(C2)(C)C)(C)O-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3023
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 43, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3023' 'CCc1cc(nc(n1)N(C)C)[N@@]2C[C@@](C(C2)(C)C)(C)O-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3023
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 43, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3023' 'CCc1cc(nc(n1)N(C)C)[N@@]2C[C@@](C(C2)(C)C)(C)O-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3023
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 43, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3023' 'CCc1cc(nc(n1)N(C)C)[N@@]2C[C@@](C(C2)(C)C)(C)O-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3023
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 43, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3023' 'CCc1cc(nc(n1)N(C)C)[N@@]2C[C@@](C(C2)(C)C)(C)O-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3023
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 43, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3023' 'CCc1cc(nc(n1)N(C)C)[N@@]2C[C@@](C(C2)(C)C)(C)O-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3023
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 43, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 30, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 31, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3034' 'c1c(cnc(n1)[N@]2C[C@H]3COC[C@@H]([C@@H]3C2)C(=O)N4CCOCC4)F-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3034
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3034' 'c1c(cnc(n1)[N@]2C[C@H]3COC[C@@H]([C@@H]3C2)C(=O)N4CCOCC4)F-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3034
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 39, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 28, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-7'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-8'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-9'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-10'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3042' 'c1cc(c(nc1)[N@]2CC[C@]3(C2)CCCN(C3=O)C4CCOCC4)C#N-11'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3042
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 45, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 29, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 37, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 38, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-5'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3119' 'c1cc(c(cc1F)[N@]2CCC[C@H]2C(=O)O)[N+](=O)[O-]-6'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3119
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 22, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 14, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 21, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3449' 'c1cncnc1[C@@H]2CCC[N@@]2c3ccncn3-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3449
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 29, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3449' 'c1cncnc1[C@@H]2CCC[N@@]2c3ccncn3-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3449
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 29, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3449' 'c1cncnc1[C@@H]2CCC[N@@]2c3ccncn3-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3449
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 29, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3449' 'c1cncnc1[C@@H]2CCC[N@@]2c3ccncn3-3'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3449
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 29, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3449' 'c1cncnc1[C@@H]2CCC[N@@]2c3ccncn3-4'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3449
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 29, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 23, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 24, aromatic: False, chiral: True
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3481' 'CC(C)[N@](C)c1ccncn1-0'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3481
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 23, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 16, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 19, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3481' 'CC(C)[N@](C)c1ccncn1-1'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3481
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 23, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 16, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 19, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3481' 'CC(C)[N@](C)c1ccncn1-2'
+Unable to make OFFMol from OEMol: OEMol has unspecified stereochemistry. oemol.GetTitle(): full_3481
+Problematic atoms are:
+Atom atomic num: 7, name: , idx: 23, aromatic: False, chiral: True with bonds:
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 16, aromatic: True, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 19, aromatic: False, chiral: False
+bond order: 1, chiral: False to atom atomic num: 6, name: , idx: 20, aromatic: False, chiral: False
+
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3561' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3562' 'C(CC(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-])C[NH3+]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3642' 'C(C[NH3+])C(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3642' 'C(C[NH3+])C(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-2'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-7'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-9'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3643' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-3'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-6'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-8'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-10'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-14'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-16'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-5'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-11'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-12'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-13'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3644' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-17'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3645' 'C(C[NH3+])C(O)([P@](=O)(O)[O-])[P@](=O)(O)[O-]-15'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3645' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-18'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3645' 'C(C[NH3+])C(O)([P@@](=O)(O)[O-])[P@](=O)(O)[O-]-19'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3673' 'c1cc(cnc1)CC(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-0'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3673' 'c1cc(cnc1)CC(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-4'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3674' 'c1cc(cnc1)CC(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-1'
+OpenEye Omega conformer generation failed
+
+ >>> openforcefield failed to create OpenMM system: 'full_3674' 'c1cc(cnc1)CC(O)(P(=O)([O-])[O-])P(=O)([O-])[O-]-5'
+OpenEye Omega conformer generation failed
+
