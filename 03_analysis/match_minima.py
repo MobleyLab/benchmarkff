@@ -105,13 +105,14 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
     medians = df.median(axis=0)
 
     # reshape for grouped violin plots
-    df = df.melt(var_name='groups', value_name='values')
-
+    df = df.melt(value_vars=list(df.columns))
+    df = df.dropna()
+    
     # set grid background style
     sns.set(style="whitegrid")
 
     if what_for == 'paper':
-        f, ax = plt.subplots(figsize=(4, 3))
+        f, ax = plt.subplots(figsize=(15, 7))
         large_font = 10
         small_font = 8
         lw = 1
@@ -131,9 +132,15 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
         #lw=1.0
         #f, ax = plt.subplots(figsize=(4, 8))
 
+    my_cmap = "tab10"
+    pal = sns.palplot(sns.color_palette(my_cmap))
+    colors = sns.color_palette(my_cmap)
+    all_labels = ['MMFF94S', 'GAFF2', 'OPLS3e', 'OpenFF-1.2.0', 'OpenFF-1.0.0', 'Smirnoff99Frosst', 'MMFF94', 'GAFF',  'B3LYP-D3BJ/DZVP', 'OpenFF-1.1.1']
+    cdict = {m: c for m, c in zip(all_labels, colors)}
+
     # show each distribution with both violins and points
-    sns.violinplot(x="groups", y="values", data=df, inner="box",
-        palette="tab10", linewidth=lw)
+    ax = sns.violinplot(x='variable', y='value', data=df, inner="box",
+                        palette=cdict, size=5, aspect=3, linewidth=lw)
 
     # replot the median point for larger marker, zorder to plot points on top
     xlocs = ax.get_xticks()
@@ -507,7 +514,10 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
 
             # also calculate mse
             sum_errs = np.sum(errs)
-            msd = sum_errs/len(errs)
+            if len(errs) == 0:
+                msd = np.nan
+            else:
+                msd = sum_errs/len(errs)
             mol_msds.append(msd)
 
         rms_array.append(mol_rmses)
