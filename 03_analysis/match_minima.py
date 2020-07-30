@@ -96,9 +96,9 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
     """
     # print stats on number of datapoints in each method
     temp = msds.T
-    for l in temp:
+    for l, m in zip(temp, ff_list):
         print(f"Total number of unique molecules: {l.shape}")
-        print(f"Count of non-nan molecules: {np.count_nonzero(~np.isnan(l))}")
+        print(f"Count of non-nan molecules for {m}: {np.count_nonzero(~np.isnan(l))}")
 
     # create dataframe from list of lists
     df = pd.DataFrame.from_records(msds, columns=ff_list)
@@ -112,11 +112,11 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
     sns.set(style="whitegrid")
 
     if what_for == 'paper':
-        f, ax = plt.subplots(figsize=(15, 7))
+        f, ax = plt.subplots(figsize=(8, 5))
         large_font = 10
         small_font = 8
         lw = 1
-        med_pt = 2
+        med_pt = 5
         xrot = 45
         xha = 'right'
     elif what_for == 'talk':
@@ -133,7 +133,6 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
         #f, ax = plt.subplots(figsize=(4, 8))
 
     my_cmap = "tab10"
-    pal = sns.palplot(sns.color_palette(my_cmap))
     colors = sns.color_palette(my_cmap)
     all_labels = ['MMFF94S', 'GAFF2', 'OPLS3e', 'OpenFF-1.2.0', 'OpenFF-1.0.0', 'Smirnoff99Frosst', 'MMFF94', 'GAFF',  'B3LYP-D3BJ/DZVP', 'OpenFF-1.1.1']
     cdict = {m: c for m, c in zip(all_labels, colors)}
@@ -167,7 +166,7 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
     #plt.xlim(-1, 1)
 
     # save and close figure
-    plt.savefig('violin.svg', bbox_inches='tight')
+    plt.savefig('violin.png', bbox_inches='tight')
     #plt.show()
     plt.clf()
     plt.close(plt.gcf())
@@ -822,6 +821,7 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
         pickle.dump(mol_dict, open('match.pickle', 'wb'))
 
     # process dictionary to match the energies by RMSD-matched conformers
+    print(list(in_dict.keys()))
     mol_dict = extract_matches(mol_dict)
 
     # collect the matched energies into a list of lists
@@ -843,36 +843,36 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
 
     if plot:
 
-        # customize: exclude outliers from violin plots
-        mol_names = list(mol_names)
-        violin_exclude = ['full_549', 'full_590', 'full_802', 'full_1691', 'full_1343', 'full_2471']
-        idx_of_exclude = [mol_names.index(x) for x in violin_exclude]
-        for idx in sorted(idx_of_exclude, reverse=True):
-            del msd_array[idx]
+        # # customize: exclude outliers from violin plots
+        # mol_names = list(mol_names)
+        # violin_exclude = ['full_549', 'full_590', 'full_802', 'full_1691', 'full_1343', 'full_2471']
+        # idx_of_exclude = [mol_names.index(x) for x in violin_exclude]
+        # for idx in sorted(idx_of_exclude, reverse=True):
+        #     del msd_array[idx]
 
         # plots combining all molecules -- skip reference bc 0 rmse to self
         # msd_array[i][j] represents ith mol, jth method's MSD
         plot_violin_signed(np.array(msd_array)[:, 1:], ff_list[1:], 'paper')
 
         # molecule-specific plots
-        print("\nGenerating bar and line plots for individual mols. This might take a while.")
-        for i, mol_name in enumerate(mol_dict):
-            print(mol_name)
+        # print("\nGenerating bar and line plots for individual mols. This might take a while.")
+        # for i, mol_name in enumerate(mol_dict):
+        #     print(mol_name)
 
-            # optional: only plot single molecule by specified title
-            #if mol_name != 'full_549': continue
-            if mol_name in violin_exclude: continue
+        #     # optional: only plot single molecule by specified title
+        #     #if mol_name != 'full_549': continue
+        #     #if mol_name in violin_exclude: continue
 
-            # optional: only plot selected force fields by index
-            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
+        #     # optional: only plot selected force fields by index
+        #     #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
-            # line plots of relative energies
-            plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
+        #     # line plots of relative energies
+        #     plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
 
-            # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
-            ref_nconfs = eff_nconfs[i][0]
-            plot_mol_rmses(mol_name, rms_array[i][1:], ff_list[1:],
-                           eff_nconfs[i][1:], ref_nconfs, 'talk')
+        #     # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
+        #     ref_nconfs = eff_nconfs[i][0]
+        #     plot_mol_rmses(mol_name, rms_array[i][1:], ff_list[1:],
+        #                    eff_nconfs[i][1:], ref_nconfs, 'talk')
 
 
 

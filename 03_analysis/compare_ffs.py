@@ -792,6 +792,18 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
         rmsds.append(flatten(b))
         tfds.append(flatten(c))
 
+    
+    # 95 % percentiles
+    print("95 % percentiles of energies")
+    for m, enes in zip(method_labels[1:], energies):
+        print(m, np.percentile(enes, 2.5), np.percentile(enes, 97.5))
+    print("Fraction of ddE between -1 <= ddE <= 1 kcal/mol")
+    for m, enes in zip(method_labels[1:], energies):
+        samples = []
+        for i in range(1000):
+            s = np.random.choice(enes, replace=True, size=len(enes))
+            samples.append(np.sum(np.logical_and(s >= -1.0, s <= 1.0))/float(len(s)))
+        print(m, np.sum(np.logical_and(enes >= -1.0, enes <= 1.0))/float(len(enes)), np.std(samples))
     if plot:
         for i in range(len(energies)):
             for j in range(i+1, len(energies)):
