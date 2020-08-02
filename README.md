@@ -9,8 +9,6 @@ Overview: Compare optimized geometries and energies from various force fields wi
 
 This repository comprises code to extract molecule datasets from [QCArchive](https://qcarchive.molssi.org/), run energy minimizations with various force fields, and analyze the resulting geometries and energies with respect to QM reference data from QCArchive.
 
-## Python dependencies
-
 ## Python setup
 
 ### Package dependencies
