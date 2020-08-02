@@ -1,7 +1,7 @@
 # BenchmarkFF
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/vtlim/benchmarkff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vtlim/benchmarkff/context:python)
 
-README last updated: June 7 2020
+README last updated: Aug 2 2020
 
 ## About
 
@@ -9,29 +9,39 @@ Overview: Compare optimized geometries and energies from various force fields wi
 
 This repository comprises code to extract molecule datasets from [QCArchive](https://qcarchive.molssi.org/), run energy minimizations with various force fields, and analyze the resulting geometries and energies with respect to QM reference data from QCArchive.
 
-## Major dependencies
-* Python (numpy, matplotlib, seaborn)
+## Python dependencies
+
+## Python setup
+
+### Package dependencies
+
+* numpy, matplotlib, seaborn
 * OpenEye
 * RDKit (solely for TFD calculations)
 * OpenMM
 * OpenForceField
 * QCFractal, QCPortal
 
-## Conda setup
+
+### Conda setup
 ```
 conda create -n parsley python=3.6 matplotlib numpy seaborn
 conda activate parsley
 conda install -c openeye -c conda-forge -c omnia rdkit openeye-toolkits qcfractal qcportal openforcefield cmiles openmm
 ```
 
+The packages in VTL's conda environment is documented in this repo as `parsley.yml`.
+
 ## Contents
 
 Directories in this repo:
 
 * `01_setup`: Extract molecules from [QCArchive](https://qcarchive.molssi.org/), convert to OpenEye mols, and standardize conformers and titles.
-* `02_calc`: Run energy minimizations for various force fields
-* `03_analysis`: Analyze output energies and geometries
+* `02_calc`: Run energy minimizations for various force fields.
+* `03_analysis`: Analyze output energies and geometries.
 * `examples`: See this directory for example results and plots.
+* `molecules`: The molecule sets used in our benchmark analyses.
+* `tools`: A handful of helpful scripts (align structures for PDF output, find specific moieties, extract conformers by SD tag value).
 
 File descriptions:
 
