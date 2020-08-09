@@ -29,7 +29,7 @@ import openeye.oechem as oechem
 import rdkit.Chem as Chem
 from rdkit.Chem import TorsionFingerprints
 import reader
-
+from collections import OrderedDict
 ### ------------------- Functions -------------------
 
 
@@ -346,7 +346,7 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
             p.set_sizes([4.0])
 
     # set log scaling but use symmetric log for negative values
-    plt.yscale('symlog')
+#    plt.yscale('symlog')
 
     plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
@@ -484,19 +484,24 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='paper',
     my_cmap = "tab10"
     pal = sns.palplot(sns.color_palette(my_cmap))
     colors = sns.color_palette(my_cmap)
-    all_labels = ['MMFF94S', 'GAFF2', 'OPLS3e', 'OpenFF-1.2.0', 'OpenFF-1.0.0', 'Smirnoff99Frosst', 'MMFF94', 'GAFF',  'B3LYP-D3BJ/DZVP', 'OpenFF-1.1.1']
+    all_labels = ['MMFF94S', 'GAFF2', 'OPLS3e', 'OpenFF-1.2', 'OpenFF-1.0', 'Smirnoff99Frosst', 'MMFF94', 'GAFF',  'B3LYP-D3BJ/DZVP', 'OpenFF-1.1']
     cdict = {m: c for m, c in zip(all_labels, colors)}
 
     # convert data to dataframes for ridge plot
     temp = []
-    for i in range(num_methods):
-        df = pd.DataFrame(mydata[i], columns = [x_label])
-        df['method'] = method_labels[i+1]
-        temp.append(df)
+    for method in ['GAFF', 'GAFF2', 'MMFF94', 'MMFF94S', 'OPLS3e', 'Smirnoff99Frosst', 'OpenFF-1.0', 'OpenFF-1.1', 'OpenFF-1.2']:
+#range(num_methods):
+        if method in method_labels:
+            index = method_labels.index(method) - 1
+            print(method, index)
+            df = pd.DataFrame(mydata[index], columns = [x_label])
+            df['method'] = method_labels[index+1]
+            temp.append(df)
 
+    print(temp)
     # list of dataframes concatenated to single dataframe
     df = pd.concat(temp, ignore_index = True)
-
+    print(df)
 #    print(method_labels)
     g = sns.FacetGrid(df, row="method", hue="method", aspect=10,
         height=ridgedict["h"], palette=cdict)
@@ -545,9 +550,12 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='paper',
         cmap = mpl.cm.tab10
         patches = []
         n_ffs = len(method_labels)-1
-        for i in range(n_ffs):
-            patches.append(mpl.patches.Patch(color=cdict[method_labels[i+1]],
-                label=method_labels[i+1]))
+        #for i in range(n_ffs):
+        for method in ['GAFF', 'GAFF2', 'MMFF94', 'MMFF94S', 'OPLS3e', 'Smirnoff99Frosst', 'OpenFF-1.0', 'OpenFF-1.1', 'OpenFF-1.2']:
+            if method in method_labels:
+                index = method_labels.index(method) - 1
+                patches.append(mpl.patches.Patch(color=cdict[method_labels[index+1]],
+                label=method_labels[index+1]))
         plt.legend(handles=patches, fontsize=ridgedict["xfontsize"]/1.2)
 
     # optional: set symmetric log scale on x-axis
@@ -569,13 +577,13 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='paper',
     # ax.spines['left'].set_position('zero')
     # ax.set_yticks([0.4])
     if what_for == 'paper':
-        plt.gcf().set_size_inches(5, 3)
+        plt.gcf().set_size_inches(7, 3)
     elif what_for == 'talk':
         plt.gcf().set_size_inches(12, 9)
 
     # adjust font sizes
     plt.xlabel(x_label, fontsize=ridgedict["xfontsize"])
-    plt.ylabel('Fraction', fontsize=ridgedict["xfontsize"])
+    plt.ylabel('Density', fontsize=ridgedict["xfontsize"])
     plt.xticks(fontsize=ridgedict["xfontsize"])
 
 
@@ -586,7 +594,7 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='paper',
 
 
 def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='talk',
-    bins=20, x_range=None, y_range=None, z_range=None, z_interp=True):
+                   bins=20, x_range=None, y_range=None, z_range=None, z_interp=True, symlog=False):
 
     """
     Draw a scatter plot colored smoothly to represent the 2D density.
@@ -700,10 +708,11 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     print(f"z''\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interp, bounded)")
 
     # generate the plot
-    plt.scatter(x, y, c=z, **plt_options)
+    plt.scatter(x, y, c=z, vmin=z_range[0], vmax=z_range[1], **plt_options)
 
     # set log scaling but use symmetric log for negative values
-    plt.yscale('symlog')
+    if symlog:
+        plt.yscale('symlog')
 
     # configure color bar and finish plotting
     colorbar_and_finish(size1, out_file)
@@ -717,7 +726,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
 
     Parameter
     ---------
-    in_dict : OrderedDict
+    in_dict : Orderedict
         dictionary from input file, where key is method and value is dictionary
         first entry should be reference method
         in sub-dictionary, keys are 'sdfile' and 'sdtag'
@@ -736,6 +745,10 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
         [-2:-1] is the same as [-2] to get just next to last molecule.
 
     """
+    print(in_dict)
+    # remove last digit of OpenFF version
+    in_dict = OrderedDict([(k[:-2], v) if (k.endswith('.0') or k.endswith('.1')) else (k, v) for k, v in in_dict.items()])
+    print(in_dict)
     method_labels = list(in_dict.keys())
 
     # run comparison, unless reading in from pickle file
@@ -863,8 +876,8 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "RMSD ($\mathrm{\AA}$)",
             "fig_ridge_rmsd.png",
             "paper",
-            bw='scott',
-            #bw='hist', hist_range=(0,4),
+            #bw='scott',
+            bw='hist', hist_range=(0,3),
             same_subplot=True,
             sym_log=False)
         draw_ridgeplot(
@@ -873,8 +886,8 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
             "TFD",
             "fig_ridge_tfd.png",
             "paper",
-            bw='scott',
-            #bw='hist', hist_range=(0,1),
+            #bw='scott',
+            bw='hist', hist_range=(0,.5),
             same_subplot=True,
             sym_log=False)
 
@@ -885,12 +898,41 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "RMSD ($\mathrm{\AA}$)",
                 "ddE (kcal/mol)",
+                f"fig_density_rmsd_linear_{ml}.png",
+                "paper",
+                x_range=(0, 3.7),
+                y_range=(-30, 30),
+                z_range=(-260, 5200),
+                z_interp=True,
+                symlog=False)
+
+            draw_density2d(
+                tfds[i],
+                energies[i],
+                ml,
+                "TFD",
+                "ddE (kcal/mol)",
+                f"fig_density_tfd_linear_{ml}.png",
+                "paper",
+                x_range=(0, .8),
+                y_range=(-30, 30),
+                z_range=(-302, 7060),
+                z_interp=True,
+                symlog=False)
+
+            draw_density2d(
+                rmsds[i],
+                energies[i],
+                ml,
+                "RMSD ($\mathrm{\AA}$)",
+                "ddE (kcal/mol)",
                 f"fig_density_rmsd_{ml}.png",
                 "paper",
                 x_range=(0, 3.7),
-                y_range=(-50, 30),
+                y_range=(-30, 30),
                 z_range=(-260, 5200),
-                z_interp=True)
+                z_interp=True,
+                symlog=True)
 
             draw_density2d(
                 tfds[i],
@@ -900,10 +942,12 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 "ddE (kcal/mol)",
                 f"fig_density_tfd_{ml}.png",
                 "paper",
-                x_range=(0, 1.0),
-                y_range=(-30, 55),
+                x_range=(0, .8),
+                y_range=(-30, 30),
                 z_range=(-302, 7060),
-                z_interp=True)
+                z_interp=True,
+                symlog=True)
+
 
 
 

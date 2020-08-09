@@ -23,9 +23,13 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import openeye.oechem as oechem
 import reader
+import seaborn as sns
+import pandas as pd
+
+sns.set(rc={'text.usetex' : True})
 
 def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
-    labels_subset, x_label, y_label, out_file, what_for='talk',
+    labels_subset, method_label, x_label, y_label, out_file, what_for='talk',
     x_range=None, y_range=None):
 
     """
@@ -97,11 +101,16 @@ def draw_scatter_moiety(x_data, y_data, all_x_subset, all_y_subset,
 
     # generate the plot with subset(s)
     subset_colors = ['#01959f', '#614051', '#e96058']  # todo generalize
-    for i, (xs, ys, lab) in enumerate(zip(all_x_subset, all_y_subset, labels_subset)):
-        print(f"Number of data points in subset {i}: {len(xs)}")
-        plt.scatter(xs, ys, label=lab, c=subset_colors[i], zorder=2, **plt_options)
+    with open('statistics.dat', 'a') as file:
+        file.write(f"{method_label} all {len(x_data)} {np.average(x_data[~np.isnan(x_data)])} {np.std(x_data[~np.isnan(x_data)])} {np.average(y_data[~np.isnan(y_data)])} {np.std(y_data[~np.isnan(y_data)])}\n")
+        for i, (xs, ys, lab) in enumerate(zip(all_x_subset, all_y_subset, labels_subset)):
+            print(f"Number of data points in subset {i}: {len(xs)}")
+            print(f"{method_label} {lab} {len(xs)} {np.average(xs)} {np.std(xs)} {np.average(ys)} {np.std(ys)}")
+            file.write(f"{method_label} {lab} {len(xs)} {np.average(xs)} {np.std(xs)} {np.average(ys)} {np.std(ys)}\n")
+            plt.scatter(xs, ys, label=lab, c=subset_colors[i], zorder=2, **plt_options)
 
-    plt.legend(loc=(0.2, 1.04))
+    plt.title(method_label)
+    plt.legend(loc=(0.35, 0.02))
     plt.savefig(out_file, bbox_inches='tight')
     plt.clf()
     #plt.show()
@@ -127,7 +136,8 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
         prefix of the names of the output plots
 
     """
-    method_labels = list(in_dict.keys())
+#    method_labels = list(in_dict.keys())
+    method_labels =[k[:-2] if (k.endswith('.0') or k.endswith('.1')) else k for k in in_dict.keys()]
     num_methods = len(method_labels)
 
     # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
@@ -164,8 +174,8 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
         # store and move onto next subset file
         all_inds_subset.append(inds_subset)
 
-    for i in range(num_methods-1):
-
+    for method in ['GAFF', 'GAFF2', 'MMFF94', 'MMFF94S', 'OPLS3e', 'Smirnoff99Frosst', 'OpenFF-1.0', 'OpenFF-1.1', 'OpenFF-1.2']:
+        i = method_labels.index(method) - 1
         # get output filename and make sure it has no forbidden characters
         out_file = out_prefix + method_labels[i+1] + '.png'
         out_file = re.sub(r'[\\/*?:"<>|]', "", out_file)
@@ -188,14 +198,25 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
 
         draw_scatter_moiety(
             x_data, y_data,
-            all_x_subset, all_y_subset, labels_subset,
+            all_x_subset, all_y_subset, labels_subset, method_labels[i+1],
             "TFD",
             "ddE (kcal/mol)",
             out_file,
             what_for='paper',
             x_range=(0, 0.8),
             y_range=(-50, 30))
-
+    
+        
+    data = pd.read_csv('statistics.dat', sep=' ', header=None)
+    print(data)
+    for i, dat, lab, unit in zip(range(4), ['avg_tfd', 'std_tfd', 'avg_ene', 'std_ene'], ['$\overline{\mathrm{TFD}}$', '$\sigma(\mathrm{TFD})$', '$\overline{\mathrm{dd}E}$', '$\sigma(\mathrm{dd}E)$'], ['', '', ' [kcal/mol]', ' [kcal/mol]']):
+        sns.barplot(x=data.iloc[:,0], y=data.iloc[:,i+3], hue=data.iloc[:,1])
+        plt.xticks(rotation=90)
+        plt.xlabel('')
+        plt.ylabel(lab + unit)
+        plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+        plt.savefig(f'{dat}.png', bbox_inches='tight')
+        plt.clf()
 
 ### ------------------- Parser -------------------
 
@@ -247,5 +268,7 @@ if __name__ == "__main__":
 
     # run main
     print("Log file from color_by_moiety.py\n")
+    with open('statistics.dat', 'w') as file:
+        file.write('')
     main(in_dict, args.picklefile, args.smifiles, args.out_prefix)
 
