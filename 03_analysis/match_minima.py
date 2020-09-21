@@ -104,8 +104,6 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
 
     # create dataframe from list of lists
     df = pd.DataFrame.from_records(msds, columns=ff_list)
-    #change order of columns and order of plotting
-    df = df.loc[:, ['GAFF', 'GAFF2', 'MMFF94', 'MMFF94S', 'OPLS3e', 'Smirnoff99Frosst', 'OpenFF-1.0', 'OpenFF-1.1', 'OpenFF-1.2']]
     medians = df.median(axis=0)
 
     # reshape for grouped violin plots
@@ -139,12 +137,10 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
 
     my_cmap = "tab10"
     colors = sns.color_palette(my_cmap)
-    all_labels = ['MMFF94S', 'GAFF2', 'OPLS3e', 'OpenFF-1.2', 'OpenFF-1.0', 'Smirnoff99Frosst', 'MMFF94', 'GAFF',  'B3LYP-D3BJ/DZVP', 'OpenFF-1.1']
-    cdict = {m: c for m, c in zip(all_labels, colors)}
 
     # show each distribution with both violins and points
     ax = sns.violinplot(x='variable', y='value', data=df, inner="box",
-                        palette=cdict, size=5, aspect=3, linewidth=lw)
+                        palette=colors, size=5, aspect=3, linewidth=lw)
 
     # replot the median point for larger marker, zorder to plot points on top
     xlocs = ax.get_xticks()
@@ -827,11 +823,7 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
         # save results in pickle file
         pickle.dump(mol_dict, open('match.pickle', 'wb'))
 
-    # rename OpenFF:
-    in_dict = OrderedDict([(k[:-2], v) if (k.endswith('.0') or k.endswith('.1')) else (k, v) for k, v in in_dict.items()])
-
     # process dictionary to match the energies by RMSD-matched conformers
-    print(list(in_dict.keys()))
     mol_dict = extract_matches(mol_dict)
 
     # collect the matched energies into a list of lists

@@ -527,48 +527,19 @@ def draw_ridgeplot(
     my_cmap = "tab10"
     pal = sns.palplot(sns.color_palette(my_cmap))
     colors = sns.color_palette(my_cmap)
-    all_labels = [
-        "MMFF94S",
-        "GAFF2",
-        "OPLS3e",
-        "OpenFF-1.2",
-        "OpenFF-1.0",
-        "Smirnoff99Frosst",
-        "MMFF94",
-        "GAFF",
-        "B3LYP-D3BJ/DZVP",
-        "OpenFF-1.1",
-    ]
-    cdict = {m: c for m, c in zip(all_labels, colors)}
 
     # convert data to dataframes for ridge plot
     temp = []
-    for method in [
-        "GAFF",
-        "GAFF2",
-        "MMFF94",
-        "MMFF94S",
-        "OPLS3e",
-        "Smirnoff99Frosst",
-        "OpenFF-1.0",
-        "OpenFF-1.1",
-        "OpenFF-1.2",
-    ]:
-        # range(num_methods):
-        if method in method_labels:
-            index = method_labels.index(method) - 1
-            print(method, index)
-            df = pd.DataFrame(mydata[index], columns=[x_label])
-            df["method"] = method_labels[index + 1]
-            temp.append(df)
+    for i in range(num_methods):
+        df = pd.DataFrame(mydata[i], columns=[x_label])
+        df["method"] = method_labels[i + 1]
+        temp.append(df)
 
-    print(temp)
     # list of dataframes concatenated to single dataframe
     df = pd.concat(temp, ignore_index=True)
-    print(df)
     #    print(method_labels)
     g = sns.FacetGrid(
-        df, row="method", hue="method", aspect=10, height=ridgedict["h"], palette=cdict
+        df, row="method", hue="method", aspect=10, height=ridgedict["h"], palette=colors
     )
 
     if not same_subplot:
@@ -647,26 +618,13 @@ def draw_ridgeplot(
         cmap = mpl.cm.tab10
         patches = []
         n_ffs = len(method_labels) - 1
-        # for i in range(n_ffs):
-        for method in [
-            "GAFF",
-            "GAFF2",
-            "MMFF94",
-            "MMFF94S",
-            "OPLS3e",
-            "Smirnoff99Frosst",
-            "OpenFF-1.0",
-            "OpenFF-1.1",
-            "OpenFF-1.2",
-        ]:
-            if method in method_labels:
-                index = method_labels.index(method) - 1
-                patches.append(
-                    mpl.patches.Patch(
-                        color=cdict[method_labels[index + 1]],
-                        label=method_labels[index + 1],
-                    )
+        for i in range(n_ffs):
+            patches.append(
+                mpl.patches.Patch(
+                    color=cmap(i/10),
+                    label=method_labels[i + 1],
                 )
+            )
         plt.legend(handles=patches, fontsize=ridgedict["xfontsize"] / 1.2)
 
     # optional: set symmetric log scale on x-axis
@@ -884,15 +842,6 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
         [-2:-1] is the same as [-2] to get just next to last molecule.
 
     """
-    print(in_dict)
-    # remove last digit of OpenFF version
-    in_dict = OrderedDict(
-        [
-            (k[:-2], v) if (k.endswith(".0") or k.endswith(".1")) else (k, v)
-            for k, v in in_dict.items()
-        ]
-    )
-    print(in_dict)
     method_labels = list(in_dict.keys())
 
     # run comparison, unless reading in from pickle file

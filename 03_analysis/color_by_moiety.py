@@ -114,14 +114,14 @@ def draw_scatter_moiety(
     subset_colors = ["#01959f", "#614051", "#e96058"]  # todo generalize
     with open("statistics.dat", "a") as file:
         file.write(
-            f"{method_label:19s},{'all':19s},{len(x_data):19d},{np.average(x_data[~np.isnan(x_data)]):19.3f},{np.std(x_data[~np.isnan(x_data)]):19.3f},{np.average(y_data[~np.isnan(y_data)]):19.3f},{np.std(y_data[~np.isnan(y_data)]):19.3f}\n"
+            f"{method_label:19s},{'all':9s},{len(x_data):9d},{np.average(x_data[~np.isnan(x_data)]):9.3f},{np.std(x_data[~np.isnan(x_data)]):9.3f},{np.average(y_data[~np.isnan(y_data)]):9.3f},{np.std(y_data[~np.isnan(y_data)]):9.3f}\n"
         )
         for i, (xs, ys, lab) in enumerate(
             zip(all_x_subset, all_y_subset, labels_subset)
         ):
             print(f"Number of data points in subset {i}: {len(xs)}")
             file.write(
-                f"{method_label:19s},{lab:19s},{len(xs):19d},{np.average(xs):19.3f},{np.std(xs):19.3f},{np.average(ys):19.3f},{np.std(ys):19.3f}\n"
+                f"{method_label:19s},{lab:9s},{len(xs):9d},{np.average(xs):9.3f},{np.std(xs):9.3f},{np.average(ys):9.3f},{np.std(ys):9.3f}\n"
             )
             plt.scatter(xs, ys, label=lab, c=subset_colors[i], zorder=2, **plt_options)
 
@@ -152,10 +152,7 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
         prefix of the names of the output plots
 
     """
-    #    method_labels = list(in_dict.keys())
-    method_labels = [
-        k[:-2] if (k.endswith(".0") or k.endswith(".1")) else k for k in in_dict.keys()
-    ]
+    method_labels = list(in_dict.keys())
     num_methods = len(method_labels)
 
     # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
@@ -191,18 +188,7 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
         # store and move onto next subset file
         all_inds_subset.append(inds_subset)
 
-    for method in [
-        "GAFF",
-        "GAFF2",
-        "MMFF94",
-        "MMFF94S",
-        "OPLS3e",
-        "Smirnoff99Frosst",
-        "OpenFF-1.0",
-        "OpenFF-1.1",
-        "OpenFF-1.2",
-    ]:
-        i = method_labels.index(method) - 1
+    for i in range(num_methods - 1):
         # get output filename and make sure it has no forbidden characters
         out_file = out_prefix + method_labels[i + 1] + ".png"
         out_file = re.sub(r'[\\/*?:"<>|]', "", out_file)
@@ -323,6 +309,6 @@ if __name__ == "__main__":
     with open("statistics.dat", "w") as file:
         file.write("")
         file.write(
-            f"#{'FF':18s},{'moiety':19s},{'FF':19s},{'avg_tfd':19s},{'std_tfd':19s},{'avg_dde':19s},{'std_dde':19s}\n"
+            f"#{'FF':18s},{'moiety':9s},{'count':>9s},{'avg_tfd':>9s},{'std_tfd':>9s},{'avg_dde':>9s},{'std_dde':>9s}\n"
         )
     main(in_dict, args.picklefile, args.smifiles, args.out_prefix)
