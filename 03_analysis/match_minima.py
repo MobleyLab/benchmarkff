@@ -865,24 +865,24 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
         plot_violin_signed(np.array(msd_array)[:, 1:], ff_list[1:], 'paper')
 
         # molecule-specific plots
-        # print("\nGenerating bar and line plots for individual mols. This might take a while.")
-        # for i, mol_name in enumerate(mol_dict):
-        #     print(mol_name)
+        print("\nGenerating bar and line plots for individual mols. This might take a while.")
+        for i, mol_name in enumerate(mol_dict):
+            print(mol_name)
 
-        #     # optional: only plot single molecule by specified title
-        #     #if mol_name != 'full_549': continue
-        #     #if mol_name in violin_exclude: continue
+            # optional: only plot single molecule by specified title
+            #if mol_name != 'full_549': continue
+            #if mol_name in violin_exclude: continue
 
-        #     # optional: only plot selected force fields by index
-        #     #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
+            # optional: only plot selected force fields by index
+            #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])
 
-        #     # line plots of relative energies
-        #     plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
+            # line plots of relative energies
+            plot_mol_minima(mol_name, rel_energies[i], ff_list, 'talk')
 
-        #     # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
-        #     ref_nconfs = eff_nconfs[i][0]
-        #     plot_mol_rmses(mol_name, rms_array[i][1:], ff_list[1:],
-        #                    eff_nconfs[i][1:], ref_nconfs, 'talk')
+            # bar plots of RMSEs by force field -- skip reference bc 0 rmse to self
+            ref_nconfs = eff_nconfs[i][0]
+            plot_mol_rmses(mol_name, rms_array[i][1:], ff_list[1:],
+                           eff_nconfs[i][1:], ref_nconfs, 'talk')
 
 
 
