@@ -629,7 +629,9 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     z_interp : Boolean
         True to smoothen the color scale for the scatter plot points;
         False to plot 2d histograms colored by cells (no scatter plot)
-
+    symlog : Boolean
+        True to represent y-axis on (symmetric) log scale (linear
+        between -1 and 1 ), False for linear y-scaling
     """
 
     def colorbar_and_finish(labelsize, fname):
@@ -726,7 +728,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
 
     Parameter
     ---------
-    in_dict : Orderedict
+    in_dict : OrderedDict
         dictionary from input file, where key is method and value is dictionary
         first entry should be reference method
         in sub-dictionary, keys are 'sdfile' and 'sdtag'
@@ -926,7 +928,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "RMSD ($\mathrm{\AA}$)",
                 "ddE (kcal/mol)",
-                f"fig_density_rmsd_{ml}.png",
+                f"fig_density_rmsd_log_{ml}.png",
                 "paper",
                 x_range=(0, 3.7),
                 y_range=(-30, 30),
@@ -940,7 +942,7 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "TFD",
                 "ddE (kcal/mol)",
-                f"fig_density_tfd_{ml}.png",
+                f"fig_density_tfd_log_{ml}.png",
                 "paper",
                 x_range=(0, .8),
                 y_range=(-30, 30),
