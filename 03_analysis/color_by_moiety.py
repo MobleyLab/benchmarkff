@@ -19,7 +19,6 @@ import os
 import re
 import numpy as np
 import pickle
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import openeye.oechem as oechem
 import reader
@@ -75,8 +74,6 @@ def draw_scatter_moiety(
 
     """
     print(f"Number of data points in full scatter plot: {len(x_data)}")
-
-    num_methods = len(x_data)
 
     # set plot limits if specified
     if x_range is not None:
@@ -167,8 +164,6 @@ def main(in_dict, pickle_file, smi_files, out_prefix):
         smiles_subset = [x.strip() for x in smiles_subset]
         all_smi_subsets.append(smiles_subset)
 
-    x_subset = []
-    y_subset = []
     all_inds_subset = []  # list[i][j] has the smiles indices for ith subset
 
     # flatten list of lists of smiles from pickle file

@@ -22,7 +22,6 @@ import seaborn as sns
 import pandas as pd
 import openeye.oechem as oechem
 import reader
-from collections import OrderedDict
 
 ### ------------------- Functions -------------------
 

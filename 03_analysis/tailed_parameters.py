@@ -344,11 +344,11 @@ def plot_fracs_diff(population_dat, sample_dat, sample_std, labels, suffix):
     fig.set_size_inches(3, 8)
 
     # plot population proportions in blue bars
-    rects1 = ax.barh(ind - width/2, population_dat, width,
+    ax.barh(ind - width/2, population_dat, width,
                 xerr=population_std, label='Entire set', color="#4F81BD")
 
     # plot sample proportions in red bars
-    rects2 = ax.barh(ind + width/2, sample_dat, width,
+    ax.barh(ind + width/2, sample_dat, width,
                 xerr=sample_std, label='High TFD subset', color="#C0504D")
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
