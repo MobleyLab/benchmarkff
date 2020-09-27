@@ -1,34 +1,15 @@
 # BenchmarkFF
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/vtlim/benchmarkff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vtlim/benchmarkff/context:python)
 
-README last updated: Aug 2 2020
+README last updated: Sep 27 2020
 
 ## About
 
-Overview: Compare optimized geometries and energies from various force fields with respect to a QM reference.
+**Objective**: Compare optimized geometries and energies from various force fields with respect to a QM reference.
 
 This repository comprises code to extract molecule datasets from [QCArchive](https://qcarchive.molssi.org/), run energy minimizations with various force fields, and analyze the resulting geometries and energies with respect to QM reference data from QCArchive.
 
-## Python setup
-
-### Package dependencies
-
-* numpy, matplotlib, seaborn
-* OpenEye
-* RDKit (solely for TFD calculations)
-* OpenMM
-* OpenForceField
-* QCFractal, QCPortal
-
-
-### Conda setup
-```
-conda create -n parsley python=3.6 matplotlib numpy seaborn
-conda activate parsley
-conda install -c openeye -c conda-forge -c omnia rdkit openeye-toolkits qcfractal qcportal openforcefield cmiles openmm
-```
-
-The packages in VTL's conda environment is documented in this repo as `parsley.yml`.
+See our work in this [preprint](https://chemrxiv.org/articles/preprint/Benchmark_Assessment_of_Molecular_Geometries_and_Energies_from_Small_Molecule_Force_Fields/12551867): Lim et. al.; Benchmark Assessment of Molecular Geometries and Energies from Small Molecule Force Fields. 2020.
 
 ## Contents
 
@@ -55,8 +36,28 @@ File descriptions:
 |`03_analysis`|`reader.py`                       |reader for molecule sets and text input files called by the other analysis scripts|
 |`03_analysis`|`tailed_parameters.py`            |identify parameters that may be overrepresented in high RMSD/TFD tails for FFXML force fields|
 
+## Python setup
 
-## Brief overview
+### Package dependencies
+
+* numpy, matplotlib, seaborn
+* OpenEye
+* RDKit (solely for TFD calculations)
+* OpenMM
+* OpenForceField
+* QCFractal, QCPortal
+
+
+### Conda setup
+```
+conda create -n parsley python=3.6 matplotlib numpy seaborn
+conda activate parsley
+conda install -c openeye -c conda-forge -c omnia rdkit openeye-toolkits qcfractal qcportal openforcefield cmiles openmm
+```
+
+The packages in VTL's conda environment is documented in this repo as `parsley.yml`.
+
+## Brief overview of usage
 
 ### Setup
 1. Write out from a QCArchive database which have completed QM calculations, using `extract_qcarchive_dataset.ipynb`.
@@ -91,13 +92,13 @@ To explore the analyzed data, adjust plots, etc. without re-analyzing data, you 
 input the pickle file written out from the previously run analysis.
 
 ## Contributors
-* Victoria Lim (author)
-* David Mobley (advising)
-* Jeffrey Wagner, Daniel Smith (code review)
-* Jessica Maat, Caitlin Bannan, Hyesu Jang, Lee-Ping Wang, Chris Bayly (discussions)
+* **Authors**: Victoria T. Lim, David F. Hahn
+* **Advising**: David Mobley, Gary Tresadern, Chris Bayly
+* **Code review**: Jeffrey Wagner, Daniel Smith
+* **Discussions**: Jessica Maat, Caitlin Bannan, Hyesu Jang, Lee-Ping Wang
 
 ## Big picture wish list / to do tasks
-See more science-focused issues in the Github issue tracker.
+See more focused issues in the [issue tracker](https://github.com/MobleyLab/benchmarkff/issues).
 * Format code with YAPF/Black
 * Use logging module instead of print statements
 * Look into automatically serializable representations (e.g., Pydantic) instead of pickle
