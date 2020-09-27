@@ -15,8 +15,6 @@ Note: This script can be easily modified to write out 2 separate PDF files
 
 """
 
-import os
-import sys
 from openeye import oechem
 from openeye import oedepict
 

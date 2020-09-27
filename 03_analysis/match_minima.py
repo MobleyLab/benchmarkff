@@ -94,28 +94,31 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
         "paper" or "talk"
 
     """
+    
     # print stats on number of datapoints in each method
     temp = msds.T
-    for l in temp:
+    for l, m in zip(temp, ff_list):
         print(f"Total number of unique molecules: {l.shape}")
-        print(f"Count of non-nan molecules: {np.count_nonzero(~np.isnan(l))}")
+        print(f"Count of non-nan molecules for {m}: {np.count_nonzero(~np.isnan(l))}")
 
     # create dataframe from list of lists
     df = pd.DataFrame.from_records(msds, columns=ff_list)
     medians = df.median(axis=0)
 
     # reshape for grouped violin plots
-    df = df.melt(var_name='groups', value_name='values')
-
+    df = df.melt(value_vars=list(df.columns))
+    df = df.dropna()
+    
     # set grid background style
     sns.set(style="whitegrid")
 
     if what_for == 'paper':
-        f, ax = plt.subplots(figsize=(4, 3))
+#        f, ax = plt.subplots(figsize=(2, 5))
+        f, ax = plt.subplots(figsize=(8, 5))
         large_font = 10
         small_font = 8
         lw = 1
-        med_pt = 2
+        med_pt = 5
         xrot = 45
         xha = 'right'
     elif what_for == 'talk':
@@ -131,9 +134,12 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
         #lw=1.0
         #f, ax = plt.subplots(figsize=(4, 8))
 
+    my_cmap = "tab10"
+    colors = sns.color_palette(my_cmap)
+
     # show each distribution with both violins and points
-    sns.violinplot(x="groups", y="values", data=df, inner="box",
-        palette="tab10", linewidth=lw)
+    ax = sns.violinplot(x='variable', y='value', data=df, inner="box",
+                        palette=colors, size=5, aspect=3, linewidth=lw)
 
     # replot the median point for larger marker, zorder to plot points on top
     xlocs = ax.get_xticks()
@@ -153,14 +159,16 @@ def plot_violin_signed(msds, ff_list, what_for='talk'):
     ax.set_xlabel("")
     ax.set_ylabel("mean signed deviation (kcal/mol)", size=large_font)
     plt.xticks(fontsize=small_font, rotation=xrot, ha=xha)
-    plt.yticks(fontsize=large_font)
 
     # settings for overlapping violins
-    #plt.xticks([])
-    #plt.xlim(-1, 1)
+    # plt.xticks([])
+    # locs, labels = plt.yticks(fontsize=large_font)
+    # plt.yticks(locs, [])
+    # plt.xlim(-1, 1)
+    # ax.set_ylabel("", size=large_font)
 
     # save and close figure
-    plt.savefig('violin.svg', bbox_inches='tight')
+    plt.savefig('violin.svg', dpi=600, bbox_inches='tight')
     #plt.show()
     plt.clf()
     plt.close(plt.gcf())
@@ -507,7 +515,10 @@ def calc_rms_error(rel_energies, lowest_conf_indices):
 
             # also calculate mse
             sum_errs = np.sum(errs)
-            msd = sum_errs/len(errs)
+            if len(errs) == 0:
+                msd = np.nan
+            else:
+                msd = sum_errs/len(errs)
             mol_msds.append(msd)
 
         rms_array.append(mol_rmses)
@@ -833,12 +844,12 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
 
     if plot:
 
-        # customize: exclude outliers from violin plots
-        mol_names = list(mol_names)
-        violin_exclude = ['full_549', 'full_590', 'full_802', 'full_1691', 'full_1343', 'full_2471']
-        idx_of_exclude = [mol_names.index(x) for x in violin_exclude]
-        for idx in sorted(idx_of_exclude, reverse=True):
-            del msd_array[idx]
+        # # customize: exclude outliers from violin plots
+        # mol_names = list(mol_names)
+        # violin_exclude = ['full_549', 'full_590', 'full_802', 'full_1691', 'full_1343', 'full_2471']
+        # idx_of_exclude = [mol_names.index(x) for x in violin_exclude]
+        # for idx in sorted(idx_of_exclude, reverse=True):
+        #     del msd_array[idx]
 
         # plots combining all molecules -- skip reference bc 0 rmse to self
         # msd_array[i][j] represents ith mol, jth method's MSD
@@ -851,7 +862,7 @@ def main(in_dict, read_pickle, plot, rmsd_cutoff):
 
             # optional: only plot single molecule by specified title
             #if mol_name != 'full_549': continue
-            if mol_name in violin_exclude: continue
+            #if mol_name in violin_exclude: continue
 
             # optional: only plot selected force fields by index
             #plot_mol_minima(mol_name, rel_energies[i], ff_list, selected=[0])

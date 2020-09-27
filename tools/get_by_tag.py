@@ -132,6 +132,7 @@ def main(argv=[__name__]):
     # remove temp files after sorting
     os.remove('____temp____.sdf')
     os.remove(itf.GetString("-o") + '.idx')
+    return 0
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))

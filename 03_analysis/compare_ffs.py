@@ -71,15 +71,17 @@ def calc_tfd(ref_mol, query_mol, conf_id_tag):
     rsmiles = Chem.MolToSmiles(ref_rdmol)
     qsmiles = Chem.MolToSmiles(que_rdmol)
     if rsmiles != qsmiles:
-        print(f"- WARNING: The reference mol \'{ref_mol.GetTitle()}\' and "
-                 f"query mol \'{query_mol.GetTitle()}\' do NOT have the same "
-                 "SMILES strings as determined by RDKit MolToSmiles. It is "
-                 "possible that they did not have matching SMILES even before "
-                 "conversion from OEMol to RDKit mol. Listing in order the "
-                 "QCArchive SMILES string, RDKit SMILES for ref mol, and "
-                 "RDKit SMILES for query mol:"
-                 f"\n {oechem.OEGetSDData(ref_mol, conf_id_tag)}"
-                 f"\n {rsmiles}\n {qsmiles}")
+        print(
+            f"- WARNING: The reference mol '{ref_mol.GetTitle()}' and "
+            f"query mol '{query_mol.GetTitle()}' do NOT have the same "
+            "SMILES strings as determined by RDKit MolToSmiles. It is "
+            "possible that they did not have matching SMILES even before "
+            "conversion from OEMol to RDKit mol. Listing in order the "
+            "QCArchive SMILES string, RDKit SMILES for ref mol, and "
+            "RDKit SMILES for query mol:"
+            f"\n {oechem.OEGetSDData(ref_mol, conf_id_tag)}"
+            f"\n {rsmiles}\n {qsmiles}"
+        )
         tfd = np.nan
 
     # calculate the TFD
@@ -88,8 +90,10 @@ def calc_tfd(ref_mol, query_mol, conf_id_tag):
             tfd = TorsionFingerprints.GetTFDBetweenMolecules(ref_rdmol, que_rdmol)
         # triggered for molecules such as urea
         except IndexError:
-            print(f"- Error calculating TFD on molecule '{ref_mol.GetTitle()}'."
-                  " Possibly no non-terminal rotatable bonds found.")
+            print(
+                f"- Error calculating TFD on molecule '{ref_mol.GetTitle()}'."
+                " Possibly no non-terminal rotatable bonds found."
+            )
             tfd = np.nan
 
     return tfd
@@ -144,9 +148,9 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
 
     """
     # set RMSD calculation parameters
-    automorph = True   # take into acct symmetry related transformations
+    automorph = True  # take into acct symmetry related transformations
     heavyOnly = False  # do consider hydrogen atoms for automorphisms
-    overlay = True     # find the lowest possible RMSD
+    overlay = True  # find the lowest possible RMSD
 
     # initiate final data lists
     enes_full = []
@@ -155,15 +159,15 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
     smiles_full = []
 
     # get first filename representing the reference geometries
-    sdf_ref = list(in_dict.values())[0]['sdfile']
-    tag_ref = list(in_dict.values())[0]['sdtag']
+    sdf_ref = list(in_dict.values())[0]["sdfile"]
+    tag_ref = list(in_dict.values())[0]["sdtag"]
 
     # assess each file against reference
     for ff_label, ff_dict in in_dict.items():
 
         # get details of queried file
-        sdf_que = ff_dict['sdfile']
-        tag_que = ff_dict['sdtag']
+        sdf_que = ff_dict["sdfile"]
+        tag_que = ff_dict["sdtag"]
 
         if sdf_que == sdf_ref:
             continue
@@ -175,7 +179,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
         smiles_method = []
 
         # open an output file to store query molecules with new SD tags
-        out_file = f'{out_prefix}_{os.path.basename(sdf_que)}'
+        out_file = f"{out_prefix}_{os.path.basename(sdf_que)}"
         ofs = oechem.oemolostream()
         if not ofs.open(out_file):
             oechem.OEThrow.Fatal(f"Unable to open {out_file} for writing")
@@ -194,10 +198,12 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
             rmol_name = rmol.GetTitle()
             rmol_nconfs = rmol.NumConfs()
             if (rmol_name != qmol.GetTitle()) or (rmol_nconfs != qmol.NumConfs()):
-                raise ValueError("ERROR: Molecules not aligned in iteration. "
-                                "Offending molecules and number of conformers:\n"
-                                f"\'{rmol_name}\': {rmol_nconfs} nconfs\n"
-                                f"\'{qmol.GetTitle()}\': {qmol.NumConfs()} nconfs")
+                raise ValueError(
+                    "ERROR: Molecules not aligned in iteration. "
+                    "Offending molecules and number of conformers:\n"
+                    f"'{rmol_name}': {rmol_nconfs} nconfs\n"
+                    f"'{qmol.GetTitle()}': {qmol.NumConfs()} nconfs"
+                )
 
             # initialize lists to store conformer energies
             enes_ref = []
@@ -213,10 +219,12 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
                 ref_id = oechem.OEGetSDData(ref_conf, conf_id_tag)
                 que_id = oechem.OEGetSDData(que_conf, conf_id_tag)
                 if ref_id != que_id:
-                    raise ValueError("ERROR: Conformers not aligned in iteration"
-                                    f" for mol: '{rmol_name}'. The conformer "
-                                    f"IDs ({conf_id_tag}) for ref and query are:"
-                                    f"\n{ref_id}\n{que_id}.")
+                    raise ValueError(
+                        "ERROR: Conformers not aligned in iteration"
+                        f" for mol: '{rmol_name}'. The conformer "
+                        f"IDs ({conf_id_tag}) for ref and query are:"
+                        f"\n{ref_id}\n{que_id}."
+                    )
 
                 # note the smiles id
                 smiles_mol.append(ref_id)
@@ -226,8 +234,7 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
                 enes_que.append(float(oechem.OEGetSDData(que_conf, tag_que)))
 
                 # compute RMSD between reference and query conformers
-                rmsd = oechem.OERMSD(ref_conf, que_conf, automorph,
-                                     heavyOnly, overlay)
+                rmsd = oechem.OERMSD(ref_conf, que_conf, automorph, heavyOnly, overlay)
                 rmsds_mol.append(rmsd)
 
                 # compute TFD between reference and query conformers
@@ -235,8 +242,8 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
                 tfds_mol.append(tfd)
 
                 # store data in SD tags for query conf, and write conf to file
-                oechem.OEAddSDData(que_conf, f'RMSD to {sdf_ref}', str(rmsd))
-                oechem.OEAddSDData(que_conf, f'TFD to {sdf_ref}', str(tfd))
+                oechem.OEAddSDData(que_conf, f"RMSD to {sdf_ref}", str(rmsd))
+                oechem.OEAddSDData(que_conf, f"TFD to {sdf_ref}", str(tfd))
                 oechem.OEWriteConstMolecule(ofs, que_conf)
 
             # compute relative energies against lowest E reference conformer
@@ -260,8 +267,8 @@ def compare_ffs(in_dict, conf_id_tag, out_prefix, keep_ref_conf=False, mol_slice
             rmsds_method.append(np.array(rmsds_mol))
             tfds_method.append(np.array(tfds_mol))
             smiles_method.append(smiles_mol)
-            #print(rmsds_method, len(rmsds_method))
-            #print(enes_method, len(enes_method))
+            # print(rmsds_method, len(rmsds_method))
+            # print(enes_method, len(enes_method))
 
         enes_full.append(enes_method)
         rmsds_full.append(rmsds_method)
@@ -289,7 +296,9 @@ def flatten(list_of_lists):
     return np.concatenate(list_of_lists).ravel()
 
 
-def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what_for='talk'):
+def draw_scatter(
+    x_data, y_data, method_labels, x_label, y_label, out_file, what_for="talk"
+):
     """
     Draw scatter plot, such as of (ddE vs RMSD) or (ddE vs TFD).
 
@@ -318,42 +327,125 @@ def draw_scatter(x_data, y_data, method_labels, x_label, y_label, out_file, what
     num_methods = len(x_data)
     plist = []
     for i in range(num_methods):
-        p = plt.scatter(x_data[i], y_data[i], marker=markers[i],
-            label=method_labels[i+1], alpha=0.6)
+        p = plt.scatter(
+            x_data[i],
+            y_data[i],
+            marker=markers[i],
+            label=method_labels[i + 1],
+            alpha=0.6,
+        )
         plist.append(p)
 
-    if what_for == 'paper':
+    if what_for == "paper":
         fig = plt.gcf()
         fig.set_size_inches(4, 3)
+        plt.subplots_adjust(left=0.16, right=0.72, top=0.9, bottom=0.2)
         plt.xlabel(x_label, fontsize=10)
         plt.ylabel(y_label, fontsize=10)
         plt.xticks(fontsize=10)
         plt.yticks(fontsize=10)
-        plt.legend(loc=(1.04,0.4), fontsize=10)
+        plt.legend(loc=(1.04, 0.4), fontsize=10)
         # make the marker size smaller
         for p in plist:
             p.set_sizes([8.0])
 
-    elif what_for == 'talk':
+    elif what_for == "talk":
         plt.xlabel(x_label, fontsize=14)
         plt.ylabel(y_label, fontsize=14)
         plt.xticks(fontsize=12)
         plt.yticks(fontsize=12)
-        plt.legend(loc=(1.04,0.5), fontsize=12)
+        plt.legend(loc=(1.04, 0.5), fontsize=12)
         # make the marker size smaller
         for p in plist:
             p.set_sizes([4.0])
 
     # set log scaling but use symmetric log for negative values
-    plt.yscale('symlog')
+    #    plt.yscale('symlog')
 
-    plt.savefig(out_file, bbox_inches='tight')
+    plt.savefig(out_file, bbox_inches="tight")
     plt.clf()
-    #plt.show()
+    # plt.show()
 
 
-def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
-        bw='scott', same_subplot=False, sym_log=False, hist_range=(-15,15)):
+def draw_corr(
+    x_data, y_data, method_labels, x_label, y_label, out_file, what_for="talk"
+):
+    """
+    Draw scatter plot, such as of (ddE vs RMSD) or (ddE vs TFD).
+
+    Parameters
+    ----------
+    x_data : list of lists
+        x_data[i][j] represents ith method and jth molecular structure
+    y_data : list of lists
+        should have same shape and correspond to x_data
+    method_labels : list
+        list of all the method names including reference method first
+    x_label : string
+        name of the x-axis label
+    y_label : string
+        name of the y-axis label
+    out_file : string
+        name of the output file
+    what_for : string
+        dictates figure size, text size of axis labels, legend, etc.
+        "paper" or "talk"
+
+    """
+    print(f"\nNumber of data points in full scatter plot: {len(flatten(x_data))}")
+    markers = ["o", "^", "d", "x", "s", "p", "P", "3", ">"]
+
+    num_methods = len(x_data)
+    plist = []
+    for i in range(num_methods):
+        p = plt.scatter(
+            x_data[i],
+            y_data[i],
+            marker=markers[i],
+            label=method_labels[i + 1],
+            alpha=0.6,
+        )
+        plist.append(p)
+
+    if what_for == "paper":
+        fig = plt.gcf()
+        fig.set_size_inches(5, 4)
+        plt.subplots_adjust(left=0.16, right=0.72, top=0.9, bottom=0.2)
+        plt.xlabel(x_label, fontsize=10)
+        plt.ylabel(y_label, fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.yticks(fontsize=10)
+        plt.legend(loc=(1.04, 0.4), fontsize=10)
+        # make the marker size smaller
+        for p in plist:
+            p.set_sizes([8.0])
+
+    elif what_for == "talk":
+        plt.xlabel(x_label, fontsize=14)
+        plt.ylabel(y_label, fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.legend(loc=(1.04, 0.5), fontsize=12)
+        # make the marker size smaller
+        for p in plist:
+            p.set_sizes([4.0])
+
+    plt.savefig(out_file, bbox_inches="tight")
+    plt.clf()
+    # plt.show()
+
+
+def draw_ridgeplot(
+    mydata,
+    method_labels,
+    x_label,
+    out_file,
+    what_for="paper",
+    bw="scott",
+    same_subplot=False,
+    sym_log=False,
+    hist_range=(-15, 15),
+):
 
     """
     Draw ridge plot of data (to which kernel density estimate is applied)
@@ -396,56 +488,89 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
         ax = plt.gca()
 
         # set axis font size
-        if what_for == 'paper': fs = 8
-        elif what_for == 'talk': fs = 14
+        if what_for == "paper":
+            fs = 14
+        elif what_for == "talk":
+            fs = 14
 
-        ax.text(0, .2, label, fontweight="bold", color=color, fontsize=fs,
-                ha="left", va="center", transform=ax.transAxes)
+        ax.text(
+            0,
+            0.2,
+            label,
+            fontweight="bold",
+            color=color,
+            fontsize=fs,
+            ha="left",
+            va="center",
+            transform=ax.transAxes,
+        )
 
-    if what_for == 'paper':
+    if what_for == "paper":
         ridgedict = {
-            "h":0.45,
-            "lw":1.0,
-            "vl":0.1,
-            "xfontsize":10,
+            "h": 0.9,
+            "lw": 2.0,
+            "vl": 1.0,
+            "xfontsize": 14,
         }
-    elif what_for == 'talk':
+    elif what_for == "talk":
         ridgedict = {
-            "h":1.0,
-            "lw":1.5,
-            "vl":0.5,
-            "xfontsize":16,
+            "h": 2.0,
+            "lw": 3.0,
+            "vl": 1.0,
+            "xfontsize": 16,
         }
 
     num_methods = len(mydata)
 
+    # Initialize the FacetGrid object
+    my_cmap = "tab10"
+    sns.palplot(sns.color_palette(my_cmap))
+    colors = sns.color_palette(my_cmap)
+
     # convert data to dataframes for ridge plot
     temp = []
     for i in range(num_methods):
-        df = pd.DataFrame(mydata[i], columns = [x_label])
-        df['method'] = method_labels[i+1]
+        df = pd.DataFrame(mydata[i], columns=[x_label])
+        df["method"] = method_labels[i + 1]
         temp.append(df)
 
     # list of dataframes concatenated to single dataframe
-    df = pd.concat(temp, ignore_index = True)
-
-    # Initialize the FacetGrid object
-    my_cmap = "tab10"
-    pal = sns.palplot(sns.color_palette(my_cmap))
-    g = sns.FacetGrid(df, row="method", hue="method", aspect=15,
-        height=ridgedict["h"], palette=pal)
+    df = pd.concat(temp, ignore_index=True)
+    #    print(method_labels)
+    g = sns.FacetGrid(
+        df, row="method", hue="method", aspect=10, height=ridgedict["h"], palette=colors
+    )
 
     if not same_subplot:
 
         # draw filled-in densities
-        if bw=='hist':
-            histoptions = {"histtype":"bar", "alpha":0.6, "linewidth":ridgedict["lw"],
-                "range":hist_range, "align":"mid"}
-            g.map(sns.distplot, x_label, hist=True, kde=False, bins=21, hist_kws=histoptions)
-
+        if bw == "hist":
+            histoptions = {
+                "histtype": "bar",
+                "alpha": 0.6,
+                "linewidth": ridgedict["lw"],
+                "range": hist_range,
+                "align": "mid",
+            }
+            g.map(
+                sns.distplot,
+                x_label,
+                hist=True,
+                kde=False,
+                bins=15,
+                norm_hist=True,
+                hist_kws=histoptions,
+            )
         else:
-            g.map(sns.kdeplot, x_label, clip_on=False, shade=True, alpha=0.5,
-                lw=ridgedict["lw"], bw=bw)
+            g.map(
+                sns.kdeplot,
+                x_label,
+                clip_on=False,
+                shade=True,
+                alpha=0.5,
+                lw=ridgedict["lw"],
+                bw=bw,
+            )
 
         # draw colored horizontal line below densities
         g.map(plt.axhline, y=0, lw=ridgedict["lw"], clip_on=False)
@@ -453,22 +578,35 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     else:
 
         # draw black horizontal line below densities
-        plt.axhline(y=0, color='black')
+        plt.axhline(y=0, color="black")
 
     # draw outline around densities; can also single outline color: color="k"
-    if bw=='hist':
-        histoptions = {"histtype":"step", "alpha":1.0, "linewidth":ridgedict["lw"],
-            "range":hist_range, "align":"mid"}
-        g.map(sns.distplot, x_label, hist=True, kde=False, bins=21, hist_kws=histoptions)
+    if bw == "hist":
+        histoptions = {
+            "histtype": "step",
+            "alpha": 1.0,
+            "linewidth": ridgedict["lw"],
+            "range": hist_range,
+            "align": "mid",
+        }
+        g.map(
+            sns.distplot,
+            x_label,
+            hist=True,
+            kde=False,
+            bins=15,
+            norm_hist=True,
+            hist_kws=histoptions,
+        )
 
     else:
         g.map(sns.kdeplot, x_label, clip_on=False, lw=ridgedict["lw"], bw=bw)
 
     # draw a vertical line at x=0 for visual reference
-    g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls='--', color='gray', clip_on=False)
+    g.map(plt.axvline, x=0, lw=ridgedict["vl"], ls="--", color="gray", clip_on=False)
 
     # optional: add custom vertical line
-    #g.map(plt.axvline, x=0.12, lw=1, ls='--', color='gray', clip_on=False)
+    # g.map(plt.axvline, x=0.12, lw=1, ls='--', color='gray', clip_on=False)
 
     # add labels to each level
     if not same_subplot:
@@ -478,15 +616,19 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
     else:
         cmap = mpl.cm.tab10
         patches = []
-        n_ffs = len(method_labels)-1
+        n_ffs = len(method_labels) - 1
         for i in range(n_ffs):
-            patches.append(mpl.patches.Patch(color=cmap(i/10),
-                label=method_labels[i+1]))
-        plt.legend(handles=patches, fontsize=ridgedict["xfontsize"]/1.2)
+            patches.append(
+                mpl.patches.Patch(
+                    color=cmap(i/10),
+                    label=method_labels[i + 1],
+                )
+            )
+        plt.legend(handles=patches, fontsize=ridgedict["xfontsize"] / 1.2)
 
     # optional: set symmetric log scale on x-axis
     if sym_log:
-        g.set(xscale = "symlog")
+        g.set(xscale="symlog")
 
     # Set the subplots to overlap
     if not same_subplot:
@@ -496,26 +638,43 @@ def draw_ridgeplot(mydata, method_labels, x_label, out_file, what_for='talk',
 
     # Remove axes details that don't play well with overlap
     g.set_titles("")
-    g.set(yticks=[])
-    g.despine(bottom=True, left=True)
-    if what_for == 'paper':
-        plt.gcf().set_size_inches(5, 3)
-    elif what_for == 'talk':
+    #    g.set(yticks=[])
+    g.despine(bottom=True)  # , left=True)
+    # ax = plt.gca()
+    # ax.spines['left'].set_visible(True)
+    # ax.spines['left'].set_position('zero')
+    # ax.set_yticks([0.4])
+    if what_for == "paper":
+        plt.gcf().set_size_inches(7, 3)
+    elif what_for == "talk":
         plt.gcf().set_size_inches(12, 9)
 
     # adjust font sizes
     plt.xlabel(x_label, fontsize=ridgedict["xfontsize"])
+    plt.ylabel("Density", fontsize=ridgedict["xfontsize"])
     plt.xticks(fontsize=ridgedict["xfontsize"])
 
-
     # save with transparency for overlapping plots
-    plt.savefig(out_file, bbox_inches='tight', transparent=True)
+    plt.savefig(out_file, transparent=True, bbox_inches="tight")
     plt.clf()
-    #plt.show()
+    # plt.show()
 
 
-def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='talk',
-    bins=20, x_range=None, y_range=None, z_range=None, z_interp=True):
+def draw_density2d(
+    x_data,
+    y_data,
+    title,
+    x_label,
+    y_label,
+    out_file,
+    what_for="talk",
+    bins=20,
+    x_range=None,
+    y_range=None,
+    z_range=None,
+    z_interp=True,
+    symlog=False,
+):
 
     """
     Draw a scatter plot colored smoothly to represent the 2D density.
@@ -550,30 +709,32 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     z_interp : Boolean
         True to smoothen the color scale for the scatter plot points;
         False to plot 2d histograms colored by cells (no scatter plot)
-
+    symlog : Boolean
+        True to represent y-axis on (symmetric) log scale (linear
+        between -1 and 1 ), False for linear y-scaling
     """
 
     def colorbar_and_finish(labelsize, fname):
         cb = plt.colorbar()
         cb.ax.tick_params(labelsize=labelsize)
-        cb.ax.set_title('counts', size=labelsize)
+        cb.ax.set_title("counts", size=labelsize)
 
-        plt.savefig(fname, bbox_inches='tight')
+        plt.savefig(fname, bbox_inches="tight")
         plt.clf()
-        #plt.show()
+        # plt.show()
 
     fig = plt.gcf()
-    if what_for == 'paper':
+    if what_for == "paper":
         ms = 1
         size1 = 10
         size2 = 10
         fig.set_size_inches(4, 3)
-    elif what_for == 'talk':
+    elif what_for == "talk":
         ms = 4
         size1 = 14
         size2 = 16
         fig.set_size_inches(9, 6)
-    plt_options = {'s':ms, 'cmap':'coolwarm_r'}
+    plt_options = {"s": ms, "cmap": "coolwarm_r"}
 
     # label and adjust plot
     plt.title(title, fontsize=size2)
@@ -600,25 +761,39 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     # plot colored 2d histogram if z_interp not specified
     if not z_interp:
         extent = [x_e[0], x_e[-1], y_e[0], y_e[-1]]
-        plt.imshow(data.T, extent=extent, origin='lower', aspect='auto',
-            cmap=plt_options['cmap'], vmin=z_range[0], vmax=z_range[1])
+        plt.imshow(
+            data.T,
+            extent=extent,
+            origin="lower",
+            aspect="auto",
+            cmap=plt_options["cmap"],
+            vmin=z_range[0],
+            vmax=z_range[1],
+        )
 
         colorbar_and_finish(size1, out_file)
         return
 
     # smooth/interpolate data
-    z = interpn( ( 0.5*(x_e[1:]+x_e[:-1]) , 0.5*(y_e[1:]+y_e[:-1]) ), data,
-        np.vstack([x_data, y_data]).T, method="splinef2d", bounds_error=False)
+    z = interpn(
+        (0.5 * (x_e[1:] + x_e[:-1]), 0.5 * (y_e[1:] + y_e[:-1])),
+        data,
+        np.vstack([x_data, y_data]).T,
+        method="splinef2d",
+        bounds_error=False,
+    )
 
     # sort the points by density, so that the densest points are plotted last
     idx = z.argsort()
     x, y, z = x_data[idx], y_data[idx], z[idx]
 
-    print(f"{title} ranges of data in density plot:\n\t\tmin\t\tmax"
-          f"\nx\t{np.min(x):10.4f}\t{np.max(x):10.4f}"
-          f"\ny\t{np.min(y):10.4f}\t{np.max(y):10.4f}"
-          f"\nz\t{np.min(data):10.4f}\t{np.max(data):10.4f} (histogrammed)"
-          f"\nz'\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interpolated)")
+    print(
+        f"{title} ranges of data in density plot:\n\t\tmin\t\tmax"
+        f"\nx\t{np.min(x):10.4f}\t{np.max(x):10.4f}"
+        f"\ny\t{np.min(y):10.4f}\t{np.max(y):10.4f}"
+        f"\nz\t{np.min(data):10.4f}\t{np.max(data):10.4f} (histogrammed)"
+        f"\nz'\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interpolated)"
+    )
 
     # add dummy points of user-specified min/max z for uniform color scaling
     # similar to using vmin/vmax in pyplot pcolor
@@ -629,10 +804,11 @@ def draw_density2d(x_data, y_data, title, x_label, y_label, out_file, what_for='
     print(f"z''\t{np.nanmin(z):10.4f}\t{np.nanmax(z):10.4f} (interp, bounded)")
 
     # generate the plot
-    plt.scatter(x, y, c=z, **plt_options)
+    plt.scatter(x, y, c=z, vmin=z_range[0], vmax=z_range[1], **plt_options)
 
     # set log scaling but use symmetric log for negative values
-    plt.yscale('symlog')
+    if symlog:
+        plt.yscale("symlog")
 
     # configure color bar and finish plotting
     colorbar_and_finish(size1, out_file)
@@ -670,36 +846,44 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
     # run comparison, unless reading in from pickle file
     if read_pickle:
         enes_full, rmsds_full, tfds_full, smiles_full = pickle.load(
-            open('metrics.pickle', 'rb'))
+            open("metrics.pickle", "rb")
+        )
     else:
         # enes_full[i][j][k] = ddE of ith method, jth mol, kth conformer.
         enes_full, rmsds_full, tfds_full, smiles_full = compare_ffs(
-                                                            in_dict,
-                                                            conf_id_tag,
-                                                            'refdata',
-                                                            False,
-                                                            mol_slice)
+            in_dict, conf_id_tag, "refdata", False, mol_slice
+        )
 
         # save results in pickle file
-        pickle.dump((enes_full, rmsds_full, tfds_full, smiles_full),
-            open('metrics.pickle', 'wb'))
+        pickle.dump(
+            (enes_full, rmsds_full, tfds_full, smiles_full),
+            open("metrics.pickle", "wb"),
+        )
 
         # write enes_full to file since not so easy to save as SD tag
-        with open('ddE.dat', 'w') as outfile:
-            outfile.write("# Relative energies (kcal/mol) of ddE = dE (query method) - dE (ref method)\n")
-            outfile.write("# Each dE is the current conformer's energy minus the lowest energy conformer of the same molecule\n")
+        with open("ddE.dat", "w") as outfile:
+            outfile.write(
+                "# Relative energies (kcal/mol) of ddE = dE (query method) - dE (ref method)\n"
+            )
+            outfile.write(
+                "# Each dE is the current conformer's energy minus the lowest energy conformer of the same molecule\n"
+            )
             outfile.write("# ==================================================\n")
 
             for i, (ddE_slice, smi_slice) in enumerate(zip(enes_full, smiles_full)):
                 outfile.write(f"# Relative energies for FF {method_labels[i+1]}\n")
 
                 # flatten the mol/conformer array
-                flat_enes =   np.array([item for sublist in ddE_slice for item in sublist])
-                flat_smiles = np.array([item for sublist in smi_slice for item in sublist])
+                flat_enes = np.array(
+                    [item for sublist in ddE_slice for item in sublist]
+                )
+                flat_smiles = np.array(
+                    [item for sublist in smi_slice for item in sublist]
+                )
 
                 # combine label and data, then write to file
                 smiles_and_enes = np.column_stack((flat_smiles, flat_enes))
-                np.savetxt(outfile, smiles_and_enes, fmt='%-60s', delimiter='\t')
+                np.savetxt(outfile, smiles_and_enes, fmt="%-60s", delimiter="\t")
 
     energies = []
     rmsds = []
@@ -707,57 +891,124 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
 
     # flatten all confs/molecules into same list but keep methods distinct
     # energies and rmsds are now 2d lists
+    enes_full = np.array(enes_full)
+    print(enes_full)
+    #    print(np.isclose(enes_full, np.zeros_like(enes_full)))
+    #    print(np.sum(np.argwhere(np.array(enes_full)==0.)))
+    print(np.array(enes_full).shape)
+
     for a, b, c in zip(enes_full, rmsds_full, tfds_full):
+        print(np.array(a).shape)
+        isclose = np.isclose(flatten(a), np.zeros_like(flatten(a)), rtol=1e-23)
+        print(np.sum(isclose))
         energies.append(flatten(a))
         rmsds.append(flatten(b))
         tfds.append(flatten(c))
 
+    # 95 % percentiles
+    print("95 % percentiles of energies")
+    for m, enes in zip(method_labels[1:], energies):
+        print(m, np.percentile(enes, 2.5), np.percentile(enes, 97.5))
+    print("Fraction of ddE between -1 <= ddE <= 1 kcal/mol")
+    for m, enes in zip(method_labels[1:], energies):
+        samples = []
+        for i in range(1000):
+            s = np.random.choice(enes, replace=True, size=len(enes))
+            samples.append(np.sum(np.logical_and(s >= -1.0, s <= 1.0)) / float(len(s)))
+        print(
+            m,
+            np.sum(np.logical_and(enes >= -1.0, enes <= 1.0)) / float(len(enes)),
+            np.std(samples),
+        )
     if plot:
+        for i in range(len(energies)):
+            for j in range(i + 1, len(energies)):
+                draw_corr(
+                    [rmsds[i]],
+                    [rmsds[j]],
+                    [None, f"{method_labels[j+1]} vs. {method_labels[i+1]}"],
+                    f"RMSD {method_labels[i+1]}" + "($\mathrm{\AA}$)",
+                    f"RMSD {method_labels[j+1]}" + "($\mathrm{\AA}$)",
+                    f"fig_scatter_rmsd_{method_labels[j+1]}_{method_labels[i+1]}.png".replace(
+                        "/", ""
+                    ),
+                    "paper",
+                )
+                draw_corr(
+                    [tfds[i]],
+                    [tfds[j]],
+                    [None, f"{method_labels[j+1]} vs. {method_labels[i+1]}"],
+                    f"TFD {method_labels[i+1]}",
+                    f"TFD {method_labels[j+1]}",
+                    f"fig_scatter_tfd_{method_labels[j+1]}_{method_labels[i+1]}.png".replace(
+                        "/", ""
+                    ),
+                    "paper",
+                )
+                draw_corr(
+                    [energies[i]],
+                    [energies[j]],
+                    [None, f"{method_labels[j+1]} vs. {method_labels[i+1]}"],
+                    f"ddE {method_labels[i+1]} (kcal/mol)",
+                    f"ddE {method_labels[j+1]} (kcal/mol)",
+                    f"fig_scatter_energies_{method_labels[j+1]}_{method_labels[i+1]}.png".replace(
+                        "/", ""
+                    ),
+                    "paper",
+                )
         draw_scatter(
             rmsds,
             energies,
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
             "ddE (kcal/mol)",
-            "scatter_rmsd.png",
-            "paper")
+            "fig_scatter_rmsd.png",
+            "paper",
+        )
         draw_scatter(
             tfds,
             energies,
             method_labels,
             "TFD",
             "ddE (kcal/mol)",
-            "scatter_tfd.png",
-            "paper")
+            "fig_scatter_tfd.png",
+            "paper",
+        )
         draw_ridgeplot(
             energies,
             method_labels,
             "ddE (kcal/mol)",
-            "ridge_dde.png",
+            "fig_ridge_dde.png",
             "paper",
-            bw='hist',
+            bw="hist",
             same_subplot=True,
-            sym_log=False)
+            sym_log=False,
+            hist_range=(-15, 15),
+        )
         draw_ridgeplot(
             rmsds,
             method_labels,
             "RMSD ($\mathrm{\AA}$)",
-            "ridge_rmsd.svg",
+            "fig_ridge_rmsd.png",
             "paper",
-            #bw='scott',
-            bw='hist', hist_range=(0,4),
+            # bw='scott',
+            bw="hist",
+            hist_range=(0, 3),
             same_subplot=True,
-            sym_log=False)
+            sym_log=False,
+        )
         draw_ridgeplot(
             tfds,
             method_labels,
             "TFD",
-            "ridge_tfd.svg",
+            "fig_ridge_tfd.png",
             "paper",
-            #bw='scott',
-            bw='hist', hist_range=(0,1),
+            # bw='scott',
+            bw="hist",
+            hist_range=(0, 0.5),
             same_subplot=True,
-            sym_log=False)
+            sym_log=False,
+        )
 
         for i, ml in enumerate(method_labels[1:]):
             draw_density2d(
@@ -766,12 +1017,14 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "RMSD ($\mathrm{\AA}$)",
                 "ddE (kcal/mol)",
-                f"density_rmsd_{ml}.png",
+                f"fig_density_rmsd_linear_{ml}.png",
                 "paper",
                 x_range=(0, 3.7),
-                y_range=(-50, 30),
+                y_range=(-30, 30),
                 z_range=(-260, 5200),
-                z_interp=True)
+                z_interp=True,
+                symlog=False,
+            )
 
             draw_density2d(
                 tfds[i],
@@ -779,58 +1032,108 @@ def main(in_dict, read_pickle, conf_id_tag, plot=False, mol_slice=None):
                 ml,
                 "TFD",
                 "ddE (kcal/mol)",
-                f"density_tfd_{ml}.png",
+                f"fig_density_tfd_linear_{ml}.png",
                 "paper",
                 x_range=(0, 0.8),
-                y_range=(-50, 30),
-                z_range=(-160, 5600),
-                z_interp=True)
+                y_range=(-30, 30),
+                z_range=(-302, 7060),
+                z_interp=True,
+                symlog=False,
+            )
 
+            draw_density2d(
+                rmsds[i],
+                energies[i],
+                ml,
+                "RMSD ($\mathrm{\AA}$)",
+                "ddE (kcal/mol)",
+                f"fig_density_rmsd_log_{ml}.png",
+                "paper",
+                x_range=(0, 3.7),
+                y_range=(-30, 30),
+                z_range=(-260, 5200),
+                z_interp=True,
+                symlog=True,
+            )
 
+            draw_density2d(
+                tfds[i],
+                energies[i],
+                ml,
+                "TFD",
+                "ddE (kcal/mol)",
+                f"fig_density_tfd_log_{ml}.png",
+                "paper",
+                x_range=(0, 0.8),
+                y_range=(-30, 30),
+                z_range=(-302, 7060),
+                z_interp=True,
+                symlog=True,
+            )
 
 
 ### ------------------- Parser -------------------
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
 
     # parse slice if not analyzing full set
     # https://stackoverflow.com/questions/18632320/numpy-array-indices-via-argparse-how-to-do-it-properly
     def _parse_slice(inslice):
-        if inslice == 'all':
+        if inslice == "all":
             return slice(None)
         try:
             section = int(inslice)
         except ValueError:
-            section = [int(s) if s else None for s in inslice.split(':')]
+            section = [int(s) if s else None for s in inslice.split(":")]
             if len(section) > 3:
-                raise ValueError('error parsing input slice')
+                raise ValueError("error parsing input slice")
             section = slice(*section)
         return section
 
-    parser.add_argument("-i", "--infile",
+    parser.add_argument(
+        "-i",
+        "--infile",
         help="Name of text file with force field in first column and molecule "
-             "file in second column. Columns separated by commas.")
+        "file in second column. Columns separated by commas.",
+    )
 
-    parser.add_argument("--readpickle", action="store_true", default=False,
-        help="Read in already-computed data from pickle file named \"metrics.pickle\"")
+    parser.add_argument(
+        "--readpickle",
+        action="store_true",
+        default=False,
+        help='Read in already-computed data from pickle file named "metrics.pickle"',
+    )
 
-    parser.add_argument("-t", "--conftag",
+    parser.add_argument(
+        "-t",
+        "--conftag",
         help="Name of the SD tag that distinguishes conformers. Within the "
-             "same SDF file, no other conformer should have the same tag value."
-             " Between two SDF files, the matching conformers should have the "
-             "same SD tag and value.")
+        "same SDF file, no other conformer should have the same tag value."
+        " Between two SDF files, the matching conformers should have the "
+        "same SD tag and value.",
+    )
 
-    parser.add_argument("--plot", action="store_true", default=False,
+    parser.add_argument(
+        "--plot",
+        action="store_true",
+        default=False,
         help="Generate line plots for every molecule with the conformer "
-             "relative energies.")
+        "relative energies.",
+    )
 
-    parser.add_argument("--molslice", nargs='+', type=_parse_slice, default=None,
+    parser.add_argument(
+        "--molslice",
+        nargs="+",
+        type=_parse_slice,
+        default=None,
         help="Only analyze the selected molecules of the given slices. Slices "
-             "are integer-sorted upon processing, and duplicates removed. Internal"
-             " code can slice negative values like -2:-1 but argparse cannot."
-             "Example: --molslice 25 26 3:5 6::3")
+        "are integer-sorted upon processing, and duplicates removed. Internal"
+        " code can slice negative values like -2:-1 but argparse cannot."
+        "Example: --molslice 25 26 3:5 6::3",
+    )
 
     # parse arguments
     args = parser.parse_args()
@@ -848,4 +1151,3 @@ if __name__ == "__main__":
     # run main
     print("Log file from compare_ffs.py")
     main(in_dict, args.readpickle, args.conftag, args.plot, args.molslice)
-
