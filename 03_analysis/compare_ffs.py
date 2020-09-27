@@ -29,7 +29,6 @@ import openeye.oechem as oechem
 import rdkit.Chem as Chem
 from rdkit.Chem import TorsionFingerprints
 import reader
-from collections import OrderedDict
 
 ### ------------------- Functions -------------------
 
@@ -525,7 +524,7 @@ def draw_ridgeplot(
 
     # Initialize the FacetGrid object
     my_cmap = "tab10"
-    pal = sns.palplot(sns.color_palette(my_cmap))
+    sns.palplot(sns.color_palette(my_cmap))
     colors = sns.color_palette(my_cmap)
 
     # convert data to dataframes for ridge plot
