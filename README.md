@@ -1,7 +1,8 @@
 # BenchmarkFF
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/vtlim/benchmarkff.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/vtlim/benchmarkff/context:python)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4247859.svg)](https://doi.org/10.5281/zenodo.4247859)
 
-README last updated: Sep 27 2020
+README last updated: Nov 09 2020
 
 ## About
 
