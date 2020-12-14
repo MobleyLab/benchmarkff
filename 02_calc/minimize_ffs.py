@@ -16,6 +16,8 @@ import os
 from openeye import oechem, oequacpac, oeszybki
 import simtk.openmm as mm
 from simtk.openmm import app
+from simtk import unit
+import numpy as np
 
 import openmoltools
 import parmed
@@ -23,7 +25,27 @@ from parmed import unit as u
 
 from openforcefield.typing.engines.smirnoff import ForceField
 from openforcefield.topology import Molecule, Topology
-from openforcefield.utils import structure
+
+
+def extractPositionsFromOEMol(oemol):
+    """Get the positions from an OEMol and return in a position array with units via simtk.unit, i.e. foramtted for OpenMM.
+    Adapted from choderalab/openmoltools test function extractPositionsFromOEMOL
+    Arguments:
+    ----------
+    oemol : OEMol
+        OpenEye molecule
+    Returns:
+    --------
+    positions : Nx3 array
+        Unit-bearing via simtk.unit Nx3 array of coordinates
+    """
+    #warnings.warn(DEPRECATION_WARNING_TEXT, PendingDeprecationWarning)
+
+    positions = unit.Quantity(np.zeros([oemol.NumAtoms(), 3], np.float32), unit.angstroms)
+    coords = oemol.GetCoords()
+    for index in range(oemol.NumAtoms()):
+        positions[index,:] = unit.Quantity(coords[index], unit.angstroms)
+    return positions
 
 
 def run_openmm(topology, system, positions):
@@ -288,7 +310,7 @@ def min_ffxml(mol, ofs, ffxml):
                f'{oe_mol.GetTitle()} {smilabel}: {e}')
         return
 
-    positions = structure.extractPositionsFromOEMol(oe_mol)
+    positions = extractPositionsFromOEMol(oe_mol)
 
     # minimize structure with ffxml
     newpos, energy = run_openmm(topology, system, positions)
