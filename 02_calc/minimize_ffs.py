@@ -23,7 +23,6 @@ from parmed import unit as u
 
 from openforcefield.typing.engines.smirnoff import ForceField
 from openforcefield.topology import Molecule, Topology
-
 from openforcefield.utils import structure
 
 # eric zhang feb12 2021
@@ -258,7 +257,6 @@ def min_gaffx(mol, ofs, gaff2=False):
 
     # save geometry, save energy as tag, write mol to file
     oe_mol.SetCoords(oechem.OEFloatArray(newpos))
-
     oechem.OESetSDData(oe_mol, f"Energy {sdlabel}", str(energy))
     oechem.OEWriteConstMolecule(ofs, oe_mol)
 
@@ -706,11 +704,11 @@ def main(infile, outfile, ffxml, minimizer):
                 min_gaffx(chg_conf, ofs, gaff2=True)
 
             elif minimizer == 'xtb':
-                # calculate xtb
+                # minimize with xtb
                 min_xtb(chg_conf, ofs)
 
             elif minimizer == 'am1':
-                # calculate am1
+                # minimize with am1
                 min_am1(chg_conf, ofs)
 
     ifs.close()
