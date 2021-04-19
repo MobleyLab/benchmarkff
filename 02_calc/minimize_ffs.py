@@ -25,6 +25,20 @@ from openforcefield.typing.engines.smirnoff import ForceField
 from openforcefield.topology import Molecule, Topology
 from openforcefield.utils import structure
 
+# eric zhang feb12 2021
+import qcengine
+import qcelemental as qcel
+from qcelemental.models import AtomicInput, OptimizationInput
+from qcelemental.models.common_models import Model
+from qcelemental.models.procedures import QCInputSpecification
+
+# ez mar4 2021
+from openeye import oeff
+
+# ez mar31 2021
+from forcebalance.molecule import Molecule as fb_molecule
+from forcebalance.molecule import get_rotate_translate
+import numpy as np
 
 def run_openmm(topology, system, positions):
     """
@@ -300,6 +314,273 @@ def min_ffxml(mol, ofs, ffxml):
 
     return
 
+# eric zhang feb12 2021
+def get_xtb(mol, ofs):
+    """
+    calculate xtb energy of a single-conformer molecule.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+
+    """
+
+    # make copy of the input mol
+    # for some reason this has to be oemol instead of oegraphmol
+    oe_mol = oechem.OEMol(mol)
+
+    energy = None
+
+    try:
+        # create openforcefield molecule ==> prone to triggering Exception
+        off_mol = Molecule.from_openeye(oe_mol, allow_undefined_stereo=True)
+
+        # create molecule for use in qcengine
+        qc_mol = off_mol.to_qcschema()
+
+        # set up qcengine
+        xtb_model = Model(method="gfn2-xtb", basis=None)
+        qc_task = AtomicInput(molecule=qc_mol, driver="energy", model=xtb_model)
+
+        result = qcengine.compute(input_data=qc_task, program="xtb")
+
+        # xtb returns energy in hartree
+        hartree_to_kcalpmol = qcel.constants.conversion_factor("hartree", "kcal/mol")
+
+        energy = result.return_result * hartree_to_kcalpmol
+
+    except Exception as e:
+        smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
+        print( ' >>> xtb calculation: something went wrong: '
+               f'{oe_mol.GetTitle()} {smilabel}: {e}')
+        return
+
+    # save energy as tag, write mol to file
+    oechem.OESetSDData(oe_mol, "Energy xtb", str(energy))
+    oechem.OEWriteConstMolecule(ofs, oe_mol)
+
+    return
+
+# eric zhang feb12 2021
+def get_am1(mol, ofs):
+    """
+    calculate am1 energy of a single-conformer molecule.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+
+    """
+
+    # make copy of the input mol
+    oe_mol = oechem.OEGraphMol(mol)
+
+    energy = None
+
+    try:
+        # set up oeAM1 calculator
+        calc = oequacpac.OEAM1()
+
+        # make space for the calculation result
+        result = oequacpac.OEAM1Results()
+
+        success = calc.CalcAM1(result, oe_mol)
+        if success == False:
+            print("calcAM1 failed to return a result")
+            raise Exception
+
+        # am1 returns energy in kcal/mol
+        energy = result.GetEnergy()
+        
+    except Exception as e:
+        smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
+        print( ' >>> am1 calculation: something went wrong: '
+               f'{oe_mol.GetTitle()} {smilabel}: {e}')
+        return
+
+    # save energy as tag, write mol to file
+    oechem.OESetSDData(oe_mol, "Energy am1", str(energy))
+    oechem.OEWriteConstMolecule(ofs, oe_mol)
+
+    return
+
+# eric zhang feb22 2021
+def min_xtb(mol, ofs):
+    """
+    calculate xtb energy of a single-conformer molecule.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+
+    """
+
+    # make copy of the input mol
+    # for some reason this has to be oemol instead of oegraphmol
+    oe_mol = oechem.OEMol(mol)
+
+    energy = None
+    geom = None
+
+    try:
+        # create openforcefield molecule ==> prone to triggering Exception
+        off_mol = Molecule.from_openeye(oe_mol, allow_undefined_stereo=True)
+
+        # create molecule for use in qcengine
+        qc_mol = off_mol.to_qcschema()
+
+        # set up qcengine
+        xtb_model = Model(method="gfn2-xtb", basis=None)
+
+        geometric_input = OptimizationInput(
+                            initial_molecule=qc_mol,
+                            input_specification=QCInputSpecification(model=xtb_model),
+                            keywords={"coordsys": "tric", "maxiter": 300, "program": "xtb"}
+                        )
+        opt_result = qcengine.compute_procedure(input_data=geometric_input, procedure="geometric",
+		local_options = {"ncores":1})
+        opt_energy = opt_result.trajectory[-1].properties.return_energy
+
+        # xtb returns energy in hartree
+        hartree_to_kcalpmol = qcel.constants.conversion_factor("hartree", "kcal/mol")
+        b2a = qcel.constants.conversion_factor("bohr", "angstrom")
+
+        energy = opt_energy * hartree_to_kcalpmol
+        geom = opt_result.final_molecule.geometry * b2a
+
+    except AttributeError as ae:
+        print(f"xtb did not converge for: {mol.GetTitle()}")
+        return
+    except Exception as e:
+        smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
+        print( ' >>> xtb calculation: something went wrong: '
+               f'{oe_mol.GetTitle()} {smilabel}: {e}')
+        return
+
+    flatgeom = []
+    for a in geom:
+        flatgeom.extend(a)
+    # save geometry, save energy as tag, write mol to file
+    oe_mol.SetCoords(flatgeom)
+
+    # change this to True to align
+    if False:
+        alignedgeom = align(mol, oe_mol, "xtb")
+
+        # save geometry, save energy as tag, write mol to file
+        oe_mol.SetCoords(alignedgeom)
+
+    oechem.OESetSDData(oe_mol, "Energy xtb", str(energy))
+    oechem.OEWriteConstMolecule(ofs, oe_mol)
+
+    return
+
+def align(mol, opt_mol, method):
+    # alignment
+    cc = mol.GetCoords()
+    a = []
+    for i in range(len(cc)):
+        a.append(cc[i])
+    ogcd = np.array(a)
+    
+    cc = opt_mol.GetCoords()
+    a = []
+    for i in range(len(cc)):
+        a.append(cc[i])
+    geom = np.array(a)
+
+    xyzs = [ogcd.copy(), geom.copy()]
+    _align(xyzs)
+
+    alignedgeom = xyzs[1]
+    flatageom = []
+    for a in alignedgeom:
+        flatageom.extend(a)
+
+    return flatageom
+
+def _align(xyzs):
+    """ Align molecules.
+    adapted from leeping/forcebalance/src/molecule.py
+    """
+    xyz1 = xyzs[0]
+
+    for index2, xyz2 in enumerate(xyzs):
+        if index2 == 0: continue
+        xyz2 -= xyz2.mean(0)
+        ref = 0
+
+        tr, rt = get_rotate_translate(xyz2,xyzs[ref])
+
+        xyz2 = np.dot(xyz2, rt) + tr
+        xyzs[index2] = xyz2
+
+
+# eric zhang mar2 2021
+def min_am1(mol, ofs):
+    """
+    calculate am1 energy of a single-conformer molecule.
+
+    Parameters
+    ----------
+    mol : OpenEye single-conformer molecule
+    ofs : OpenEye output filestream
+
+    """
+
+    # make copy of the input mol
+    oe_mol = oechem.OEMol(mol)
+
+    energy = None
+
+    try:
+        am1 = oequacpac.OEAM1()  # this is a low-level api class that will not perform any optimization on its own
+        results = oequacpac.OEAM1Results()  # this is where you can access the energy as well as the bond orders
+
+        # get vector coords
+        vecCoords = oechem.OEDoubleArray(3 * oe_mol.NumAtoms())
+        fcoords = oechem.OEDoubleArray(3 * oe_mol.NumAtoms())
+        cdict = oe_mol.GetCoords(vecCoords)
+
+        # somehow this is needed to prevent segfault on optimizer( ... )
+        am1.CalcAM1(results, oe_mol)
+
+        # Optimize the geometry using AM1
+        optimizer = oeff.OEBFGSOpt()
+        
+        optimizer(am1, vecCoords, fcoords)  # (MolFunc1, Input Coords, Output Coords)
+
+        # Set the optimized coords on the conf
+        oe_mol.SetCoords(fcoords)
+
+        # Perform the AM1 calculation again on the optimized conf
+        am1.CalcAM1(results, oe_mol)
+        
+        energy = results.GetEnergy()
+       
+    except Exception as e:
+        smilabel = oechem.OEGetSDData(oe_mol, "SMILES QCArchive")
+        print( ' >>> am1 calculation: something went wrong: '
+               f'{oe_mol.GetTitle()} {smilabel}: {e}')
+        return
+
+    # change this to True to align
+    if False:
+        acoords = align(mol, oe_mol, "am1")
+        oe_mol.SetCoords(acoords)
+    # save energy as tag, write mol to file
+    oechem.OESetSDData(oe_mol, "Energy am1", str(energy))
+    oechem.OEWriteConstMolecule(ofs, oe_mol)
+
+    return
+
+
+
+
+
 
 def find_unspecified_stereochem(mol):
     """
@@ -406,21 +687,29 @@ def main(infile, outfile, ffxml, minimizer):
                 # minimize with parsley (charges set by ff not used from conf)
                 min_ffxml(chg_conf, ofs, ffxml)
 
-            if minimizer == 'mmff94':
+            elif minimizer == 'mmff94':
                 # minimize with mmff94
                 min_mmff94x(chg_conf, ofs, mmff94s=False)
 
-            if minimizer == 'mmff94s':
+            elif minimizer == 'mmff94s':
                 # minimize with mmff94S
                 min_mmff94x(chg_conf, ofs, mmff94s=True)
 
-            if minimizer == 'gaff':
+            elif minimizer == 'gaff':
                 # minimize with gaff
                 min_gaffx(chg_conf, ofs, gaff2=False)
 
-            if minimizer == 'gaff2':
+            elif minimizer == 'gaff2':
                 # minimize with gaff2
                 min_gaffx(chg_conf, ofs, gaff2=True)
+
+            elif minimizer == 'xtb':
+                # minimize with xtb
+                min_xtb(chg_conf, ofs)
+
+            elif minimizer == 'am1':
+                # minimize with am1
+                min_am1(chg_conf, ofs)
 
     ifs.close()
     ofs.close()
@@ -447,7 +736,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.minimizer not in ['gaff', 'gaff2', 'mmff94', 'mmff94s', 'ffxml']:
+    if args.minimizer not in ['gaff', 'gaff2', 'mmff94', 'mmff94s', 'ffxml', 'xtb', 'am1']:
         raise ValueError('Please specify one of the following: '
                          'gaff gaff2 mmff94 mmff94s ffxml')
     if args.minimizer == 'ffxml' and not os.path.isfile(args.ffxml):
